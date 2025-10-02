@@ -1,22 +1,15 @@
-#include <raylib.h>
+#include "window.h"
+#include <memory>
 
 int main (int argc, char *argv[]) {
   
-  constexpr int width = 800;
-  constexpr int height = 600;
-  constexpr int fps_limit = 60;
+  std::unique_ptr<Window> game_window{ new Window() };
 
-  InitWindow(width, height, "Window");
-  SetTargetFPS(fps_limit);
-
-  while (!WindowShouldClose()) {
-    BeginDrawing();
-    ClearBackground(WHITE);
-    DrawText("Hello raylib", 800 / 2, 600 / 2, 32, LIGHTGRAY);
-    EndDrawing();
+  while (!game_window->shouldWindowClose()) {
+    game_window->beginDraw();
+    game_window->clearWindow();
+    game_window->endDraw();
   }
-  
-  CloseWindow();
   
   return 0;
 }
