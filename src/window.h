@@ -1,9 +1,10 @@
 #pragma once
+#include <raylib.h>
 
 class Window 
 {
   public:
-    Window();
+    Window( int width, int height, int target_fps );
     ~Window();
     bool shouldWindowClose();
     void beginDraw();
@@ -11,7 +12,7 @@ class Window
     void clearWindow();
   
   private: 
-    int m_length;
     int m_width;
+    int m_height;
     int m_target_fps;
 };

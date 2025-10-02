@@ -1,43 +1,36 @@
-#include <raylib.h>
+#include "window.h"
 
-class Window 
+Window::Window(int width, int height, int target_fps) 
+  : m_width ( width )
+  , m_height ( height )
+  , m_target_fps ( target_fps )
 {
-  public: 
-    Window(int length, int width, int target_fps) 
-      : m_length { length }
-      , m_width { width }
-      , m_target_fps { target_fps }
-    {
-      InitWindow(m_width, m_length, "app");
-      SetTargetFPS(m_target_fps);
-    }
-    ~Window() 
-    {
-      CloseWindow();
-    }
+  InitWindow(m_width, m_height, "app");
+  SetTargetFPS(m_target_fps);
+}
 
-    bool shouldWindowClose() 
-    {
-      return WindowShouldClose();
-    }
+Window::~Window() 
+{
+  CloseWindow();
+}
 
-    void beginDraw()
-    {
-      BeginDrawing();
-    }
-    
-    void endDraw()
-    {
-      EndDrawing();
-    }
-    
-    void clearWindow()
-    {
-      ClearBackground(YELLOW);
-    }
+bool Window::shouldWindowClose() 
+{
+  return WindowShouldClose();
+}
 
-  private:
-    int m_length { 600 };
-    int m_width { 800 };
-    int m_target_fps { 60 };
-};
+void Window::beginDraw()
+{
+  BeginDrawing();
+}
+
+void Window::endDraw()
+{
+  EndDrawing();
+}
+
+void Window::clearWindow()
+{
+  ClearBackground(YELLOW);
+}
+
