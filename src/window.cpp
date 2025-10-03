@@ -34,3 +34,15 @@ void Window::clearWindow()
   ClearBackground(YELLOW);
 }
 
+void Window::changeCursorStatus( CursorStatus status_to_change_to )
+{
+  switch (status_to_change_to) 
+  {
+    case CursorStatus::hide:
+      HideCursor();
+      break;
+    case CursorStatus::show:
+      ShowCursor();
+      break;
+  }
+}

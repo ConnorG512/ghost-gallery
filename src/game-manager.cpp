@@ -3,7 +3,7 @@
 
 void GameManager::initialiseApplication()
 {
-  HideCursor();
+  game_window.changeCursorStatus(Window::CursorStatus::hide);
 }
 void GameManager::drawUpdatePerTick()
 {
