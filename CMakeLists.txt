@@ -13,6 +13,8 @@ add_executable(app
   src/player.cpp
   src/image-sprite.h
   src/image-sprite.cpp
+  src/game-manager.h
+  src/game-manager.cpp
 )
 
 find_package(raylib REQUIRED)
