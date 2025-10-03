@@ -16,7 +16,7 @@ int main (int argc, char *argv[]) {
     game_window.beginDraw();
     game_window.clearWindow();
     DrawTexture(background_sprite, 0, 0, WHITE);
-    DrawTexture(cursor, GetMouseX(), GetMouseY(), WHITE);
+    DrawTexture(cursor, GetMouseX() - 64, GetMouseY() - 64, WHITE);
     game_window.endDraw();
   }
 
