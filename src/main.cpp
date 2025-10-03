@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <array>
 #include <iostream>
 #include <memory>
 #include <raylib.h>
@@ -11,10 +13,12 @@ int main (int argc, char *argv[]) {
   Window game_window { 1600, 900, 60 };
   Player player_instance { 6 };
 
-  // Load background image
-  Texture2D background_sprite = LoadTexture("assets/image/default-background.png");
-  Texture2D cursor = LoadTexture("assets/image/ui/cursor-target.png");
-  Texture2D enemy_default = LoadTexture("assets/image/entity/enemy/default/default.png");
+  std::array<Texture2D, 3> loaded_textures = 
+  {
+    LoadTexture("assets/image/default-background.png"),
+    LoadTexture("assets/image/ui/cursor-target.png"),
+    LoadTexture("assets/image/entity/enemy/default/default.png"),
+  };
 
   constexpr int enemy_pos_x = 1600 / 2;
   constexpr int enemy_pos_y = 900 / 2;
@@ -30,9 +34,9 @@ int main (int argc, char *argv[]) {
     game_window.beginDraw();
     game_window.clearWindow();
     
-    DrawTexture(background_sprite, 0, 0, WHITE);
-    DrawTexture(enemy_default, enemy_pos_x, enemy_pos_y, WHITE);
-    DrawTexture(cursor, GetMouseX() - 64, GetMouseY() - 64, WHITE);
+    DrawTexture(loaded_textures[0], 0, 0, WHITE);
+    DrawTexture(loaded_textures[2], enemy_pos_x, enemy_pos_y, WHITE);
+    DrawTexture(loaded_textures[1], GetMouseX() - 64, GetMouseY() - 64, WHITE);
     DrawText("Score: ", 10, 10, 32, WHITE);
     DrawText("0", 125, 10, 32, WHITE);
 
@@ -40,9 +44,9 @@ int main (int argc, char *argv[]) {
   }
 
   // Unload Texture
-  UnloadTexture(background_sprite);
-  UnloadTexture(cursor);
-  UnloadTexture(enemy_default);
-
+  for ( auto texture : loaded_textures )
+  {
+    UnloadTexture( texture );
+  }
   return 0;
 }
