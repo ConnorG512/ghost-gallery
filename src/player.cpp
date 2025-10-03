@@ -5,7 +5,7 @@ Player::Player(int current_lives)
 
 Player::~Player() {};
 
-int Player::calculateScore(const int score_to_add) 
+int Player::addToScore(const int score_to_add) 
 {
   m_current_score += score_to_add;
 
