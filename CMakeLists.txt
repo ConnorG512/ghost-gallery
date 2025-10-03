@@ -11,6 +11,8 @@ add_executable(app
   src/window.cpp
   src/player.h
   src/player.cpp
+  src/image-sprite.h
+  src/image-sprite.cpp
 )
 
 find_package(raylib REQUIRED)
