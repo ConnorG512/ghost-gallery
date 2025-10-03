@@ -57,7 +57,7 @@
           llvmPackages_21.libcxx
           raylib
         ];
-        
+
         cmakeFlags = [
           "-DCMAKE_BUILD_TYPE=Debug"
         ];
