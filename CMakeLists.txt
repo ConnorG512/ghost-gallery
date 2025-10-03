@@ -9,6 +9,8 @@ add_executable(app
   src/main.cpp
   src/window.h
   src/window.cpp
+  src/player.h
+  src/player.cpp
 )
 
 find_package(raylib REQUIRED)
