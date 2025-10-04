@@ -3,6 +3,7 @@
 #include "player.h"
 #include "window.h"
 #include "image-sprite.h"
+#include "text-render.h"
 
 class GameManager
 {

@@ -15,6 +15,8 @@ add_executable(app
   src/image-sprite.cpp
   src/game-manager.h
   src/game-manager.cpp
+  src/text-render.h
+  src/text-render.cpp
 )
 
 find_package(raylib REQUIRED)
