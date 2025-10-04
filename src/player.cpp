@@ -16,6 +16,7 @@ int Player::addToScore(const int score_to_add)
   }
   return m_current_score;
 };
+
 int Player::reduceLives(const int num_to_reduce) 
 {
   m_current_lives -= num_to_reduce;
