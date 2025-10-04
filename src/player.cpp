@@ -1,4 +1,8 @@
 #include "player.h"
+#include "entity.h"
+
+Player::Player( const int pos_x, const int pos_y, const std::string& texture_path, const int coll_width, const int coll_height )
+  : Entity{ pos_x, pos_y, texture_path, coll_width, coll_height } {}
 
 int Player::addToScore(const int score_to_add) 
 {
