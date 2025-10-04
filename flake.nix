@@ -11,6 +11,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
 
     debug = "debug";
+    release = "release";
   in 
   {
     devShells.${system}.default = pkgs.mkShell {
@@ -42,7 +43,7 @@
     packages.${system} = {
       # nix build .#packages.x86_64-linux.debug
       ${debug} = pkgs.stdenv.mkDerivation (finalAttrs: {
-        pname = "app";
+        pname = "app-debug";
         version = "1.0.0";
         dontStrip = true;
         src = ./.;
@@ -63,6 +64,29 @@
           "-DCMAKE_BUILD_TYPE=Debug"
         ];
       });
+
+      ${release} = pkgs.stdenv.mkDerivation (finalAttrs: {
+        pname = "app";
+        version = "1.0.0";
+        src = ./.;
+
+        nativeBuildInputs = with pkgs; [
+          llvmPackages_21.libcxxClang
+          llvmPackages_21.libcxx
+          cmake
+          raylib
+        ];
+
+        buildInputs = with pkgs; [
+          llvmPackages_21.libcxx
+          raylib
+        ];
+
+        cmakeFlags = [
+          "-DCMAKE_BUILD_TYPE=Release"
+        ];
+      });
+
     };
   };
 }
