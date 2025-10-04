@@ -19,6 +19,8 @@ add_executable(app
   src/text-render.cpp
   src/entity.h
   src/entity.cpp
+  src/health-component.h
+  src/health-component.cpp
 )
 
 find_package(raylib REQUIRED)
