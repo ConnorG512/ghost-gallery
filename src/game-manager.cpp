@@ -14,7 +14,7 @@ void GameManager::drawUpdatePerTick()
 
   background_sprite.drawSprite();
   enemy_sprite.drawToScreen();
-  cursor_sprite.drawSprite( GetMouseX() - 64, GetMouseY() - 64 );
+  player_instance.drawToScreen( GetMouseX() - 64, GetMouseY() - 64 );
 
   TextRender::drawTextToScreen( "Score", 10, 10, 32 );
   TextRender::drawTextToScreen( std::to_string(player_instance.m_current_score).c_str(), 125, 10, 32 );

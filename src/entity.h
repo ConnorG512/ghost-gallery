@@ -15,6 +15,7 @@ class Entity
     ~Entity();
 
     void drawToScreen();
+    void drawToScreen( const int pos_x, const int pos_y );
     bool checkCollision( const Rectangle& collider );
     int takeDamage( int health_to_reduce );
     int recieveHealth( int health_to_add );
