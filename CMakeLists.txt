@@ -21,6 +21,8 @@ add_executable(app
   src/entity.cpp
   src/health-component.h
   src/health-component.cpp
+  src/collision-shape.h
+  src/collision-shape.cpp
 )
 
 find_package(raylib REQUIRED)

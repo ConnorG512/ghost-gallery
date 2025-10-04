@@ -2,6 +2,8 @@
 
 #include "health-component.h"
 
+#include <raylib.h>
+
 class Player 
 {
   public:
@@ -14,6 +16,8 @@ class Player
     int takeDamage( int health_to_reduce );
     int recieveHealth( int health_to_add);
 
+    bool checkCollision( const Rectangle& collider );
+    
     int m_current_score { 0 };
 
   private:
