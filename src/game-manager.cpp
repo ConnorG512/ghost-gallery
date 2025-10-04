@@ -1,5 +1,4 @@
 #include "game-manager.h"
-#include "text-render.h"
 
 #include <string>
 
@@ -14,7 +13,7 @@ void GameManager::drawUpdatePerTick()
   game_window.clearWindow();
 
   background_sprite.drawSprite();
-  enemy_sprite.drawSprite();
+  enemy_sprite.drawToScreen();
   cursor_sprite.drawSprite( GetMouseX() - 64, GetMouseY() - 64 );
 
   TextRender::drawTextToScreen( "Score", 10, 10, 32 );

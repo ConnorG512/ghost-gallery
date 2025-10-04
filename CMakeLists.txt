@@ -17,6 +17,8 @@ add_executable(app
   src/game-manager.cpp
   src/text-render.h
   src/text-render.cpp
+  src/entity.h
+  src/entity.cpp
 )
 
 find_package(raylib REQUIRED)
