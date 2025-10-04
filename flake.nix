@@ -44,6 +44,7 @@
       ${debug} = pkgs.stdenv.mkDerivation (finalAttrs: {
         pname = "app";
         version = "1.0.0";
+        dontStrip = true;
         src = ./.;
 
         nativeBuildInputs = with pkgs; [
