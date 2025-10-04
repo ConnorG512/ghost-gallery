@@ -16,7 +16,7 @@ class GameManager
     
   private:
     Window game_window { 1600, 900, 60 };
-    Player player_instance { 6 };
+    Player player_instance {};
 
     ImageSprite background_sprite { "assets/image/default-background.png", 0, 0 };
     ImageSprite cursor_sprite { "assets/image/ui/cursor-target.png", 0, 0 };

@@ -1,7 +1,8 @@
 #include "player.h"
 
-Player::Player(int current_lives)
-  : m_current_lives { current_lives } {};
+Player::Player() {};
+Player::Player(int max_health, int current_health )
+  : m_player_health { max_health, current_health } {}
 
 Player::~Player() {};
 
@@ -17,12 +18,12 @@ int Player::addToScore(const int score_to_add)
   return m_current_score;
 };
 
-int Player::reduceLives(const int num_to_reduce) 
+int Player::takeDamage( int health_to_reduce )
 {
-  m_current_lives -= num_to_reduce;
-  if ( m_current_lives <= 0 )
-  {
-    m_current_lives = 0;
-  }
-  return m_current_lives;
-};
+  return m_player_health.reduceHealth( health_to_reduce );
+  
+}
+int Player::recieveHealth( int health_to_add)
+{
+  return m_player_health.increaseHealth( health_to_add );
+}
