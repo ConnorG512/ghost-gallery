@@ -1,4 +1,5 @@
 #include "entity.h"
+#include <memory>
 
 Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_path )
   : m_pos_x { pos_x }
@@ -17,10 +18,12 @@ void Entity::drawToScreen()
 {
   m_sprite.drawSprite();
 }
+
 void Entity::drawToScreen( const int pos_x, const int pos_y )
 {
   m_sprite.drawSprite( pos_x, pos_y );
 }
+
 bool Entity::checkCollision( const Rectangle& collider )
 {
   return m_collision.isCollidingWith(collider);
@@ -29,9 +32,14 @@ bool Entity::checkCollision( const Rectangle& collider )
 int Entity::takeDamage( int health_to_reduce )
 {
   return m_health.reduceHealth( health_to_reduce );
-  
 }
+
 int Entity::recieveHealth( int health_to_add)
 {
   return m_health.increaseHealth( health_to_add );
+}
+
+Rectangle& Entity::getCollision()
+{
+  return m_collision.m_collision_shape;
 }
