@@ -19,6 +19,6 @@ class GameManager
     Player player_instance { 0, 0, "assets/image/ui/cursor-target.png", 128, 128 };
 
     ImageSprite background_sprite { "assets/image/default-background.png", 0, 0 };
-    Entity enemy_sprite { 1600 / 2 -64, 900 / 2 -64, "assets/image/entity/enemy/default/default.png" };
+    Entity enemy_sprite { 1600 / 2 -64, 900 / 2 -64, "assets/image/entity/enemy/default/default.png", 128, 128 };
 
 };
