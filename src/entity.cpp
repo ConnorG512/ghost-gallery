@@ -22,6 +22,7 @@ void Entity::drawToScreen()
 void Entity::drawToScreen( const int pos_x, const int pos_y )
 {
   m_sprite.drawSprite( pos_x, pos_y );
+  m_collision.updateCollisionPosition( pos_x, pos_y );
 }
 
 bool Entity::checkCollision( const Rectangle& collider )

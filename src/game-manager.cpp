@@ -18,11 +18,6 @@ void GameManager::drawUpdatePerTick()
   enemy_sprite.drawToScreen();
   player_instance.drawToScreen( GetMouseX() - 64, GetMouseY() - 64 );
 
-  if (player_instance.checkCollision(enemy_sprite.getCollision()))
-  {
-    std::cout << "Hit!" << std::endl;
-    std::cout << std::to_string(player_instance.getCollision().x) << std::to_string(player_instance.getCollision().y) << std::endl;
-  }
 
   TextRender::drawTextToScreen( std::format("{}: {}", "Score", std::to_string(player_instance.m_current_score)), 10, 10, 32 );
 
@@ -33,7 +28,11 @@ void GameManager::inputUpdatePerTick()
 {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) 
     {
-      player_instance.addToScore( 10 );
+      if (player_instance.checkCollision(enemy_sprite.getCollision()))
+      {
+        std::cout << std::to_string(player_instance.getCollision().x) << std::to_string(player_instance.getCollision().y) << std::endl;
+        player_instance.addToScore( 10 );
+      }
     }
 }
 
