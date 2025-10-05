@@ -1,5 +1,6 @@
 #include "game-manager.h"
 
+#include <format>
 #include <iostream>
 #include <string>
 
@@ -23,8 +24,7 @@ void GameManager::drawUpdatePerTick()
     std::cout << std::to_string(player_instance.getCollision().x) << std::to_string(player_instance.getCollision().y) << std::endl;
   }
 
-  TextRender::drawTextToScreen( "Score", 10, 10, 32 );
-  TextRender::drawTextToScreen( std::to_string(player_instance.m_current_score).c_str(), 125, 10, 32 );
+  TextRender::drawTextToScreen( std::format("{}: {}", "Score", std::to_string(player_instance.m_current_score)), 10, 10, 32 );
 
   game_window.endDraw();
 }
