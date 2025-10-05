@@ -23,6 +23,8 @@ add_executable(app
   src/health-component.cpp
   src/collision-shape.h
   src/collision-shape.cpp
+  src/random_generation.h
+  src/random_generation.cpp
 )
 
 find_package(raylib REQUIRED)
