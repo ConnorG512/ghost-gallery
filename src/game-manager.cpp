@@ -30,7 +30,6 @@ void GameManager::inputUpdatePerTick()
     {
       if (player_instance.checkCollision(enemy_sprite.getCollision()))
       {
-        std::cout << std::to_string(player_instance.getCollision().x) << std::to_string(player_instance.getCollision().y) << std::endl;
         player_instance.addToScore( 10 );
       }
     }
