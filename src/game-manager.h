@@ -5,6 +5,7 @@
 #include "image-sprite.h"
 #include "text-render.h"
 #include "entity.h"
+#include "random-generation.h"
 
 class GameManager
 {
@@ -19,5 +20,5 @@ class GameManager
     Player player_instance { 0, 0, "assets/image/ui/cursor-target.png", 128, 128 };
 
     ImageSprite background_sprite { "assets/image/default-background.png", 0, 0 };
-    Entity enemy_sprite { 1600 / 2 -64, 900 / 2 -64, "assets/image/entity/enemy/default/default.png", 128, 128 };
+    Entity enemy_sprite { RandomGeneration::generateRandomNumberBetween(0, 1600), RandomGeneration::generateRandomNumberBetween(0, 900), "assets/image/entity/enemy/default/default.png", 128, 128 };
 };
