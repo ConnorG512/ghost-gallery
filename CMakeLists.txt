@@ -25,6 +25,8 @@ add_executable(app
   src/collision-shape.cpp
   src/random-generation.h
   src/random-generation.cpp
+  src/tick-manager.h
+  src/tick-manager.cpp
 )
 
 find_package(raylib REQUIRED)
