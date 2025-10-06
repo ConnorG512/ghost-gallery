@@ -31,6 +31,7 @@ class GameStateGameplay : public GameState
       0, 
       0, 
       "assets/image/ui/cursor-target.png", 
+      "assets/image/ui/cursor-target-found.png",
       128, 
       128,
     };

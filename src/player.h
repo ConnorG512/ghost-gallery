@@ -8,7 +8,14 @@
 class Player : public Entity
 {
   public:
-    Player( const int pos_x, const int pos_y, const std::string& texture_path, const int coll_width, const int coll_height );
+    Player( 
+      const int pos_x, 
+      const int pos_y, 
+      const std::string& texture_path, 
+      const std::string& texture_path_2, 
+      const int coll_width, 
+      const int coll_height 
+    );
 
     int addToScore(int score_to_add);
 

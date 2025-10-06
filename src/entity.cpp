@@ -1,5 +1,5 @@
 #include "entity.h"
-#include <memory>
+#include <string>
 
 Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_path )
   : m_pos_x { pos_x }
@@ -12,7 +12,13 @@ Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_pat
   , m_sprite { texture_path, pos_x, pos_y }
   , m_collision { pos_x, pos_y, coll_width, coll_height } {}
 
-Entity::~Entity() {}
+Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_path, const std::string& texture_path_2, const int coll_width, const int coll_height )
+  : m_pos_x { pos_x }
+  , m_pos_y { pos_y }
+  , m_sprite { texture_path, texture_path_2, pos_x, pos_y }
+  , m_collision { pos_x, pos_y, coll_width, coll_height } {}
+
+  Entity::~Entity() {}
 
 void Entity::drawToScreen( const int texture_index )
 {
@@ -21,7 +27,7 @@ void Entity::drawToScreen( const int texture_index )
 
 void Entity::drawToScreen(const int texture_index, const int pos_x, const int pos_y )
 {
-  m_sprite.drawSprite( 0, pos_x, pos_y );
+  m_sprite.drawSprite( texture_index, pos_x, pos_y );
   m_collision.updateCollisionPosition( pos_x, pos_y );
 }
 

@@ -11,7 +11,24 @@ class Entity
 {
   public:
     Entity( const int pos_x, const int pos_y, const std::string& texture_path );
-    Entity( const int pos_x, const int pos_y, const std::string& texture_path, const int coll_width, const int coll_height );
+    
+    Entity( 
+      const int pos_x, 
+      const int pos_y, 
+      const std::string& texture_path, 
+      const int coll_width, 
+      const int coll_height 
+    );
+    
+    Entity( 
+      const int pos_x, 
+      const int pos_y, 
+      const std::string& texture_path, 
+      const std::string& texture_path_2, 
+      const int coll_width, 
+      const int coll_height 
+    );
+    
     ~Entity();
 
     void drawToScreen( const int texture_index );

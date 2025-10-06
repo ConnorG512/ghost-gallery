@@ -4,6 +4,8 @@
 #include "../window.h"
 #include "../input-handler.h"
 #include <format>
+#include <iostream>
+#include <ostream>
 #include <raylib.h>
 #include <string>
 
@@ -34,7 +36,15 @@ void GameStateGameplay::gameplayLoop()
 
   m_background_image.drawSprite( 0 );
   m_enemy_sprite.drawToScreen( 0 );
-  m_player.drawToScreen( 0, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+
+  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
+  {
+    m_player.drawToScreen( 1, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+  } 
+  else 
+  {
+    m_player.drawToScreen( 0, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+  }
 
   TextRender::drawTextToScreen( 
     std::format("{} {}", "Score:", 
