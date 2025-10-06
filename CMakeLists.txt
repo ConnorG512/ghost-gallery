@@ -29,6 +29,8 @@ add_executable(app
   src/tick-manager.cpp
   src/gamestate/gamestate-base.h
   src/gamestate/gamestate-base.cpp
+  src/gamestate/gamestate-gameplay.h
+  src/gamestate/gamestate-gameplay.cpp
 )
 
 find_package(raylib REQUIRED)
