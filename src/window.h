@@ -10,6 +10,8 @@ class Window
     void beginDraw();
     void endDraw();
     void clearWindow();
+    int getCursorX();
+    int getCursorY();
     
     enum class CursorStatus
     {

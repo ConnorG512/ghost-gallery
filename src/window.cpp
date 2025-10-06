@@ -1,4 +1,5 @@
 #include "window.h"
+#include <raylib.h>
 
 Window::Window(int width, int height, int target_fps) 
   : m_width ( width )
@@ -32,6 +33,16 @@ void Window::endDraw()
 void Window::clearWindow()
 {
   ClearBackground(YELLOW);
+}
+
+int Window::getCursorX()
+{
+  return GetMouseX();
+}
+
+int Window::getCursorY()
+{
+  return GetMouseY();
 }
 
 void Window::changeCursorStatus( CursorStatus status_to_change_to )

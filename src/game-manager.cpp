@@ -12,10 +12,17 @@ namespace
 
 GameManager::GameManager()
   : m_game_window( 1600, 900, 60 )
-  , m_current_gamestate { std::make_unique<GameStateGameplay>( m_game_window )}{}
+  , m_current_gamestate { std::make_unique<GameStateGameplay>( m_game_window )} {}
 
-void GameManager::startGame() 
+void GameManager::initGameState()
 {
+  m_current_gamestate->initialiseState();
+}
+
+void GameManager::startGameLoop() 
+{
+  initGameState();
+
   while ( !shouldGameClose() ) 
   {
     assert( m_current_gamestate );

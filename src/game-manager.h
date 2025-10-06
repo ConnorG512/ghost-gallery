@@ -11,7 +11,8 @@ struct GameManager
   {
     gameplay,
   };
-  void startGame();
+  void initGameState();
+  void startGameLoop();
   bool shouldGameClose();
   
   private:
