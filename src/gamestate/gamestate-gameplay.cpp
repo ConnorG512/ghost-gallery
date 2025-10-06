@@ -12,7 +12,6 @@ GameStateGameplay::GameStateGameplay( Window& game_window )
 
 namespace 
 {
-  constexpr int cursor_offset { 64 };
   constexpr int score_text_offset { 10 };
   constexpr int score_amount_to_add { 20 };
   constexpr int font_size { 32 }; 
