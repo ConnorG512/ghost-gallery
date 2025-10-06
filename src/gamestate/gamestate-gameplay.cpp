@@ -10,6 +10,7 @@ GameStateGameplay::GameStateGameplay( Window& game_window )
 
 namespace 
 {
+  constexpr int cursor_offset { 64 };
 }
 
 void GameStateGameplay::initialiseState()
@@ -29,7 +30,7 @@ void GameStateGameplay::gameplayLoop()
 
   m_background_image.drawSprite();
   m_enemy_sprite.drawToScreen();
-  m_player.drawToScreen( m_game_window.getCursorX() - 64, m_game_window.getCursorY() - 64 );
+  m_player.drawToScreen( m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
 
   TextRender::drawTextToScreen( std::format("{} {}", "Score:", std::to_string(m_player.m_current_score)), 10, 10, 32 ); 
 
