@@ -28,14 +28,8 @@ void GameStateGameplay::inputLoop()
   playerShoot();
 }
 
-void GameStateGameplay::gameplayLoop()
+void GameStateGameplay::changePlayerCursor()
 {
-  m_game_window.beginDraw();
-  m_game_window.clearWindow();
-
-  m_background_image.drawSprite( 0 );
-  m_enemy_sprite.drawToScreen( 0 );
-
   if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
     m_player.drawToScreen( 1, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
@@ -44,6 +38,17 @@ void GameStateGameplay::gameplayLoop()
   {
     m_player.drawToScreen( 0, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
   }
+}
+
+void GameStateGameplay::gameplayLoop()
+{
+  m_game_window.beginDraw();
+  m_game_window.clearWindow();
+
+  m_background_image.drawSprite( 0 );
+  m_enemy_sprite.drawToScreen( 0 );
+
+  changePlayerCursor();
 
   TextRender::drawTextToScreen( 
     std::format("{} {}", "Score:", 
