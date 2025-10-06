@@ -2,6 +2,7 @@
 #include "gamestate-base.h"
 #include "../text-render.h"
 #include "../window.h"
+#include "../inputhandler.h"
 #include <format>
 #include <raylib.h>
 #include <string>
@@ -48,7 +49,7 @@ void GameStateGameplay::gameplayLoop()
 
 void GameStateGameplay::playerShoot()
 {
-  if ( IsMouseButtonPressed(MOUSE_BUTTON_LEFT ))
+  if ( InputHandler::leftMousePressed())
   {
     if ( m_player.checkCollision( m_enemy_sprite.getCollision()) )
     {
