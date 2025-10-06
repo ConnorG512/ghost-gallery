@@ -15,6 +15,7 @@ class GameStateGameplay : public GameState
     void gameplayLoop() override;
 
     void playerShoot();
+    void respawnEnemy();
     void changePlayerCursor();
 
   protected:

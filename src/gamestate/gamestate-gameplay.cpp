@@ -59,19 +59,24 @@ void GameStateGameplay::gameplayLoop()
   m_game_window.endDraw();
 }
 
+void GameStateGameplay::respawnEnemy()
+{
+  m_enemy_sprite.drawToScreen(
+    0,
+    RandomGeneration::generateRandomNumberBetween(0, 1600),
+    RandomGeneration::generateRandomNumberBetween(0, 900)
+  );
+  m_enemy_sprite.reviveEntity();
+}
+
 void GameStateGameplay::playerShoot()
 {
   if ( InputHandler::leftMousePressed() && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
     if (m_enemy_sprite.takeDamage(m_player.fire_damage) <= 0 )
     {
+      respawnEnemy();
       m_player.addToScore( score_amount_to_add );
-      m_enemy_sprite.reviveEntity();
-      m_enemy_sprite.drawToScreen(
-        0,
-        RandomGeneration::generateRandomNumberBetween(0, 1600),
-        RandomGeneration::generateRandomNumberBetween(0, 900)
-      );
     }
   }
 }
