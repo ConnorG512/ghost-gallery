@@ -27,6 +27,8 @@ add_executable(app
   src/random-generation.cpp
   src/tick-manager.h
   src/tick-manager.cpp
+  src/gamestate/gamestate-base.h
+  src/gamestate/gamestate-base.cpp
 )
 
 find_package(raylib REQUIRED)
