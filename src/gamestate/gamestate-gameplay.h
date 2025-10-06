@@ -14,6 +14,8 @@ class GameStateGameplay : public GameState
     void inputLoop() override;
     void gameplayLoop() override;
 
+    void playerShoot();
+
   protected:
     ImageSprite m_background_image { "assets/image/background/default-background.png", 0, 0 };
     
