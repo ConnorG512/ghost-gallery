@@ -14,8 +14,8 @@ class Entity
     Entity( const int pos_x, const int pos_y, const std::string& texture_path, const int coll_width, const int coll_height );
     ~Entity();
 
-    void drawToScreen();
-    void drawToScreen( const int pos_x, const int pos_y );
+    void drawToScreen( const int texture_index );
+    void drawToScreen( const int texture_index, const int pos_x, const int pos_y );
 
     bool checkCollision( const Rectangle& collider );
     

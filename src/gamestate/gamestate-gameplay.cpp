@@ -32,9 +32,9 @@ void GameStateGameplay::gameplayLoop()
   m_game_window.beginDraw();
   m_game_window.clearWindow();
 
-  m_background_image.drawSprite();
-  m_enemy_sprite.drawToScreen();
-  m_player.drawToScreen( m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+  m_background_image.drawSprite( 0 );
+  m_enemy_sprite.drawToScreen( 0 );
+  m_player.drawToScreen( 0, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
 
   TextRender::drawTextToScreen( 
     std::format("{} {}", "Score:", 

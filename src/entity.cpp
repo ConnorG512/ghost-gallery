@@ -14,14 +14,14 @@ Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_pat
 
 Entity::~Entity() {}
 
-void Entity::drawToScreen()
+void Entity::drawToScreen( const int texture_index )
 {
-  m_sprite.drawSprite();
+  m_sprite.drawSprite( texture_index );
 }
 
-void Entity::drawToScreen( const int pos_x, const int pos_y )
+void Entity::drawToScreen(const int texture_index, const int pos_x, const int pos_y )
 {
-  m_sprite.drawSprite( pos_x, pos_y );
+  m_sprite.drawSprite( 0, pos_x, pos_y );
   m_collision.updateCollisionPosition( pos_x, pos_y );
 }
 
