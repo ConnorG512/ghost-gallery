@@ -19,7 +19,8 @@ class Player : public Entity
 
     int addToScore(int score_to_add);
 
-    int m_current_score { 0 };
+    int current_score { 0 };
+    int fire_damage { 2 };
 
   private:
 };

@@ -51,8 +51,7 @@ void GameStateGameplay::gameplayLoop()
   changePlayerCursor();
 
   TextRender::drawTextToScreen( 
-    std::format("{} {}", "Score:", 
-    std::to_string(m_player.m_current_score)), 
+    std::format("{} {}", "Score:", std::to_string(m_player.current_score)), 
     score_text_offset, 
     score_text_offset, 
     font_size 
@@ -65,6 +64,9 @@ void GameStateGameplay::playerShoot()
 {
   if ( InputHandler::leftMousePressed() && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
-    m_player.addToScore( score_amount_to_add );
+    if (m_enemy_sprite.takeDamage(m_player.fire_damage) <= 0 )
+    {
+      m_player.addToScore( score_amount_to_add );
+    }
   }
 }
