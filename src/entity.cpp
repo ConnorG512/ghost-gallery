@@ -50,3 +50,8 @@ Rectangle& Entity::getCollision()
 {
   return m_collision.m_collision_shape;
 }
+
+void Entity::reviveEntity()
+{
+  m_health.resetHealthToMax();
+}

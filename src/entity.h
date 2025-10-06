@@ -38,6 +38,7 @@ class Entity
     
     int takeDamage( int health_to_reduce );
     int recieveHealth( int health_to_add );
+    void reviveEntity();
 
     Rectangle& getCollision();
 

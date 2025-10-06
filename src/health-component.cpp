@@ -21,3 +21,8 @@ int HealthComponent::increaseHealth( int health_to_add )
   }
   return m_current_health;
 }
+
+void HealthComponent::resetHealthToMax()
+{
+  m_current_health = m_max_health;
+}
