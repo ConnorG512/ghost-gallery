@@ -2,6 +2,7 @@
 
 #include "entity.h"
 #include "health-component.h"
+#include "window.h"
 
 #include <raylib.h>
 
@@ -17,7 +18,14 @@ class Player : public Entity
       const int coll_height 
     );
 
+    enum class TextureName 
+    {
+      not_targeted,
+      targeted,
+    };
+
     int addToScore(int score_to_add);
+    void changePlayerCursor( TextureName texture_to_swap_to, Window& game_window );
 
     int current_score { 0 };
     int fire_damage { 2 };

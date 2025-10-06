@@ -32,11 +32,11 @@ void GameStateGameplay::changePlayerCursor()
 {
   if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
-    m_player.drawToScreen( 1, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+    m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
   } 
   else 
   {
-    m_player.drawToScreen( 0, m_game_window.getCursorX() - cursor_offset, m_game_window.getCursorY() - cursor_offset );
+    m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
   }
 }
 

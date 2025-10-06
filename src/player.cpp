@@ -1,6 +1,11 @@
 #include "player.h"
 #include <string>
 
+namespace 
+{
+  constexpr int cursor_offset { 64 };
+}
+
 Player::Player( const int pos_x, const int pos_y, const std::string& texture_path, const std::string& texture_path_2, const int coll_width, const int coll_height )
   : Entity{ pos_x, pos_y, texture_path, texture_path_2, coll_width, coll_height } {}
 
@@ -16,3 +21,15 @@ int Player::addToScore(const int score_to_add)
   return current_score;
 };
 
+void Player::changePlayerCursor( TextureName texture_to_swap_to, Window& game_window )
+{
+  switch (texture_to_swap_to) 
+  {
+    case TextureName::not_targeted:
+      drawToScreen( 0, game_window.getCursorX() - cursor_offset, game_window.getCursorY() - cursor_offset );
+      break;
+    case TextureName::targeted:
+      drawToScreen( 1, game_window.getCursorX() - cursor_offset, game_window.getCursorY() - cursor_offset );
+      break;
+  }
+}
