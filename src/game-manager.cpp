@@ -1,41 +1,30 @@
 #include "game-manager.h"
+#include "gamestate/gamestate-gameplay.h"
+#include "window.h"
+#include "gamestate/gamestate-base.h"
+#include <cassert>
+#include <memory>
 
-#include <format>
-#include <iostream>
-#include <string>
 
-void GameManager::initialiseApplication()
+namespace 
 {
-  game_window.changeCursorStatus(Window::CursorStatus::hide);
 }
 
-void GameManager::drawUpdatePerTick()
+GameManager::GameManager()
+  : m_game_window( 1600, 900, 60 )
+  , m_current_gamestate { std::make_unique<GameStateGameplay>( m_game_window )}{}
+
+void GameManager::startGame() 
 {
-  game_window.beginDraw();
-  game_window.clearWindow();
-
-  background_sprite.drawSprite();
-  enemy_sprite.drawToScreen();
-  player_instance.drawToScreen( GetMouseX() - 64, GetMouseY() - 64 );
-
-
-  TextRender::drawTextToScreen( std::format("{}: {}", "Score", std::to_string(player_instance.m_current_score)), 10, 10, 32 );
-
-  game_window.endDraw();
+  while ( !shouldGameClose() ) 
+  {
+    assert( m_current_gamestate );
+    m_current_gamestate->inputLoop();
+    m_current_gamestate->gameplayLoop();
+  }
 }
 
-void GameManager::inputUpdatePerTick()
+bool GameManager::shouldGameClose() 
 {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) 
-    {
-      if (player_instance.checkCollision(enemy_sprite.getCollision()))
-      {
-        player_instance.addToScore( 10 );
-      }
-    }
-}
-
-bool GameManager::shouldGameClose()
-{
-  return game_window.shouldWindowClose();
+  return m_game_window.shouldWindowClose();
 }

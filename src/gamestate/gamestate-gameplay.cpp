@@ -12,5 +12,8 @@ void GameStateGameplay::inputLoop()
 
 void GameStateGameplay::gameplayLoop()
 {
+  m_game_window.beginDraw();
+  m_game_window.clearWindow();
   TextRender::drawTextToScreen( "GAMEPLAY", 900, 500, 32 ); 
+  m_game_window.endDraw();
 }
