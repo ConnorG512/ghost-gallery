@@ -4,8 +4,6 @@
 #include "../window.h"
 #include "../input-handler.h"
 #include <format>
-#include <iostream>
-#include <ostream>
 #include <raylib.h>
 #include <string>
 
@@ -17,6 +15,7 @@ namespace
   constexpr int cursor_offset { 64 };
   constexpr int score_text_offset { 10 };
   constexpr int score_amount_to_add { 20 };
+  constexpr int font_size { 32 }; 
 }
 
 void GameStateGameplay::initialiseState()
@@ -51,7 +50,7 @@ void GameStateGameplay::gameplayLoop()
     std::to_string(m_player.m_current_score)), 
     score_text_offset, 
     score_text_offset, 
-    32 
+    font_size 
   ); 
 
   m_game_window.endDraw();
