@@ -2,7 +2,7 @@
 #include "gamestate-base.h"
 #include "../text-render.h"
 #include "../window.h"
-#include "../inputhandler.h"
+#include "../input-handler.h"
 #include <format>
 #include <raylib.h>
 #include <string>
