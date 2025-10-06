@@ -17,7 +17,7 @@ class GameStateGameplay : public GameState
     void playerShoot();
 
   protected:
-    ImageSprite m_background_image { "assets/image/background/default-background.png", 0, 0 };
+    ImageSprite m_background_image { "assets/image/background/manor-1.png", 0, 0 };
     
     Entity m_enemy_sprite {
       RandomGeneration::generateRandomNumberBetween(0, 1600),
