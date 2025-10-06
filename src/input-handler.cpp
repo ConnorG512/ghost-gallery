@@ -1,4 +1,4 @@
-#include "inputhandler.h"
+#include "input-handler.h"
 
 #include <raylib.h>
 
