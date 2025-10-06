@@ -58,11 +58,8 @@ void GameStateGameplay::gameplayLoop()
 
 void GameStateGameplay::playerShoot()
 {
-  if ( InputHandler::leftMousePressed())
+  if ( InputHandler::leftMousePressed() && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
-    if ( m_player.checkCollision( m_enemy_sprite.getCollision()) )
-    {
-      m_player.addToScore( score_amount_to_add );
-    }
+    m_player.addToScore( score_amount_to_add );
   }
 }
