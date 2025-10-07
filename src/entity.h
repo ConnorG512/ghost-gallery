@@ -46,6 +46,6 @@ class Entity
     int m_pos_x { 0 };
     int m_pos_y { 0 };
     ImageSprite m_sprite;
-    CollisionShape m_collision { 0, 0, 128, 128 };
+    CollisionShape m_collision { m_pos_x, m_pos_y, 128, 128 };
     HealthComponent m_health { 8, 8 };
 };
