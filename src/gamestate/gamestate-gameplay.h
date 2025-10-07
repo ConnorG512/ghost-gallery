@@ -5,6 +5,7 @@
 #include "../entity.h"
 #include "../random-generation.h"
 #include "../player.h"
+#include "../tick-manager.h"
 
 class GameStateGameplay : public GameState
 {
@@ -16,10 +17,11 @@ class GameStateGameplay : public GameState
 
     void playerShoot();
     void respawnEnemy();
-    void changePlayerCursor();
+    void cursorHoverOverEnemy();
 
   protected:
     ImageSprite m_background_image { "assets/image/background/manor-1.png", 0, 0 };
+    TickManager m_game_tick {};
     
     Entity m_enemy_sprite {
       RandomGeneration::generateRandomNumberBetween(0, 1600),

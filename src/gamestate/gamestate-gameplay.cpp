@@ -25,9 +25,15 @@ void GameStateGameplay::initialiseState()
 void GameStateGameplay::inputLoop()
 {
   playerShoot();
+
+  m_game_tick.incrementTick();
+  if ( m_game_tick.hasHitTick( 120 ))
+  {
+    respawnEnemy();
+  }
 }
 
-void GameStateGameplay::changePlayerCursor()
+void GameStateGameplay::cursorHoverOverEnemy()
 {
   if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
@@ -47,7 +53,7 @@ void GameStateGameplay::gameplayLoop()
   m_background_image.drawSprite( 0 );
   m_enemy_sprite.drawToScreen( 0 );
 
-  changePlayerCursor();
+  cursorHoverOverEnemy();
 
   TextRender::drawTextToScreen( 
     std::format("{} {}", "Score:", std::to_string(m_player.current_score)), 
