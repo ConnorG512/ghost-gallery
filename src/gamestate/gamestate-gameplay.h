@@ -31,7 +31,7 @@ class GameStateGameplay : public GameState
       128,
       128,
     };
-    
+
     Player m_player {
       0, 
       0, 
