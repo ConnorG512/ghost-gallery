@@ -4,7 +4,7 @@
 
 class GameStateSplash : public GameState 
 {
-  private:
+  public:
     GameStateSplash( Window& game_window );
     
     void initialiseState() override;
