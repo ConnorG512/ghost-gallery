@@ -33,6 +33,8 @@ add_executable(app
   src/gamestate/gamestate-base.cpp
   src/gamestate/gamestate-gameplay.h
   src/gamestate/gamestate-gameplay.cpp
+  src/gamestate/gamestate-splash.h
+  src/gamestate/gamestate-splash.cpp
 )
 
 find_package(raylib REQUIRED)
