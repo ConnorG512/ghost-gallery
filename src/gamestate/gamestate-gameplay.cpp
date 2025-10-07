@@ -27,22 +27,7 @@ void GameStateGameplay::inputLoop()
   playerShoot();
 
   m_game_tick.incrementTick();
-  if ( m_game_tick.hasHitTick( 120 ))
-  {
-    respawnEnemy();
-  }
-}
-
-void GameStateGameplay::cursorHoverOverEnemy()
-{
-  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
-  {
-    m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
-  } 
-  else 
-  {
-    m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
-  }
+  resetEnemyOnTick();
 }
 
 void GameStateGameplay::gameplayLoop()
@@ -65,6 +50,18 @@ void GameStateGameplay::gameplayLoop()
   m_game_window.endDraw();
 }
 
+void GameStateGameplay::cursorHoverOverEnemy()
+{
+  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
+  {
+    m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
+  } 
+  else 
+  {
+    m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
+  }
+}
+
 void GameStateGameplay::respawnEnemy()
 {
   m_enemy_sprite.drawToScreen(
@@ -81,8 +78,17 @@ void GameStateGameplay::playerShoot()
   {
     if (m_enemy_sprite.takeDamage(m_player.fire_damage) <= 0 )
     {
+      m_game_tick.resetTickCounter();
       respawnEnemy();
       m_player.addToScore( score_amount_to_add );
     }
+  }
+}
+
+void GameStateGameplay::resetEnemyOnTick()
+{
+  if ( m_game_tick.hasHitTick( 120 ))
+  {
+    respawnEnemy();
   }
 }

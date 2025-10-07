@@ -18,6 +18,7 @@ class GameStateGameplay : public GameState
     void playerShoot();
     void respawnEnemy();
     void cursorHoverOverEnemy();
+    void resetEnemyOnTick();
 
   protected:
     ImageSprite m_background_image { "assets/image/background/manor-1.png", 0, 0 };

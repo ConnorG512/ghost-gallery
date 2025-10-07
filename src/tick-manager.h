@@ -7,4 +7,6 @@ class TickManager
   public:
     void incrementTick();
     uint64_t& getCurrentTick();
+    bool hasHitTick( int tick_to_check );
+    void resetTickCounter();
 };
