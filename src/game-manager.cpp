@@ -1,7 +1,8 @@
 #include "game-manager.h"
-#include "gamestate/gamestate-gameplay.h"
-#include "window.h"
 #include "gamestate/gamestate-base.h"
+#include "gamestate/gamestate-gameplay.h"
+#include "gamestate/gamestate-splash.h"
+#include "window.h"
 #include <cassert>
 #include <memory>
 
@@ -12,7 +13,7 @@ namespace
 
 GameManager::GameManager()
   : m_game_window( 1600, 900, 60 )
-  , m_current_gamestate { std::make_unique<GameStateGameplay>( m_game_window )} {}
+  , m_current_gamestate { std::make_unique<GameStateSplash>( m_game_window )} {}
 
 void GameManager::initGameState()
 {
