@@ -25,8 +25,8 @@ class GameStateGameplay : public GameState
     TickManager m_game_tick {};
     
     Entity m_enemy_sprite {
-      RandomGeneration::generateRandomNumberBetween(0, 1600),
-      RandomGeneration::generateRandomNumberBetween(0, 900),
+      RandomGeneration::NumberBetween(0, 1600),
+      RandomGeneration::NumberBetween(0, 900),
       "assets/image/entity/enemy/default/default.png",
       128,
       128,

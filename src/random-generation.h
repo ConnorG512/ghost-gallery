@@ -4,5 +4,5 @@
 
 namespace RandomGeneration
 {
-  int generateRandomNumberBetween(const int min, const int max);
+  int NumberBetween(const int min, const int max);
 }

@@ -1,6 +1,6 @@
 #include "random-generation.h"
 
-int RandomGeneration::generateRandomNumberBetween(const int min, const int max)
+int RandomGeneration::NumberBetween(const int min, const int max)
 {
   std::random_device rd;
   std::mt19937 gen(rd());

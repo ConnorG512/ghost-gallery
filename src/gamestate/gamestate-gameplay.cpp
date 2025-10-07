@@ -66,8 +66,8 @@ void GameStateGameplay::respawnEnemy()
 {
   m_enemy_sprite.drawToScreen(
     0,
-    RandomGeneration::generateRandomNumberBetween(0, 1600),
-    RandomGeneration::generateRandomNumberBetween(0, 900)
+    RandomGeneration::NumberBetween(0, 1600),
+    RandomGeneration::NumberBetween(0, 900)
   );
   m_enemy_sprite.reviveEntity();
 }
