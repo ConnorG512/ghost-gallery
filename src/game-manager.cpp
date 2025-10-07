@@ -9,10 +9,13 @@
 
 namespace 
 {
+  constexpr int window_width { 1600 };
+  constexpr int window_height { 900 };
+  constexpr int target_framerate { 60 };
 }
 
 GameManager::GameManager()
-  : m_game_window( 1600, 900, 60 )
+  : m_game_window( window_width, window_height, target_framerate )
   , m_current_gamestate { std::make_unique<GameStateSplash>( m_game_window )} {}
 
 void GameManager::initGameState()
