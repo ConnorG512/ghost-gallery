@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../window.h"
 #include <memory>
+
+class GameManager;
+class Window;
 
 class GameState 
 {
@@ -13,5 +15,6 @@ class GameState
     virtual void gameplayLoop() = 0;
 
   protected:
+    GameManager* m_game_manager;
     Window& m_game_window;
 };
