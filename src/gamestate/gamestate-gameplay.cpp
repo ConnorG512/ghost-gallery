@@ -98,5 +98,6 @@ void GameStateGameplay::resetEnemyOnTick()
   if ( m_game_tick.hasHitTick( 120 ))
   {
     respawnEnemy();
+    m_player.takeDamage( 1 );
   }
 }
