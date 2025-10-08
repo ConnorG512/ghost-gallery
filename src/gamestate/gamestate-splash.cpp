@@ -4,8 +4,8 @@
 #include "../window.h"
 #include <iostream>
 
-GameStateSplash::GameStateSplash( Window& game_window )
-  : GameState { game_window } {}
+GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window )
+  : GameState { game_manager, game_window } {}
 
 void GameStateSplash::initialiseState() 
 {

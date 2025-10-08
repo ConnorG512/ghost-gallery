@@ -10,7 +10,7 @@
 class GameStateGameplay : public GameState
 {
   public: 
-    GameStateGameplay( Window& game_window );
+    GameStateGameplay( GameManager* game_manager, Window& game_window );
     void initialiseState() override;
     void inputLoop() override;
     void gameplayLoop() override;

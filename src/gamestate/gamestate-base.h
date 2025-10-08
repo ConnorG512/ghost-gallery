@@ -8,7 +8,7 @@ class Window;
 class GameState 
 {
   public:
-    GameState( Window& game_window );
+    GameState( GameManager* game_manager, Window& game_window );
     virtual ~GameState();
     virtual void initialiseState() = 0;
     virtual void inputLoop() = 0;

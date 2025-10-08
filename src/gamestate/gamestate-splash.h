@@ -5,7 +5,7 @@
 class GameStateSplash : public GameState 
 {
   public:
-    GameStateSplash( Window& game_window );
+    GameStateSplash(GameManager* game_manager, Window& game_window );
     
     void initialiseState() override;
     void inputLoop() override;

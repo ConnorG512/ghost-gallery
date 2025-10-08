@@ -1,6 +1,7 @@
 #include "gamestate-base.h"
 
-GameState::GameState( Window& game_window )
-  : m_game_window { game_window } {}
+GameState::GameState( GameManager* game_manager, Window& game_window )
+  : m_game_window { game_window }
+  , m_game_manager { game_manager }{}
 
 GameState::~GameState() = default;

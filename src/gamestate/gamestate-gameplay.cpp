@@ -7,8 +7,8 @@
 #include <raylib.h>
 #include <string>
 
-GameStateGameplay::GameStateGameplay( Window& game_window )
-  : GameState { game_window } {};
+GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_window )
+  : GameState { game_manager, game_window } {};
 
 namespace 
 {

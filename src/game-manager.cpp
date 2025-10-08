@@ -16,7 +16,7 @@ namespace
 
 GameManager::GameManager()
   : m_game_window( window_width, window_height, target_framerate )
-  , m_current_gamestate { std::make_unique<GameStateSplash>( m_game_window )} {}
+  , m_current_gamestate { std::make_unique<GameStateSplash>( this, m_game_window )} {}
 
 void GameManager::initGameState()
 {
@@ -45,8 +45,8 @@ void GameManager::changeCurrentGameState( GameType gamestate )
   switch ( gamestate ) 
   {
     case GameType::splash:
-      m_current_gamestate = std::make_unique<GameStateSplash>( m_game_window );
+      m_current_gamestate = std::make_unique<GameStateSplash>( this, m_game_window );
     case GameType::gameplay:
-      m_current_gamestate = std::make_unique<GameStateGameplay>( m_game_window );
+      m_current_gamestate = std::make_unique<GameStateGameplay>( this, m_game_window );
   }
 }
