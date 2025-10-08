@@ -1,7 +1,6 @@
 #pragma once
 
 #include "entity.h"
-#include "health-component.h"
 #include "window.h"
 
 #include <raylib.h>
@@ -15,7 +14,7 @@ class Player : public Entity
       const std::string& texture_path, 
       const std::string& texture_path_2, 
       const int coll_width, 
-      const int coll_height 
+      const int coll_height
     );
 
     enum class TextureName 

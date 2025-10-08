@@ -41,9 +41,16 @@ void GameStateGameplay::gameplayLoop()
   cursorHoverOverEnemy();
 
   TextRender::drawTextToScreen( 
-    std::format("{} {}", "Score:", std::to_string(m_player.current_score)), 
+    std::format("Score: {}",  std::to_string(m_player.current_score)), 
     score_text_offset, 
     score_text_offset, 
+    font_size 
+  ); 
+
+  TextRender::drawTextToScreen( 
+    std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
+    score_text_offset, 
+    score_text_offset + 40, 
     font_size 
   ); 
 
@@ -66,8 +73,8 @@ void GameStateGameplay::respawnEnemy()
 {
   m_enemy_sprite.drawToScreen(
     0,
-    RandomGeneration::NumberBetween(0, 1600),
-    RandomGeneration::NumberBetween(0, 900)
+    RandomGeneration::NumberBetween(200, 1400),
+    RandomGeneration::NumberBetween(100, 800)
   );
   m_enemy_sprite.reviveEntity();
 }
