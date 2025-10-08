@@ -9,6 +9,10 @@ HealthComponent::HealthComponent( int max_health )
 int HealthComponent::reduceHealth( int health_to_reduce ) 
 {
   m_current_health -= health_to_reduce; 
+  if ( m_current_health <= 0 )
+  {
+    m_current_health = 0;
+  }
   return m_current_health;
 }
 

@@ -9,8 +9,7 @@ class HealthComponent {
     int increaseHealth( int health_to_add );
     void resetHealthToMax();
     
+    int m_max_health { 8 };
     int m_current_health { m_max_health };
 
-  private:
-    int m_max_health { 8 };
 };
