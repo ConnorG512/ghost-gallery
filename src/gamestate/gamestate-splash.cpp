@@ -3,7 +3,6 @@
 #include "../input-handler.h"
 #include "../window.h"
 #include "../game-manager.h"
-#include <iostream>
 
 GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window )
   : GameState { game_manager, game_window } {}
@@ -18,7 +17,6 @@ void GameStateSplash::inputLoop()
   // TODO
   if ( InputHandler::leftMousePressed() )
   {
-    std::cout << "Ready to play!" << std::endl;
     startGameplayLoop();
   }
 }
