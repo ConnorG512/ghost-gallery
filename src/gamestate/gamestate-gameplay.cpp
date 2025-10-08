@@ -16,6 +16,7 @@ namespace
   constexpr int score_amount_to_add { 20 };
   constexpr int health_vertical_offset { score_text_offset + 10 };
   constexpr int font_size { 32 }; 
+  constexpr int player_dealt_damage { 1 };
 }
 
 void GameStateGameplay::initialiseState()
@@ -98,6 +99,6 @@ void GameStateGameplay::resetEnemyOnTick()
   if ( m_game_tick.hasHitTick( 120 ))
   {
     respawnEnemy();
-    m_player.takeDamage( 1 );
+    m_player.takeDamage( player_dealt_damage );
   }
 }
