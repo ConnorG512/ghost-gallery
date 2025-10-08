@@ -2,6 +2,7 @@
 #include "../text-render.h"
 #include "../input-handler.h"
 #include "../window.h"
+#include "../game-manager.h"
 #include <iostream>
 
 GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window )
@@ -18,6 +19,7 @@ void GameStateSplash::inputLoop()
   if ( InputHandler::leftMousePressed() )
   {
     std::cout << "Ready to play!" << std::endl;
+    startGameplayLoop();
   }
 }
 
@@ -31,3 +33,8 @@ void GameStateSplash::gameplayLoop()
 
   m_game_window.endDraw();
 }
+
+void GameStateSplash::startGameplayLoop()
+{
+  m_game_manager->changeCurrentGameState( GameManager::GameType::gameplay );
+};

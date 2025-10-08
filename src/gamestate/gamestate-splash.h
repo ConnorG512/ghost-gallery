@@ -12,5 +12,6 @@ class GameStateSplash : public GameState
     void gameplayLoop() override;
 
   protected:
+    void startGameplayLoop();
 
 };
