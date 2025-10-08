@@ -14,6 +14,7 @@ namespace
 {
   constexpr int score_text_offset { 10 };
   constexpr int score_amount_to_add { 20 };
+  constexpr int health_vertical_offset { score_text_offset + 10 };
   constexpr int font_size { 32 }; 
 }
 
