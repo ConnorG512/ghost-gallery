@@ -1,6 +1,7 @@
 #include "gamestate-splash.h"
 #include "../text-render.h"
 #include "../input-handler.h"
+#include "../window.h"
 #include <iostream>
 
 GameStateSplash::GameStateSplash( Window& game_window )
