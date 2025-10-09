@@ -121,7 +121,7 @@ GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
 
   if ( m_player.current_score < score_thresholds_for_round_change[0] )
   {
-    return static_cast<GameStateGameplay::CurrentGameRound>(score_thresholds_for_round_change[0] / 100 );
+    return GameStateGameplay::CurrentGameRound::first;
   }
   if ( m_player.current_score < score_thresholds_for_round_change[1] )
   {
