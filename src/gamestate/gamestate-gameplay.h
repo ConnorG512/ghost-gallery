@@ -53,4 +53,5 @@ class GameStateGameplay : public GameState
     void resetEnemyOnTick();
     int setGameRoundProperties( const CurrentGameRound current_round );
     void startTickEvent();
+    void drawGameUi();
 }; 

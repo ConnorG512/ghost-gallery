@@ -12,11 +12,8 @@ GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_wi
 
 namespace 
 {
-  constexpr int score_text_offset { 10 };
-  constexpr int score_amount_to_add { 20 };
-  constexpr int health_vertical_offset { score_text_offset + 10 };
-  constexpr int font_size { 32 }; 
   constexpr int player_dealt_damage { 1 };
+  constexpr int score_amount_to_add { 20 };
 }
 
 void GameStateGameplay::initialiseState()
@@ -40,19 +37,7 @@ void GameStateGameplay::gameplayLoop()
 
   cursorHoverOverEnemy();
 
-  TextRender::drawTextToScreen ( 
-    std::format("Score: {}",  std::to_string(m_player.current_score)), 
-    score_text_offset, 
-    score_text_offset, 
-    font_size 
-  ); 
-
-  TextRender::drawTextToScreen ( 
-    std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
-    score_text_offset, 
-    score_text_offset + 40, 
-    font_size 
-  ); 
+  drawGameUi();
 
   m_game_window.endDraw();
 }
@@ -105,4 +90,25 @@ void GameStateGameplay::startTickEvent()
   {
     resetEnemyOnTick();
   }
+}
+
+void GameStateGameplay::drawGameUi()
+{
+  constexpr int ui_text_offset { 10 };
+  constexpr int health_vertical_offset { ui_text_offset + 10 };
+  constexpr int font_size { 32 }; 
+
+  TextRender::drawTextToScreen ( 
+    std::format("Score: {}",  std::to_string(m_player.current_score)), 
+    ui_text_offset, 
+    ui_text_offset, 
+    font_size 
+  ); 
+
+  TextRender::drawTextToScreen ( 
+    std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
+    ui_text_offset, 
+    ui_text_offset + 40, 
+    font_size 
+  ); 
 }
