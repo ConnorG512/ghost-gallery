@@ -37,6 +37,8 @@ class GameStateGameplay : public GameState
       "assets/image/entity/enemy/default/default.png",
       128,
       128,
+      2,
+      2,
     };
 
     Player m_player 
