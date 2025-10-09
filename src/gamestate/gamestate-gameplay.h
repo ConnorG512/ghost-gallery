@@ -34,7 +34,7 @@ class GameStateGameplay : public GameState
     {
       RandomGeneration::NumberBetween(0, 1600),
       RandomGeneration::NumberBetween(0, 900),
-      "assets/image/entity/enemy/default/default.png",
+      "assets/image/entity/enemy/ghost/ghost-1.png",
       128,
       128,
       2,
