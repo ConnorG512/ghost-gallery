@@ -29,6 +29,16 @@ class Entity
       const int coll_height 
     );
     
+    Entity( 
+      const int pos_x, 
+      const int pos_y, 
+      const std::string& texture_path, 
+      const int coll_width, 
+      const int coll_height, 
+      const int max_health,
+      const int current_health
+    );
+    
     ~Entity();
 
     void drawToScreen( const int texture_index );

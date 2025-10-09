@@ -18,6 +18,13 @@ Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_pat
   , m_sprite { texture_path, texture_path_2, pos_x, pos_y }
   , m_collision { pos_x, pos_y, coll_width, coll_height } {}
 
+Entity::Entity( const int pos_x, const int pos_y, const std::string& texture_path, const int coll_width, const int coll_height, const int max_health, const int current_health )
+  : m_pos_x { pos_x }
+  , m_pos_y { pos_y }
+  , m_sprite { texture_path, pos_x, pos_y }
+  , m_collision { pos_x, pos_y, coll_width, coll_height }
+  , m_health( max_health, current_health ) {}
+  
   Entity::~Entity() {}
 
 void Entity::drawToScreen( const int texture_index )
