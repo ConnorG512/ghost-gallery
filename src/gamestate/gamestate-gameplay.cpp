@@ -24,7 +24,7 @@ void GameStateGameplay::initialiseState()
 
 void GameStateGameplay::inputLoop()
 {
-  startTickEvent();
+  startTickEvent( determineGameRound());
   playerShoot();
 }
 
@@ -84,13 +84,13 @@ void GameStateGameplay::resetEnemyOnTick()
   m_player.takeDamage( player_dealt_damage );
 }
 
-void GameStateGameplay::startTickEvent()
+void GameStateGameplay::startTickEvent( GameStateGameplay::CurrentGameRound current_round )
 {
   m_game_tick.incrementTick();
   constexpr std::array<int, 5> round_tick_thresholds { 150, 120, 90, 60, 30 };
   int tick_threshold;
 
-  switch ( m_current_round ) 
+  switch ( current_round ) 
   {
     case CurrentGameRound::first:
       tick_threshold = round_tick_thresholds[0];
@@ -115,20 +115,52 @@ void GameStateGameplay::startTickEvent()
   }
 }
 
+GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
+{
+  constexpr std::array<int, 5> score_thresholds_for_round_change { 100, 200, 300, 400, 500 };
+  
+  if ( m_player.current_score < score_thresholds_for_round_change[0] )
+  {
+    return GameStateGameplay::CurrentGameRound::first;
+  }
+  if ( m_player.current_score < score_thresholds_for_round_change[1] )
+  {
+    return GameStateGameplay::CurrentGameRound::second;
+  }
+  if ( m_player.current_score < score_thresholds_for_round_change[2] )
+  {
+    return GameStateGameplay::CurrentGameRound::third;
+  }
+  if ( m_player.current_score < score_thresholds_for_round_change[3] )
+  {
+    return GameStateGameplay::CurrentGameRound::fourth;
+  }
+  if ( m_player.current_score < score_thresholds_for_round_change[4] || m_player.current_score > score_thresholds_for_round_change[4] )
+  {
+    return GameStateGameplay::CurrentGameRound::fith;
+  } 
+  else 
+  {
+    return GameStateGameplay::CurrentGameRound::fith;
+  }
+}
+
 void GameStateGameplay::drawGameUi()
 {
   constexpr int ui_text_offset { 10 };
   constexpr int health_vertical_offset { ui_text_offset + 10 };
   constexpr int font_size { 32 }; 
 
-  TextRender::drawTextToScreen ( 
+  TextRender::drawTextToScreen 
+  ( 
     std::format("Score: {}",  std::to_string(m_player.current_score)), 
     ui_text_offset, 
     ui_text_offset, 
     font_size 
   ); 
 
-  TextRender::drawTextToScreen ( 
+  TextRender::drawTextToScreen 
+  ( 
     std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
     ui_text_offset, 
     ui_text_offset + 40, 

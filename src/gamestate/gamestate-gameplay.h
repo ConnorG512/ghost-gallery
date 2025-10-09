@@ -28,8 +28,6 @@ class GameStateGameplay : public GameState
       fith
     };
 
-    CurrentGameRound m_current_round = CurrentGameRound::first;
-
     TickManager m_game_tick {};
     
     Entity m_enemy_sprite 
@@ -56,6 +54,7 @@ class GameStateGameplay : public GameState
     void cursorHoverOverEnemy();
     void resetEnemyOnTick();
     int setGameRoundProperties( const CurrentGameRound current_round );
-    void startTickEvent();
+    void startTickEvent( GameStateGameplay::CurrentGameRound current_round );
+    GameStateGameplay::CurrentGameRound determineGameRound();
     void drawGameUi();
 }; 
