@@ -59,8 +59,8 @@ void GameStateGameplay::respawnEnemy()
 {
   m_enemy_sprite.drawToScreen(
     0,
-    RandomGeneration::NumberBetween(200, 1400),
-    RandomGeneration::NumberBetween(100, 800)
+    RandomGeneration::NumberBetween( 200, 1400 ),
+    RandomGeneration::NumberBetween( 100, 800 )
   );
   m_enemy_sprite.reviveEntity();
 }
@@ -104,7 +104,7 @@ void GameStateGameplay::startTickEvent( GameStateGameplay::CurrentGameRound curr
     case CurrentGameRound::fourth:
       tick_threshold = round_tick_thresholds[3];
       break;
-    case CurrentGameRound::fith:
+    case CurrentGameRound::fifth:
       tick_threshold = round_tick_thresholds[4];
       break;
   }
@@ -118,10 +118,10 @@ void GameStateGameplay::startTickEvent( GameStateGameplay::CurrentGameRound curr
 GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
 {
   constexpr std::array<int, 5> score_thresholds_for_round_change { 100, 200, 300, 400, 500 };
-  
+
   if ( m_player.current_score < score_thresholds_for_round_change[0] )
   {
-    return GameStateGameplay::CurrentGameRound::first;
+    return static_cast<GameStateGameplay::CurrentGameRound>(score_thresholds_for_round_change[0] / 100 );
   }
   if ( m_player.current_score < score_thresholds_for_round_change[1] )
   {
@@ -135,13 +135,13 @@ GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
   {
     return GameStateGameplay::CurrentGameRound::fourth;
   }
-  if ( m_player.current_score < score_thresholds_for_round_change[4] || m_player.current_score > score_thresholds_for_round_change[4] )
+  if ( m_player.current_score < score_thresholds_for_round_change[4] || m_player.current_score > score_thresholds_for_round_change[4])
   {
-    return GameStateGameplay::CurrentGameRound::fith;
+    return GameStateGameplay::CurrentGameRound::fifth;
   } 
   else 
   {
-    return GameStateGameplay::CurrentGameRound::fith;
+    return GameStateGameplay::CurrentGameRound::fifth;
   }
 }
 

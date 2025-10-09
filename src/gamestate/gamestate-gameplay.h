@@ -25,7 +25,7 @@ class GameStateGameplay : public GameState
       second,
       third,
       fourth,
-      fith
+      fifth
     };
 
     TickManager m_game_tick {};
