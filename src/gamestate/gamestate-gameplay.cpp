@@ -57,10 +57,13 @@ void GameStateGameplay::cursorHoverOverEnemy()
 
 void GameStateGameplay::respawnEnemy()
 {
+  constexpr std::array<int, 2> x_screen_pos_min_max { 200, 1400 };
+  constexpr std::array<int, 2> y_screen_pos_min_max { 100, 800 };
+  
   m_enemy_sprite.drawToScreen(
     0,
-    RandomGeneration::NumberBetween( 200, 1400 ),
-    RandomGeneration::NumberBetween( 100, 800 )
+    RandomGeneration::NumberBetween( x_screen_pos_min_max[ 0 ], x_screen_pos_min_max[ 1 ] ),
+    RandomGeneration::NumberBetween( y_screen_pos_min_max[ 0 ], y_screen_pos_min_max[ 1 ] )
   );
   m_enemy_sprite.reviveEntity();
 }
