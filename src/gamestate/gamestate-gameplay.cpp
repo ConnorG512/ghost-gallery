@@ -26,10 +26,8 @@ void GameStateGameplay::initialiseState()
 
 void GameStateGameplay::inputLoop()
 {
+  startTickEvent();
   playerShoot();
-
-  m_game_tick.incrementTick();
-  resetEnemyOnTick();
 }
 
 void GameStateGameplay::gameplayLoop()
@@ -42,14 +40,14 @@ void GameStateGameplay::gameplayLoop()
 
   cursorHoverOverEnemy();
 
-  TextRender::drawTextToScreen( 
+  TextRender::drawTextToScreen ( 
     std::format("Score: {}",  std::to_string(m_player.current_score)), 
     score_text_offset, 
     score_text_offset, 
     font_size 
   ); 
 
-  TextRender::drawTextToScreen( 
+  TextRender::drawTextToScreen ( 
     std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
     score_text_offset, 
     score_text_offset + 40, 
@@ -96,9 +94,15 @@ void GameStateGameplay::playerShoot()
 
 void GameStateGameplay::resetEnemyOnTick()
 {
-  if ( m_game_tick.hasHitTick( 120 ))
+  respawnEnemy();
+  m_player.takeDamage( player_dealt_damage );
+}
+
+void GameStateGameplay::startTickEvent()
+{
+  m_game_tick.incrementTick();
+  if (m_game_tick.hasHitTick( 30 ))
   {
-    respawnEnemy();
-    m_player.takeDamage( player_dealt_damage );
+    resetEnemyOnTick();
   }
 }

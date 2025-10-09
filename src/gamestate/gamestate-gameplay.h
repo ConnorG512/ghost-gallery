@@ -15,13 +15,19 @@ class GameStateGameplay : public GameState
     void inputLoop() override;
     void gameplayLoop() override;
 
-    void playerShoot();
-    void respawnEnemy();
-    void cursorHoverOverEnemy();
-    void resetEnemyOnTick();
 
   protected:
     ImageSprite m_background_image { "assets/image/background/manor-1.png", 0, 0 };
+
+    enum class CurrentGameRound 
+    {
+      first,
+      second,
+      third,
+      fourth,
+      fith
+    };
+
     TickManager m_game_tick {};
     
     Entity m_enemy_sprite {
@@ -40,4 +46,11 @@ class GameStateGameplay : public GameState
       128, 
       128,
     };
-};
+    
+    void playerShoot();
+    void respawnEnemy();
+    void cursorHoverOverEnemy();
+    void resetEnemyOnTick();
+    int setGameRoundProperties( const CurrentGameRound current_round );
+    void startTickEvent();
+}; 
