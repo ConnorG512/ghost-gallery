@@ -57,3 +57,8 @@ void Window::changeCursorStatus( CursorStatus status_to_change_to )
       break;
   }
 }
+
+void Window::requestWindowClose()
+{
+  CloseWindow();
+}

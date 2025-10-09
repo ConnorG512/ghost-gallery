@@ -12,6 +12,7 @@ class Window
     void clearWindow();
     int getCursorX();
     int getCursorY();
+    void requestWindowClose();
     
     enum class CursorStatus
     {

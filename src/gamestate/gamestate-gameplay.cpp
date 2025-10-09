@@ -3,10 +3,12 @@
 #include "../text-render.h"
 #include "../window.h"
 #include "../input-handler.h"
+#include "../game-manager.h"
 #include <array>
 #include <format>
 #include <raylib.h>
 #include <string>
+#include <unistd.h>
 
 GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_window )
   : GameState { game_manager, game_window } {};
@@ -84,7 +86,10 @@ void GameStateGameplay::playerShoot()
 void GameStateGameplay::resetEnemyOnTick()
 {
   respawnEnemy();
-  m_player.takeDamage( player_dealt_damage );
+  if ( m_player.takeDamage( player_dealt_damage ) <= 0)
+  {
+    gameOver();
+  }
 }
 
 void GameStateGameplay::startTickEvent()
@@ -119,4 +124,10 @@ void GameStateGameplay::drawGameUi()
     ui_text_offset + 40, 
     font_size 
   ); 
+}
+
+void GameStateGameplay::gameOver()
+{
+  //m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
+  m_game_manager->closeGame();
 }

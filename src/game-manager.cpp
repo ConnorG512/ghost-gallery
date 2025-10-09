@@ -50,3 +50,8 @@ void GameManager::changeCurrentGameState( GameType gamestate )
       m_current_gamestate = std::make_unique<GameStateGameplay>( this, m_game_window );
   }
 }
+
+void GameManager::closeGame()
+{
+  m_game_window.requestWindowClose();
+}

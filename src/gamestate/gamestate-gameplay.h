@@ -50,4 +50,5 @@ class GameStateGameplay : public GameState
     int setGameRoundProperties();
     void startTickEvent();
     void drawGameUi();
+    void gameOver();
 }; 
