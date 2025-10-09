@@ -117,7 +117,7 @@ void GameStateGameplay::startTickEvent( GameStateGameplay::CurrentGameRound curr
 
 GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
 {
-  constexpr std::array<int, 5> score_thresholds_for_round_change { 100, 200, 300, 400, 500 };
+  constexpr std::array<int, 5> score_thresholds_for_round_change { 100, 500, 850, 1300, 1800 };
 
   if ( m_player.current_score < score_thresholds_for_round_change[0] )
   {
