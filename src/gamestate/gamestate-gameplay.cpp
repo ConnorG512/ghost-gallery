@@ -24,7 +24,7 @@ void GameStateGameplay::initialiseState()
 
 void GameStateGameplay::inputLoop()
 {
-  startTickEvent( determineGameRound());
+  startTickEvent();
   playerShoot();
 }
 
@@ -87,64 +87,14 @@ void GameStateGameplay::resetEnemyOnTick()
   m_player.takeDamage( player_dealt_damage );
 }
 
-void GameStateGameplay::startTickEvent( GameStateGameplay::CurrentGameRound current_round )
+void GameStateGameplay::startTickEvent()
 {
   m_game_tick.incrementTick();
-  constexpr std::array<int, 5> round_tick_thresholds { 150, 120, 90, 60, 30 };
-  int tick_threshold;
-
-  switch ( current_round ) 
-  {
-    case CurrentGameRound::first:
-      tick_threshold = round_tick_thresholds[0];
-      break;
-    case CurrentGameRound::second:
-      tick_threshold = round_tick_thresholds[1];
-      break;
-    case CurrentGameRound::third:
-      tick_threshold = round_tick_thresholds[2];
-      break;
-    case CurrentGameRound::fourth:
-      tick_threshold = round_tick_thresholds[3];
-      break;
-    case CurrentGameRound::fifth:
-      tick_threshold = round_tick_thresholds[4];
-      break;
-  }
-
-  if (m_game_tick.hasHitTick( tick_threshold ))
+  constexpr std::array<int, 5> tick_thresholds { 150, 120, 90, 60, 30 };
+  
+  if (m_game_tick.hasHitTick( tick_thresholds[ RandomGeneration::NumberBetween(0, tick_thresholds.size() - 1) ] ))
   {
     resetEnemyOnTick();
-  }
-}
-
-GameStateGameplay::CurrentGameRound GameStateGameplay::determineGameRound()
-{
-  constexpr std::array<int, 5> score_thresholds_for_round_change { 100, 500, 850, 1300, 1800 };
-
-  if ( m_player.current_score < score_thresholds_for_round_change[0] )
-  {
-    return GameStateGameplay::CurrentGameRound::first;
-  }
-  if ( m_player.current_score < score_thresholds_for_round_change[1] )
-  {
-    return GameStateGameplay::CurrentGameRound::second;
-  }
-  if ( m_player.current_score < score_thresholds_for_round_change[2] )
-  {
-    return GameStateGameplay::CurrentGameRound::third;
-  }
-  if ( m_player.current_score < score_thresholds_for_round_change[3] )
-  {
-    return GameStateGameplay::CurrentGameRound::fourth;
-  }
-  if ( m_player.current_score < score_thresholds_for_round_change[4] || m_player.current_score > score_thresholds_for_round_change[4])
-  {
-    return GameStateGameplay::CurrentGameRound::fifth;
-  } 
-  else 
-  {
-    return GameStateGameplay::CurrentGameRound::fifth;
   }
 }
 
