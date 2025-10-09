@@ -28,9 +28,12 @@ class GameStateGameplay : public GameState
       fith
     };
 
+    CurrentGameRound m_current_round = CurrentGameRound::first;
+
     TickManager m_game_tick {};
     
-    Entity m_enemy_sprite {
+    Entity m_enemy_sprite 
+    {
       RandomGeneration::NumberBetween(0, 1600),
       RandomGeneration::NumberBetween(0, 900),
       "assets/image/entity/enemy/default/default.png",
@@ -38,7 +41,8 @@ class GameStateGameplay : public GameState
       128,
     };
 
-    Player m_player {
+    Player m_player 
+    {
       0, 
       0, 
       "assets/image/ui/cursor-target.png", 

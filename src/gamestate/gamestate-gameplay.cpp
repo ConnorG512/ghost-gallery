@@ -3,6 +3,7 @@
 #include "../text-render.h"
 #include "../window.h"
 #include "../input-handler.h"
+#include <array>
 #include <format>
 #include <raylib.h>
 #include <string>
@@ -86,7 +87,29 @@ void GameStateGameplay::resetEnemyOnTick()
 void GameStateGameplay::startTickEvent()
 {
   m_game_tick.incrementTick();
-  if (m_game_tick.hasHitTick( 30 ))
+  constexpr std::array<int, 5> round_tick_thresholds { 150, 120, 90, 60, 30 };
+  int tick_threshold;
+
+  switch ( m_current_round ) 
+  {
+    case CurrentGameRound::first:
+      tick_threshold = round_tick_thresholds[0];
+      break;
+    case CurrentGameRound::second:
+      tick_threshold = round_tick_thresholds[1];
+      break;
+    case CurrentGameRound::third:
+      tick_threshold = round_tick_thresholds[2];
+      break;
+    case CurrentGameRound::fourth:
+      tick_threshold = round_tick_thresholds[3];
+      break;
+    case CurrentGameRound::fith:
+      tick_threshold = round_tick_thresholds[4];
+      break;
+  }
+
+  if (m_game_tick.hasHitTick( tick_threshold ))
   {
     resetEnemyOnTick();
   }
