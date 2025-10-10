@@ -96,7 +96,7 @@ void GameStateGameplay::playerShoot()
 void GameStateGameplay::resetEnemyOnTick()
 {
   respawnEnemy();
-  if ( m_player.takeDamage( player_dealt_damage ) <= 0)
+  if ( m_player.takeDamage( m_enemy_sprite.dealDamage() ) <= 0)
   {
     gameOver();
   }
