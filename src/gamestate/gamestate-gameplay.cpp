@@ -142,7 +142,7 @@ void GameStateGameplay::gameOver()
 
 void GameStateGameplay::drawSprites()
 {
-  drawHeartCollectable();
+  m_heart_collectable.drawToScreen();
   m_enemy_sprite.drawToScreen( 0 );
 }
 
