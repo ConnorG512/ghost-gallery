@@ -141,11 +141,19 @@ void GameStateGameplay::gameOver()
 
 void GameStateGameplay::drawSprites()
 {
+  drawHeartCollectable();
   m_enemy_sprite.drawToScreen( 0 );
-  m_heart_collectable.drawToScreen();
 }
 
 void GameStateGameplay::playerClickedHeartPickup()
 {
   m_player.recieveHealth( m_heart_collectable.giveHealth());
+}
+
+void GameStateGameplay::drawHeartCollectable()
+{
+  if ( m_heart_collectable.is_active )
+  {
+    m_heart_collectable.drawToScreen();
+  }
 }

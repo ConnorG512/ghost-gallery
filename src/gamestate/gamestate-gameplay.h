@@ -7,6 +7,7 @@
 #include "../entities/player.h"
 #include "../tick-manager.h"
 #include "../entities/heart-collectable.h"
+#include "../score-manager.h"
 
 class GameStateGameplay : public GameState
 {
@@ -19,9 +20,8 @@ class GameStateGameplay : public GameState
 
   protected:
     ImageSprite m_background_image {{ "assets/image/background/manor-1.png" }, 0, 0 };
-
     TickManager m_game_tick {};
-    
+    ScoreManager m_score_manager {};
     Enemy m_enemy_sprite 
     {
       2,
@@ -30,7 +30,6 @@ class GameStateGameplay : public GameState
       { "assets/image/entity/enemy/ghost/ghost-1.png" },
       2
     };
-
     Player m_player 
     {
       0, 
@@ -40,7 +39,6 @@ class GameStateGameplay : public GameState
         "assets/image/ui/cursor-target-found.png"
       }
     };
-
     HeartCollectable m_heart_collectable
     {
       RandomGeneration::NumberBetween(0, 1600),
@@ -59,4 +57,5 @@ class GameStateGameplay : public GameState
     void drawHeartCollectable();
     void drawSprites();
     void playerClickedHeartPickup();
+    void spawnHeartCollectable();
 }; 
