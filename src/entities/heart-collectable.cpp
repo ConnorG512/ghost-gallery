@@ -1,5 +1,6 @@
 #include "heart-collectable.h"
 #include "entity.h"
+#include "../random-generation.h"
 
 namespace 
 {
@@ -20,6 +21,10 @@ void HeartCollectable::drawToScreen()
     m_sprite.drawSprite( 0 );
   }
 }
+void HeartCollectable::drawToScreen( int x_pos, int y_pos )
+{
+  m_sprite.drawSprite( 0, x_pos, y_pos );
+}
 
 int HeartCollectable::giveHealth()
 {
@@ -28,4 +33,12 @@ int HeartCollectable::giveHealth()
     return m_health_to_restore;
   }
   return 0;
+}
+
+void HeartCollectable::changePosition()
+{
+  drawToScreen
+  (
+    RandomGeneration::NumberBetween( 300, 1400),
+    RandomGeneration::NumberBetween( 200, 700));
 }
