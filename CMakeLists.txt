@@ -9,16 +9,16 @@ add_executable(app
   src/main.cpp
   src/window.h
   src/window.cpp
-  src/player.h
-  src/player.cpp
+  src/entities/player.h
+  src/entities/player.cpp
   src/image-sprite.h
   src/image-sprite.cpp
   src/game-manager.h
   src/game-manager.cpp
   src/text-render.h
   src/text-render.cpp
-  src/entity.h
-  src/entity.cpp
+  src/entities/entity.h
+  src/entities/entity.cpp
   src/health-component.h
   src/health-component.cpp
   src/collision-shape.h
