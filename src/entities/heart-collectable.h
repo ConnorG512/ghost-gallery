@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entity.h"
+
 #include <vector>
 
 class HeartCollectable : public Entity
@@ -13,11 +14,12 @@ class HeartCollectable : public Entity
       const std::vector<std::string>& texture_paths
     );
 
-    bool is_active { true };
 
     void drawToScreen();
     int giveHealth();
 
+    bool is_active { false };
+  
   protected:
     int m_health_to_restore { 2 };
 };

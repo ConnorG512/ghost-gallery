@@ -23,5 +23,9 @@ void HeartCollectable::drawToScreen()
 
 int HeartCollectable::giveHealth()
 {
-  return m_health_to_restore;
+  if (is_active == true )
+  {
+    return m_health_to_restore;
+  }
+  return 0;
 }
