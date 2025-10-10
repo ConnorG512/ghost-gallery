@@ -42,8 +42,8 @@ class GameStateGameplay : public GameState
 
     HeartCollectable m_heart_collectable
     {
-      500,
-      500,
+      RandomGeneration::NumberBetween(0, 1600),
+      RandomGeneration::NumberBetween(0, 900),
       { "assets/image/entity/heart/heart-pickup.png" }
     };
     
@@ -57,4 +57,5 @@ class GameStateGameplay : public GameState
     void gameOver();
     void drawHeartCollectable();
     void drawSprites();
+    void playerClickedHeartPickup();
 }; 

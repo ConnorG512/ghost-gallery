@@ -36,9 +36,10 @@ int Entity::takeDamage( int health_to_reduce )
   return m_health.reduceHealth( health_to_reduce );
 }
 
-int Entity::recieveHealth( int health_to_add)
+int Entity::recieveHealth( int health_to_add )
 {
-  return m_health.increaseHealth( health_to_add );
+  m_health.increaseHealth( health_to_add );
+  return m_health.m_current_health;
 }
 
 Rectangle& Entity::getCollision()

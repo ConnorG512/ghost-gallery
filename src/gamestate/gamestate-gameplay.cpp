@@ -85,6 +85,11 @@ void GameStateGameplay::playerShoot()
       m_player.addToScore( score_amount_to_add );
     }
   }
+  else if (InputHandler::leftMousePressed() && m_player.checkCollision( m_heart_collectable.getCollision()))
+  {
+    m_player.recieveHealth( m_heart_collectable.giveHealth());
+    drawGameUi();
+  }
 }
 
 void GameStateGameplay::resetEnemyOnTick()
@@ -140,4 +145,9 @@ void GameStateGameplay::drawSprites()
 {
   m_enemy_sprite.drawToScreen( 0 );
   m_heart_collectable.drawToScreen();
+}
+
+void GameStateGameplay::playerClickedHeartPickup()
+{
+  m_player.recieveHealth( m_heart_collectable.giveHealth());
 }
