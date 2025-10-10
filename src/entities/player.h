@@ -1,7 +1,7 @@
 #pragma once
 
 #include "entity.h"
-#include "window.h"
+#include "../window.h"
 
 #include <raylib.h>
 
