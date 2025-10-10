@@ -35,6 +35,8 @@ add_executable(app
   src/gamestate/gamestate-gameplay.cpp
   src/gamestate/gamestate-splash.h
   src/gamestate/gamestate-splash.cpp
+  src/heart-collectable.h
+  src/heart-collectable.cpp
 )
 
 find_package(raylib REQUIRED)
