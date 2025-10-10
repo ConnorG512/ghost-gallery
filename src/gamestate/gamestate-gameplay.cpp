@@ -84,6 +84,7 @@ void GameStateGameplay::playerShoot()
       m_game_tick.resetTickCounter();
       respawnEnemy();
       m_score_manager.increaseScore( score_amount_to_add ); 
+      spawnHeartCollectable();
     }
   }
   else if (InputHandler::leftMousePressed() && m_player.checkCollision( m_heart_collectable.getCollision()))
@@ -150,10 +151,18 @@ void GameStateGameplay::playerClickedHeartPickup()
   m_player.recieveHealth( m_heart_collectable.giveHealth());
 }
 
-void GameStateGameplay::drawHeartCollectable()
+void GameStateGameplay::spawnHeartCollectable()
 {
-  if ( m_heart_collectable.is_active )
+  if ( !m_heart_collectable.is_active )
   {
-    m_heart_collectable.drawToScreen();
+    int random_result { RandomGeneration::NumberBetween( 1, 100)};
+    constexpr int success_threshold { 50 };
+    
+    if (random_result >= success_threshold )
+    {
+      m_heart_collectable.changePosition();
+      m_heart_collectable.is_active = true;
+      m_heart_collectable.drawToScreen();
+    }
   }
 }
