@@ -13,7 +13,7 @@ class Enemy : public Entity
       const std::vector<std::string>& texture_paths, 
       const int enemy_damage 
     );
-
+    
     int dealDamage();
 
   protected:
