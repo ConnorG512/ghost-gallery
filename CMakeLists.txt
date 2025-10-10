@@ -39,6 +39,8 @@ add_executable(app
   src/entities/heart-collectable.cpp
   src/entities/enemy.h
   src/entities/enemy.cpp
+  src/score-manager.h
+  src/score-manager.cpp
 )
 
 find_package(raylib REQUIRED)
