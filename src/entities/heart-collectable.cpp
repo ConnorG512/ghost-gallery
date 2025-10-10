@@ -23,7 +23,10 @@ void HeartCollectable::drawToScreen()
 }
 void HeartCollectable::drawToScreen( int x_pos, int y_pos )
 {
-  m_sprite.drawSprite( 0, x_pos, y_pos );
+  if ( is_active == true )
+  {
+    m_sprite.drawSprite( 0, x_pos, y_pos );
+  }
 }
 
 int HeartCollectable::giveHealth()
@@ -40,5 +43,6 @@ void HeartCollectable::changePosition()
   drawToScreen
   (
     RandomGeneration::NumberBetween( 300, 1400),
-    RandomGeneration::NumberBetween( 200, 700));
+    RandomGeneration::NumberBetween( 200, 700)
+  );
 }
