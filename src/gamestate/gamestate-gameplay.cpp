@@ -51,7 +51,7 @@ void GameStateGameplay::cursorHoverOverEnemy()
   {
     m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
   } 
-  if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.is_active )
+  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.is_active )
   {
     m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
   }
