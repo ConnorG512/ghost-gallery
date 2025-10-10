@@ -1,8 +1,8 @@
 #pragma once
 
-#include "image-sprite.h"
-#include "collision-shape.h"
-#include "health-component.h"
+#include "../image-sprite.h"
+#include "../collision-shape.h"
+#include "../health-component.h"
 
 #include <raylib.h>
 #include <string>
