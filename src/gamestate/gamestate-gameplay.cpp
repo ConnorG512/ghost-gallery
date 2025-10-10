@@ -4,6 +4,7 @@
 #include "../window.h"
 #include "../input-handler.h"
 #include "../game-manager.h"
+
 #include <array>
 #include <format>
 #include <raylib.h>

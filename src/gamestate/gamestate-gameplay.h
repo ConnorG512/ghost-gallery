@@ -2,11 +2,11 @@
 
 #include "gamestate-base.h"
 #include "../image-sprite.h"
-#include "../entity.h"
+#include "../entities/entity.h"
 #include "../random-generation.h"
-#include "../player.h"
+#include "../entities/player.h"
 #include "../tick-manager.h"
-#include "../heart-collectable.h"
+#include "../entities/heart-collectable.h"
 
 class GameStateGameplay : public GameState
 {
