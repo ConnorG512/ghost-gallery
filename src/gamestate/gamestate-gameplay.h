@@ -50,7 +50,6 @@ class GameStateGameplay : public GameState
     void respawnEnemy();
     void cursorHoverOverEnemy();
     void resetEnemyOnTick();
-    int setGameRoundProperties();
     void startTickEvent();
     void drawGameUi();
     void gameOver();
