@@ -2,7 +2,7 @@
 
 #include "gamestate-base.h"
 #include "../image-sprite.h"
-#include "../entities/entity.h"
+#include "../entities/enemy.h"
 #include "../random-generation.h"
 #include "../entities/player.h"
 #include "../tick-manager.h"
@@ -22,12 +22,13 @@ class GameStateGameplay : public GameState
 
     TickManager m_game_tick {};
     
-    Entity m_enemy_sprite 
+    Enemy m_enemy_sprite 
     {
       2,
       RandomGeneration::NumberBetween(0, 1600),
       RandomGeneration::NumberBetween(0, 900),
-      { "assets/image/entity/enemy/ghost/ghost-1.png" }
+      { "assets/image/entity/enemy/ghost/ghost-1.png" },
+      2
     };
 
     Player m_player 
