@@ -53,7 +53,6 @@ class GameStateGameplay : public GameState
     void startTickEvent();
     void drawGameUi();
     void gameOver();
-    void drawHeartCollectable();
     void drawSprites();
     void playerClickedHeartPickup();
     void spawnHeartCollectable();
