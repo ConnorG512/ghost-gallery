@@ -25,7 +25,6 @@ class Player : public Entity
     int addToScore(int score_to_add);
     void changePlayerCursor( TextureName texture_to_swap_to, Window& game_window );
 
-    int current_score { 0 };
     int fire_damage { 2 };
 
   private:

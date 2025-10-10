@@ -83,7 +83,7 @@ void GameStateGameplay::playerShoot()
     {
       m_game_tick.resetTickCounter();
       respawnEnemy();
-      m_player.addToScore( score_amount_to_add );
+      m_score_manager.increaseScore( score_amount_to_add ); 
     }
   }
   else if (InputHandler::leftMousePressed() && m_player.checkCollision( m_heart_collectable.getCollision()))
@@ -120,7 +120,7 @@ void GameStateGameplay::drawGameUi()
 
   TextRender::drawTextToScreen 
   ( 
-    std::format("Score: {}",  std::to_string(m_player.current_score)), 
+    std::format("Score: {}",  std::to_string(m_score_manager.m_current_score)), 
     ui_text_offset, 
     ui_text_offset
   ); 

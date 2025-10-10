@@ -23,18 +23,6 @@ Player::Player
       }
     } {}
 
-int Player::addToScore(const int score_to_add) 
-{
-  current_score += score_to_add;
-
-  constexpr int maximum_score { 99999 };
-  if ( current_score > maximum_score ) 
-  {
-    current_score = maximum_score;
-  }
-  return current_score;
-};
-
 void Player::changePlayerCursor( TextureName texture_to_swap_to, Window& game_window )
 {
   switch (texture_to_swap_to) 
