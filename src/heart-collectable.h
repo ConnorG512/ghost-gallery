@@ -24,7 +24,9 @@ class HeartCollectable : public Entity
       const int health_to_restore
     );
 
-  protected:
     int m_health_to_restore { 2 };
+    bool m_is_active { false };
+
+    void changeActiveStatus(bool active);
 
 };

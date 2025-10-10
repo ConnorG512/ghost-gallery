@@ -9,4 +9,5 @@ HeartCollectable::HeartCollectable
       const int coll_width, 
       const int coll_height 
 ) 
-  : Entity{ pos_x, pos_y, "assets/image/entity/heart/heart-pickup.png", 128, 128 } {}
+  : Entity{ pos_x, pos_y, texture_path, coll_width, coll_height } {}
+

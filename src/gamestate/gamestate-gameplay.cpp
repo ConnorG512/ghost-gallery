@@ -37,6 +37,7 @@ void GameStateGameplay::gameplayLoop()
 
   m_background_image.drawSprite( 0 );
   m_enemy_sprite.drawToScreen( 0 );
+  m_heart_collectable.drawToScreen( 0 );
 
   cursorHoverOverEnemy();
 

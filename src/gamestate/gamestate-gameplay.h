@@ -6,6 +6,7 @@
 #include "../random-generation.h"
 #include "../player.h"
 #include "../tick-manager.h"
+#include "../heart-collectable.h"
 
 class GameStateGameplay : public GameState
 {
@@ -39,6 +40,15 @@ class GameStateGameplay : public GameState
       "assets/image/ui/cursor-target.png", 
       "assets/image/ui/cursor-target-found.png",
       128, 
+      128,
+    };
+
+    HeartCollectable m_heart_collectable
+    {
+      500,
+      500,
+      "assets/image/entity/heart/heart-pickup.png",
+      128,
       128,
     };
 
