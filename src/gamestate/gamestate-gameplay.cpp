@@ -34,11 +34,10 @@ void GameStateGameplay::gameplayLoop()
 {
   m_game_window.beginDraw();
   m_game_window.clearWindow();
-
+  
   m_background_image.drawSprite( 0 );
-  m_enemy_sprite.drawToScreen( 0 );
-  m_heart_collectable.drawToScreen( 0 );
 
+  drawSprites();
   cursorHoverOverEnemy();
 
   drawGameUi();
@@ -52,7 +51,11 @@ void GameStateGameplay::cursorHoverOverEnemy()
   {
     m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
   } 
-  else 
+  if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.is_active )
+  {
+    m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
+  }
+  else
   {
     m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
   }
@@ -131,4 +134,10 @@ void GameStateGameplay::gameOver()
 {
   //m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
   m_game_manager->closeGame();
+}
+
+void GameStateGameplay::drawSprites()
+{
+  m_enemy_sprite.drawToScreen( 0 );
+  m_heart_collectable.drawToScreen();
 }

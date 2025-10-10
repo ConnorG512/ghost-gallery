@@ -8,19 +8,18 @@
 class Player : public Entity
 {
   public:
-    Player( 
+    Player
+    ( 
       const int pos_x, 
       const int pos_y, 
-      const std::string& texture_path, 
-      const std::string& texture_path_2, 
-      const int coll_width, 
-      const int coll_height
+      const std::vector<std::string>& texture_paths 
     );
 
     enum class TextureName 
     {
-      not_targeted,
-      targeted,
+      not_targeted = 0,
+      targeted = 1,
+      targeted_friendly = 2
     };
 
     int addToScore(int score_to_add);

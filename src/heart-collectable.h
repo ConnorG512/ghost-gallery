@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entity.h"
+#include <vector>
 
 class HeartCollectable : public Entity
 {
@@ -9,24 +10,14 @@ class HeartCollectable : public Entity
     ( 
       const int pos_x, 
       const int pos_y, 
-      const std::string& texture_path, 
-      const int coll_width, 
-      const int coll_height 
+      const std::vector<std::string>& texture_paths
     );
 
-    HeartCollectable
-    ( 
-      const int pos_x, 
-      const int pos_y, 
-      const std::string& texture_path, 
-      const int coll_width, 
-      const int coll_height,
-      const int health_to_restore
-    );
+    bool is_active { true };
 
+    void drawToScreen();
+    int giveHealth();
+
+  protected:
     int m_health_to_restore { 2 };
-    bool m_is_active { false };
-
-    void changeActiveStatus(bool active);
-
 };

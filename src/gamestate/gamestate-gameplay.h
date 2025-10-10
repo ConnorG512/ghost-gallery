@@ -18,40 +18,34 @@ class GameStateGameplay : public GameState
 
 
   protected:
-    ImageSprite m_background_image { "assets/image/background/manor-1.png", 0, 0 };
+    ImageSprite m_background_image {{ "assets/image/background/manor-1.png" }, 0, 0 };
 
     TickManager m_game_tick {};
     
     Entity m_enemy_sprite 
     {
+      2,
       RandomGeneration::NumberBetween(0, 1600),
       RandomGeneration::NumberBetween(0, 900),
-      "assets/image/entity/enemy/ghost/ghost-1.png",
-      128,
-      128,
-      2,
-      2,
+      { "assets/image/entity/enemy/ghost/ghost-1.png" }
     };
 
     Player m_player 
     {
       0, 
       0, 
-      "assets/image/ui/cursor-target.png", 
-      "assets/image/ui/cursor-target-found.png",
-      128, 
-      128,
+      {
+        "assets/image/ui/cursor-target.png", 
+        "assets/image/ui/cursor-target-found.png"
+      }
     };
 
     HeartCollectable m_heart_collectable
     {
       500,
       500,
-      "assets/image/entity/heart/heart-pickup.png",
-      128,
-      128,
+      { "assets/image/entity/heart/heart-pickup.png" }
     };
-
     
     void playerShoot();
     void respawnEnemy();
@@ -61,4 +55,6 @@ class GameStateGameplay : public GameState
     void startTickEvent();
     void drawGameUi();
     void gameOver();
+    void drawHeartCollectable();
+    void drawSprites();
 }; 
