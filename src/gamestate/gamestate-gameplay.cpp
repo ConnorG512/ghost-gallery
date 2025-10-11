@@ -23,9 +23,7 @@ namespace
   constexpr int score_amount_to_add { 20 };
 }
 
-void GameStateGameplay::initialiseState()
-{
-}
+void GameStateGameplay::initialiseState() { }
 
 void GameStateGameplay::inputLoop()
 {
