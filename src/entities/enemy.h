@@ -2,6 +2,8 @@
 
 #include "entity.h"
 
+class ScoreManager;
+
 class Enemy : public Entity 
 {
   public:
@@ -14,9 +16,9 @@ class Enemy : public Entity
       const int enemy_damage 
     );
     
-    int dealDamage();
+    int dealDamage( ScoreManager& score_manager );
 
   protected:
-    int m_current_damage { 2 };
+    int m_current_damage { 1 };
 
 };
