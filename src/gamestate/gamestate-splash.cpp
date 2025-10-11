@@ -45,10 +45,17 @@ void GameStateSplash::drawSplashText()
   constexpr int screen_size_x { 1600 };
   constexpr int screen_size_y { 900 };
 
-  const std::string& splash_text { "Press space key to start..." };
+  const std::string& start_text { "Press space key to start..." };
   TextRender::drawTextToScreen( 
-    splash_text, screen_size_x / 2 - MeasureText(splash_text.c_str(), 32 ) / 2, 
+    start_text, screen_size_x / 2 - MeasureText(start_text.c_str(), 32 ) / 2, 
     screen_size_y / 2, 
+    font_size 
+  );
+  
+  const std::string& exit_text { "Press escape to exit..." };
+  TextRender::drawTextToScreen( 
+    exit_text, screen_size_x / 2 - MeasureText(exit_text.c_str(), 32 ) / 2, 
+    screen_size_y / 2 + 50, 
     font_size 
   );
 }
