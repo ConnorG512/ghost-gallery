@@ -17,10 +17,14 @@ class HeartCollectable : public Entity
     void drawToScreen();
     void drawToScreen( int x_pos, int y_pos );
     int giveHealth();
-    void changePosition();
+    bool isHeartActive();
 
-    bool is_active { false };
+    void moveAndActivateToNewLocation();
+
   
   protected:
+    bool m_is_active { false };
     int m_health_to_restore { 2 };
+    
+    void changePosition();
 };

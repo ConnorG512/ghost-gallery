@@ -16,14 +16,14 @@ HeartCollectable::HeartCollectable
 
 void HeartCollectable::drawToScreen()
 {
-  if ( is_active == true )
+  if ( m_is_active == true )
   {
     m_sprite.drawSprite( 0 );
   }
 }
 void HeartCollectable::drawToScreen( int x_pos, int y_pos )
 {
-  if ( is_active == true )
+  if ( m_is_active == true )
   {
     m_sprite.drawSprite( 0, x_pos, y_pos );
   }
@@ -31,7 +31,7 @@ void HeartCollectable::drawToScreen( int x_pos, int y_pos )
 
 int HeartCollectable::giveHealth()
 {
-  if (is_active == true )
+  if ( m_is_active == true )
   {
     return m_health_to_restore;
   }
@@ -40,9 +40,17 @@ int HeartCollectable::giveHealth()
 
 void HeartCollectable::changePosition()
 {
-  drawToScreen
-  (
-    RandomGeneration::NumberBetween( 300, 1400),
-    RandomGeneration::NumberBetween( 200, 700)
-  );
+  m_pos_x = RandomGeneration::NumberBetween( 300, 1400);
+  m_pos_y = RandomGeneration::NumberBetween( 200, 700);
+}
+
+void HeartCollectable::moveAndActivateToNewLocation()
+{
+  m_is_active = true;
+  changePosition();
+}
+
+bool HeartCollectable::isHeartActive()
+{
+  return m_is_active;
 }

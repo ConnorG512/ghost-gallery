@@ -17,7 +17,6 @@ class GameStateGameplay : public GameState
     void inputLoop() override;
     void gameplayLoop() override;
 
-
   protected:
     ImageSprite m_background_image {{ "assets/image/background/manor-1.png" }, 0, 0 };
     TickManager m_game_tick {};

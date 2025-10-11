@@ -52,7 +52,7 @@ void GameStateGameplay::cursorHoverOverEnemy()
   {
     m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
   } 
-  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.is_active )
+  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.isHeartActive() )
   {
     m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
   }
@@ -153,16 +153,14 @@ void GameStateGameplay::playerClickedHeartPickup()
 
 void GameStateGameplay::spawnHeartCollectable()
 {
-  if ( !m_heart_collectable.is_active )
+  if ( !m_heart_collectable.isHeartActive() )
   {
     int random_result { RandomGeneration::NumberBetween( 1, 100)};
     constexpr int success_threshold { 50 };
     
     if (random_result >= success_threshold )
     {
-      m_heart_collectable.changePosition();
-      m_heart_collectable.is_active = true;
-      m_heart_collectable.drawToScreen();
+      m_heart_collectable.moveAndActivateToNewLocation();
     }
   }
 }
