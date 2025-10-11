@@ -12,7 +12,10 @@
 #include <unistd.h>
 
 GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_window )
-  : GameState { game_manager, game_window } {};
+  : GameState { game_manager, game_window } 
+{
+  m_game_window.changeCursorStatus( Window::CursorStatus::hide );
+};
 
 namespace 
 {
@@ -22,7 +25,6 @@ namespace
 
 void GameStateGameplay::initialiseState()
 {
-  m_game_window.changeCursorStatus( Window::CursorStatus::hide );
 }
 
 void GameStateGameplay::inputLoop()

@@ -47,7 +47,7 @@ int Window::getCursorY()
 
 void Window::changeCursorStatus( CursorStatus status_to_change_to )
 {
-  switch (status_to_change_to) 
+  switch ( status_to_change_to ) 
   {
     case CursorStatus::hide:
       HideCursor();

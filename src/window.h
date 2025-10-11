@@ -26,5 +26,4 @@ class Window
     int m_width;
     int m_height;
     int m_target_fps;
-    CursorStatus current_cusor_visibility { CursorStatus::hide };
 };
