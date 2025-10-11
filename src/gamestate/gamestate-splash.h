@@ -14,6 +14,7 @@ class GameStateSplash : public GameState
 
   protected:
     void startGameplayLoop();
+    void drawSplashText();
 
     ImageSprite m_background_image { { "assets/image/background/manor-1.png" }, 0, 0 };
 
