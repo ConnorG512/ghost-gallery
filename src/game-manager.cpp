@@ -46,8 +46,10 @@ void GameManager::changeCurrentGameState( GameType gamestate )
   {
     case GameType::splash:
       m_current_gamestate = std::make_unique<GameStateSplash>( this, m_game_window );
+      break;
     case GameType::gameplay:
       m_current_gamestate = std::make_unique<GameStateGameplay>( this, m_game_window );
+      break;
   }
 }
 

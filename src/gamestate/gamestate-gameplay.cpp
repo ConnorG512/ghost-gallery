@@ -137,8 +137,7 @@ void GameStateGameplay::drawGameUi()
 
 void GameStateGameplay::gameOver()
 {
-  //m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
-  m_game_manager->closeGame();
+  m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
 }
 
 void GameStateGameplay::drawSprites()
