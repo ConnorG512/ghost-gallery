@@ -91,6 +91,7 @@ void GameStateGameplay::playerShoot()
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
     drawGameUi();
+    m_heart_collectable.deactivatePickup();
   }
 }
 

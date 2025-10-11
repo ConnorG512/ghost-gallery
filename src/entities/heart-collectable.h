@@ -18,6 +18,7 @@ class HeartCollectable : public Entity
     void drawToScreen( int x_pos, int y_pos );
     int giveHealth();
     bool isHeartActive();
+    void deactivatePickup();
 
     void moveAndActivateToNewLocation();
 

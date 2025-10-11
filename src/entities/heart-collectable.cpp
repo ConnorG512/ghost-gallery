@@ -54,3 +54,8 @@ bool HeartCollectable::isHeartActive()
 {
   return m_is_active;
 }
+    
+void HeartCollectable::deactivatePickup()
+{
+  m_is_active = false;
+}
