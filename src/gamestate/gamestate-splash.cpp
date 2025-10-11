@@ -26,6 +26,8 @@ void GameStateSplash::gameplayLoop()
   // TODO
   m_game_window.beginDraw();
   m_game_window.clearWindow();
+
+  m_background_image.drawSprite( 0 );
   
   TextRender::drawTextToScreen( "Press space key to start...", 1600 / 2 , 900 / 2, 32 );
 
