@@ -157,9 +157,9 @@ void GameStateGameplay::spawnHeartCollectable()
   if ( !m_heart_collectable.isHeartActive() )
   {
     int random_result { RandomGeneration::NumberBetween( 1, 100)};
-    constexpr int success_threshold { 50 };
+    constexpr int success_threshold { 5 };
     
-    if (random_result >= success_threshold )
+    if (random_result <= success_threshold )
     {
       m_heart_collectable.moveAndActivateToNewLocation();
     }
