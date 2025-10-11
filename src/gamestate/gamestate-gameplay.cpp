@@ -77,7 +77,7 @@ void GameStateGameplay::respawnEnemy()
 
 void GameStateGameplay::playerShoot()
 {
-  if ( InputHandler::leftMousePressed() && m_player.checkCollision( m_enemy_sprite.getCollision()))
+  if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
     if (m_enemy_sprite.takeDamage(m_player.fire_damage) <= 0 )
     {
@@ -87,7 +87,7 @@ void GameStateGameplay::playerShoot()
       spawnHeartCollectable();
     }
   }
-  else if (InputHandler::leftMousePressed() && m_player.checkCollision( m_heart_collectable.getCollision()))
+  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()))
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
     drawGameUi();

@@ -15,7 +15,7 @@ void GameStateSplash::initialiseState()
 void GameStateSplash::inputLoop()
 {
   // TODO
-  if ( InputHandler::leftMousePressed() )
+  if ( InputHandler::receiveInput() == InputHandler::ButtonPress::space_key )
   {
     startGameplayLoop();
   }
@@ -27,7 +27,7 @@ void GameStateSplash::gameplayLoop()
   m_game_window.beginDraw();
   m_game_window.clearWindow();
   
-  TextRender::drawTextToScreen( "Press left mouse...", 1600 / 2 , 900 / 2, 32 );
+  TextRender::drawTextToScreen( "Press space key to start...", 1600 / 2 , 900 / 2, 32 );
 
   m_game_window.endDraw();
 }

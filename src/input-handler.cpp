@@ -2,7 +2,22 @@
 
 #include <raylib.h>
 
-bool InputHandler::leftMousePressed()
+InputHandler::ButtonPress InputHandler::receiveInput()
 {
-  return IsMouseButtonPressed( MOUSE_BUTTON_LEFT );
+  if ( IsMouseButtonPressed( MOUSE_BUTTON_LEFT ))
+  {
+    return InputHandler::ButtonPress::left_mouse;
+  }
+  else if ( IsKeyPressed( KEY_SPACE ))
+  {
+    return InputHandler::ButtonPress::space_key;
+  }
+  else if ( IsKeyPressed( KEY_R ))
+  {
+    return InputHandler::ButtonPress::r_key;
+  }
+  else 
+  { 
+    return InputHandler::ButtonPress::none; 
+  }
 }

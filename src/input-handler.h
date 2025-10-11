@@ -2,5 +2,14 @@
 
 namespace InputHandler 
 {
-  bool leftMousePressed();
+  
+  enum class ButtonPress 
+  {
+    none,
+    space_key,
+    r_key,
+    left_mouse
+  };
+  
+  ButtonPress receiveInput(); 
 }
