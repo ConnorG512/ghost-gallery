@@ -93,6 +93,7 @@ void GameStateGameplay::playerShoot()
   else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()))
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
+    m_heart_collectable.setHidden( true );
     drawGameUi();
   }
 }
