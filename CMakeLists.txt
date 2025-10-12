@@ -41,6 +41,8 @@ add_executable(app
   src/entities/enemy.cpp
   src/score-manager.h
   src/score-manager.cpp
+  src/damage-component.h
+  src/damage-component.cpp
 )
 
 find_package(raylib REQUIRED)

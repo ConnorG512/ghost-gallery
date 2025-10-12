@@ -15,4 +15,6 @@ class DamageComponent
     int m_base_damage { 2 };
     int m_critical_chance { 0 };
     int m_critical_multiplier { 1 };
+    
+    int CalculateDamage( const int critical_chance, const int critical_multiplier );
 };
