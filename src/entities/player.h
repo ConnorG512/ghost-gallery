@@ -22,7 +22,8 @@ class Player : public Entity
       targeted_friendly = 2
     };
 
-    void changePlayerCursor( TextureName texture_to_swap_to, Window& game_window );
+    void changePlayerCursor( Window& game_window, Entity& collided_entity );
+    void changePlayerCursor( Window& game_window );
 
     DamageComponent damage_component { 2, 30, 1 };
 };

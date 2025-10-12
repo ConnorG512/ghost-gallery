@@ -17,6 +17,8 @@ class HeartCollectable : public Entity
 
     int giveHealth();
     void moveAndActivateToNewLocation();
+
+    EntityType getEntityType() override;
     
   protected:
     int m_health_to_restore { 2 };

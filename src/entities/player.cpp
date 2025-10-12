@@ -2,9 +2,10 @@
 
 #include "player.h"
 #include "../window.h"
+#include "entity.h"
 
 namespace 
-{
+{ 
   constexpr int cursor_offset { 64 };
 }
 
@@ -25,32 +26,41 @@ Player::Player
       }
     } {}
 
-void Player::changePlayerCursor( TextureName texture_to_swap_to, Window& game_window )
+void Player::changePlayerCursor( Window& game_window, Entity& collided_entity )
 {
-  switch (texture_to_swap_to) 
+  
+  switch (collided_entity.getEntityType()) 
   {
-    case TextureName::not_targeted:
-      drawToScreen( 
-          static_cast<int>( TextureName::not_targeted ), 
+    case Entity::EntityType::hostile:
+      drawToScreen
+      ( 
+          static_cast<int>( TextureName::targeted ), 
           game_window.getCursorX() - cursor_offset, 
           game_window.getCursorY() - cursor_offset
       );
-      break;
+      return;
 
-    case TextureName::targeted:
-      drawToScreen( 
-          static_cast<int>( TextureName::targeted ), 
-          game_window.getCursorX() - cursor_offset, 
-          game_window.getCursorY() - cursor_offset 
-      );
-      break;
-    
-    case TextureName::targeted_friendly:
-      drawToScreen( 
+    case Entity::EntityType::friendly:
+      drawToScreen
+      ( 
           static_cast<int>( TextureName::targeted_friendly ), 
           game_window.getCursorX() - cursor_offset, 
-          game_window.getCursorY() - cursor_offset 
+          game_window.getCursorY() - cursor_offset
       );
-      break;
+      return;
+
+    default:
+      changePlayerCursor( game_window );
   }
+}
+
+void Player::changePlayerCursor( Window& game_window )
+{
+  drawToScreen
+  ( 
+      static_cast<int>( TextureName::not_targeted ), 
+      game_window.getCursorX() - cursor_offset, 
+      game_window.getCursorY() - cursor_offset
+  );
+  return;
 }

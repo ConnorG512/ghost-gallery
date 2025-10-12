@@ -12,4 +12,6 @@ class CoinCollectable : public Entity
     int GivePoints( ScoreManager& score_manager );
     
     void respawnToNewLocation();
+
+    EntityType getEntityType() override;
 };

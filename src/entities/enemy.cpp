@@ -10,3 +10,8 @@ Enemy::Enemy
 )
   : Entity { max_health, pos_x, pos_y, texture_paths }
   , m_base_damage { enemy_damage } {}
+
+Enemy::EntityType Enemy::getEntityType() 
+{
+  return Entity::EntityType::hostile;
+}

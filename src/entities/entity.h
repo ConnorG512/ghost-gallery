@@ -13,7 +13,7 @@ class Entity
     Entity( const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths );
     Entity( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths );
     Entity( const int max_health, const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths );
-    ~Entity();
+    virtual~Entity();
 
     void drawToScreen( const int texture_index );
     void drawToScreen( const int texture_index, const int pos_x, const int pos_y );
@@ -37,6 +37,7 @@ class Entity
       friendly,
       hostile
     };
+    virtual EntityType getEntityType();
 
   protected:
     int m_pos_x { 0 };

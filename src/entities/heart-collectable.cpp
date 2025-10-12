@@ -35,3 +35,8 @@ void HeartCollectable::moveAndActivateToNewLocation()
   setHidden( false );
   changePosition();
 }
+
+HeartCollectable::EntityType HeartCollectable::getEntityType() 
+{
+  return HeartCollectable::EntityType::friendly;
+}

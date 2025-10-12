@@ -22,3 +22,8 @@ void CoinCollectable::respawnToNewLocation()
   setHidden( false );
   drawToScreen(0, RandomGeneration::NumberBetween(100, 1400), RandomGeneration::NumberBetween(100, 800));
 }
+
+CoinCollectable::EntityType CoinCollectable::getEntityType()
+{
+  return CoinCollectable::EntityType::friendly;
+}

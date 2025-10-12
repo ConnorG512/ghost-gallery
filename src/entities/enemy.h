@@ -18,6 +18,8 @@ class Enemy : public Entity
     );
     
     DamageComponent damage_component { 1, 10, 1 };
+
+    EntityType getEntityType() override;
     
   protected:
     int m_base_damage{ 1 };

@@ -19,7 +19,7 @@ Entity::Entity( const int max_health, const int pos_x, const int pos_y, const st
   , m_pos_y { pos_y }
   , m_sprite { texture_paths, pos_x, pos_y } {}
 
-Entity::~Entity() {}
+Entity::~Entity() = default;
 
 void Entity::drawToScreen( const int texture_index )
 {
@@ -80,4 +80,9 @@ void Entity::setHidden(bool is_hidden )
 bool Entity::isHidden()
 {
   return m_is_hidden;
+}
+
+Entity::EntityType Entity::getEntityType()
+{
+  return EntityType::neutral;
 }

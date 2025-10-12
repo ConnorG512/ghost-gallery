@@ -38,31 +38,26 @@ void GameStateGameplay::gameplayLoop()
   m_background_image.drawSprite( 0 );
 
   drawSprites();
-  cursorHoverOverEnemy();
+
+  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_enemy_sprite );
+  }
+  else if ( m_player.checkCollision(m_heart_collectable.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_heart_collectable );
+  }
+  else if ( m_player.checkCollision(m_coin_collectable.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_coin_collectable );
+  }
+  else {
+    m_player.changePlayerCursor( m_game_window );
+  }
 
   drawGameUi();
 
   m_game_window.endDraw();
-}
-
-void GameStateGameplay::cursorHoverOverEnemy()
-{
-  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
-  {
-    m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
-  } 
-  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && !m_heart_collectable.isHidden())
-  {
-    m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
-  }
-  else if ( m_player.checkCollision( m_coin_collectable.getCollision()) && !m_coin_collectable.isHidden())
-  {
-    m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
-  }
-  else
-  {
-    m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
-  }
 }
 
 void GameStateGameplay::respawnEnemy()
