@@ -78,7 +78,7 @@ void GameStateGameplay::playerShoot()
 {
   if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
-    if (m_enemy_sprite.takeDamage(m_player.fire_damage) <= 0 )
+    if (m_enemy_sprite.takeDamage(m_player.damage_component.CalculateDamage()) <= 0 )
     {
       m_game_tick.resetTickCounter();
       respawnEnemy();
@@ -96,7 +96,7 @@ void GameStateGameplay::playerShoot()
 
 bool GameStateGameplay::hasPlayerDied()
 {
-  if ( m_player.takeDamage( m_enemy_sprite.dealDamage()) <= 0)
+  if ( m_player.takeDamage( m_enemy_sprite.damage_component.CalculateDamage( m_score_manager )) <= 0)
   {
     return true;
   }
