@@ -4,8 +4,8 @@
 
 #include <array>
 
-CoinCollectable::CoinCollectable( const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths )
-  : Entity(pos_x, pos_y, texture_paths ) {}
+CoinCollectable::CoinCollectable( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths )
+  : Entity(pos_x, pos_y, is_hidden, texture_paths ) {}
 
 int CoinCollectable::GivePoints( ScoreManager& score_manager )
 {
