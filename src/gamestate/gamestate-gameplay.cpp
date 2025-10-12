@@ -87,13 +87,19 @@ void GameStateGameplay::playerShoot()
       m_game_tick.resetTickCounter();
       respawnEnemy();
       m_score_manager.increaseScore( score_amount_to_add ); 
-      spawnHeartCollectable();
+      spawnCollectables();
     }
   }
   else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()))
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
     m_heart_collectable.setHidden( true );
+    drawGameUi();
+  }
+  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_coin_collectable.getCollision()))
+  {
+    m_score_manager.increaseScore(m_coin_collectable.GivePoints( m_score_manager ));
+    m_coin_collectable.setHidden( true );
     drawGameUi();
   }
 }
@@ -164,7 +170,7 @@ void GameStateGameplay::playerClickedHeartPickup()
   m_player.recieveHealth( m_heart_collectable.giveHealth());
 }
 
-void GameStateGameplay::spawnHeartCollectable()
+void GameStateGameplay::spawnCollectables()
 {
   if ( m_heart_collectable.isHidden() )
   {
@@ -172,6 +178,14 @@ void GameStateGameplay::spawnHeartCollectable()
     if ( RandomGeneration::HasHitThreshold( RandomGeneration::NumberBetween( 1, 100 ), success_threshold ))
     {
       m_heart_collectable.moveAndActivateToNewLocation();
+    }
+  }
+  if ( m_coin_collectable.isHidden())
+  {
+    constexpr int success_threshold { 15 };
+    if ( RandomGeneration::HasHitThreshold( RandomGeneration::NumberBetween( 1, 100 ), success_threshold ))
+    {
+      m_coin_collectable.respawnToNewLocation();
     }
   }
 }

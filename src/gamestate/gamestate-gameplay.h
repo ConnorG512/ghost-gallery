@@ -67,6 +67,6 @@ class GameStateGameplay : public GameState
     void gameOver();
     void drawSprites();
     void playerClickedHeartPickup();
-    void spawnHeartCollectable();
+    void spawnCollectables();
     bool hasPlayerDied();
 }; 

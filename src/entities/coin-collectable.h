@@ -10,5 +10,6 @@ class CoinCollectable : public Entity
   public:
     CoinCollectable( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths );
     int GivePoints( ScoreManager& score_manager );
-
+    
+    void respawnToNewLocation();
 };

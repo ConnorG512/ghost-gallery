@@ -1,6 +1,7 @@
 #include "coin-collectable.h"
-#include "../score-manager.h"
 #include "entity.h"
+#include "../score-manager.h"
+#include "../random-generation.h"
 
 #include <array>
 
@@ -14,4 +15,10 @@ int CoinCollectable::GivePoints( ScoreManager& score_manager )
   constexpr int bonus_chance { 10 };
 
   return 300;
+}
+
+void CoinCollectable::respawnToNewLocation()
+{
+  setHidden( false );
+  drawToScreen(0, RandomGeneration::NumberBetween(100, 1400), RandomGeneration::NumberBetween(100, 800));
 }
