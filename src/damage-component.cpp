@@ -1,4 +1,4 @@
-#include "damage_component.h"
+#include "damage-component.h"
 #include "score-manager.h"
 #include "random-generation.h"
 
