@@ -1,6 +1,7 @@
 #pragma once
 
 #include "entity.h"
+#include "../damage-component.h"
 
 class ScoreManager;
 
@@ -16,7 +17,7 @@ class Enemy : public Entity
       const int enemy_damage 
     );
     
-    int dealDamage();
+    DamageComponent damage_component { 1, 10, 1 };
 
   protected:
     int m_base_damage{ 1 };

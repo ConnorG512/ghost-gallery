@@ -10,8 +10,3 @@ Enemy::Enemy
 )
   : Entity { max_health, pos_x, pos_y, texture_paths }
   , m_base_damage { enemy_damage } {}
-
-int Enemy::dealDamage()
-{
-  return m_base_damage;
-}
