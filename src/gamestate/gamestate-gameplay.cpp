@@ -19,7 +19,6 @@ GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_wi
 
 namespace 
 {
-  constexpr int player_dealt_damage { 1 };
   constexpr int score_amount_to_add { 20 };
 }
 
@@ -95,10 +94,19 @@ void GameStateGameplay::playerShoot()
   }
 }
 
+bool GameStateGameplay::hasPlayerDied()
+{
+  if ( m_player.takeDamage( m_enemy_sprite.dealDamage()) <= 0)
+  {
+    return true;
+  }
+  return false;
+}
+
 void GameStateGameplay::resetEnemyOnTick()
 {
   respawnEnemy();
-  if ( m_player.takeDamage( m_enemy_sprite.dealDamage( m_score_manager )) <= 0)
+  if ( hasPlayerDied())
   {
     gameOver();
   }
@@ -118,11 +126,11 @@ void GameStateGameplay::startTickEvent()
 void GameStateGameplay::drawGameUi()
 {
   constexpr int ui_text_offset { 10 };
-  constexpr int health_vertical_offset { ui_text_offset + 10 };
+  constexpr int health_vertical_offset { ui_text_offset + 40 };
 
   TextRender::drawTextToScreen 
   ( 
-    std::format("Score: {}",  std::to_string(m_score_manager.m_current_score)), 
+    std::format("Score: {}",  std::to_string(m_score_manager.current_score)), 
     ui_text_offset, 
     ui_text_offset
   ); 
@@ -131,7 +139,7 @@ void GameStateGameplay::drawGameUi()
   ( 
     std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
     ui_text_offset, 
-    ui_text_offset + 40 
+    health_vertical_offset 
   ); 
 }
 
@@ -155,10 +163,8 @@ void GameStateGameplay::spawnHeartCollectable()
 {
   if ( !m_heart_collectable.isHeartActive() )
   {
-    int random_result { RandomGeneration::NumberBetween( 1, 100)};
     constexpr int success_threshold { 5 };
-    
-    if (random_result <= success_threshold )
+    if ( RandomGeneration::HasHitThreshold( RandomGeneration::NumberBetween( 1, 100 ), success_threshold ))
     {
       m_heart_collectable.moveAndActivateToNewLocation();
     }

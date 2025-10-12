@@ -55,4 +55,5 @@ class GameStateGameplay : public GameState
     void drawSprites();
     void playerClickedHeartPickup();
     void spawnHeartCollectable();
+    bool hasPlayerDied();
 }; 
