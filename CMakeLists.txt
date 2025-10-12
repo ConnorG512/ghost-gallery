@@ -43,6 +43,8 @@ add_executable(app
   src/score-manager.cpp
   src/damage-component.h
   src/damage-component.cpp
+  src/entities/coin-collectable.h
+  src/entities/coin-collectable.cpp
 )
 
 find_package(raylib REQUIRED)
