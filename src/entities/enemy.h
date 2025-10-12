@@ -16,9 +16,9 @@ class Enemy : public Entity
       const int enemy_damage 
     );
     
-    int dealDamage( ScoreManager& score_manager );
+    int dealDamage();
 
   protected:
-    int m_current_damage { 1 };
+    int m_base_damage{ 1 };
 
 };

@@ -1,6 +1,4 @@
 #include "enemy.h"
-#include "../score-manager.h"
-#include <array>
 
 Enemy::Enemy
 ( 
@@ -11,21 +9,9 @@ Enemy::Enemy
  const int enemy_damage 
 )
   : Entity { max_health, pos_x, pos_y, texture_paths }
-  , m_current_damage { enemy_damage } {}
+  , m_base_damage { enemy_damage } {}
 
-int Enemy::dealDamage( ScoreManager& score_manager )
+int Enemy::dealDamage()
 {
-  constexpr std::array<int, 3> damage_multiplier { 1, 2, 4 };
-
-  if ( score_manager.m_current_score > 400 )
-  {
-    return m_current_damage * damage_multiplier[ 1 ];
-  }
-  else if ( score_manager.m_current_score > 800 )
-  {
-    return m_current_damage * damage_multiplier[ 2 ];
-  }
-  else {
-    return m_current_damage * damage_multiplier [ 0 ];
-  }
+  return m_base_damage;
 }
