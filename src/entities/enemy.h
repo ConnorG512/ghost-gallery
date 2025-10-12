@@ -18,6 +18,8 @@ class Enemy : public Entity
     );
     
     DamageComponent damage_component { 1, 10, 1 };
+    
+    EntityType current_entity_type { EntityType::hostile };
 
   protected:
     int m_base_damage{ 1 };

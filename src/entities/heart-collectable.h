@@ -17,6 +17,8 @@ class HeartCollectable : public Entity
 
     int giveHealth();
     void moveAndActivateToNewLocation();
+    
+    EntityType current_entity_type { EntityType::friendly };
 
   
   protected:

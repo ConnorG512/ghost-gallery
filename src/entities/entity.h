@@ -31,6 +31,14 @@ class Entity
     
     HealthComponent m_health { 8, 8 };
 
+    enum class EntityType 
+    {
+      neutral,
+      friendly,
+      hostile
+    };
+    EntityType current_entity_type { EntityType::neutral };
+
   protected:
     int m_pos_x { 0 };
     int m_pos_y { 0 };
