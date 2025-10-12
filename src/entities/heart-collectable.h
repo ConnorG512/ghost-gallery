@@ -18,9 +18,6 @@ class HeartCollectable : public Entity
     int giveHealth();
     void moveAndActivateToNewLocation();
     
-    EntityType current_entity_type { EntityType::friendly };
-
-  
   protected:
     int m_health_to_restore { 2 };
     

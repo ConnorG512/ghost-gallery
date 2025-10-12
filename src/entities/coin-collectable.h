@@ -12,6 +12,4 @@ class CoinCollectable : public Entity
     int GivePoints( ScoreManager& score_manager );
     
     void respawnToNewLocation();
-    
-    EntityType current_entity_type { EntityType::friendly };
 };

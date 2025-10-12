@@ -37,7 +37,6 @@ class Entity
       friendly,
       hostile
     };
-    EntityType current_entity_type { EntityType::neutral };
 
   protected:
     int m_pos_x { 0 };
