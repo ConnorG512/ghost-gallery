@@ -6,5 +6,5 @@ struct ScoreManager
 {
   public:
     int increaseScore( int num_to_increase_by );
-    int m_current_score { 0 };
+    int current_score { 0 };
 };
