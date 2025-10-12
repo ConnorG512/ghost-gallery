@@ -55,6 +55,10 @@ void GameStateGameplay::cursorHoverOverEnemy()
   {
     m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
   }
+  else if ( m_player.checkCollision( m_coin_collectable.getCollision()))
+  {
+    m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
+  }
   else
   {
     m_player.changePlayerCursor(Player::TextureName::not_targeted, m_game_window );
@@ -151,6 +155,7 @@ void GameStateGameplay::gameOver()
 void GameStateGameplay::drawSprites()
 {
   m_heart_collectable.drawToScreen();
+  m_coin_collectable.drawToScreen(0);
   m_enemy_sprite.drawToScreen( 0 );
 }
 
