@@ -46,6 +46,7 @@ class GameStateGameplay : public GameState
     {
       RandomGeneration::NumberBetween(0, 1600),
       RandomGeneration::NumberBetween(0, 900),
+      true,
       { "assets/image/entity/heart/heart-pickup.png" }
     };
 
@@ -53,6 +54,7 @@ class GameStateGameplay : public GameState
     {
       RandomGeneration::NumberBetween( 200, 1300 ),
       RandomGeneration::NumberBetween( 150, 750 ),
+      true,
       { "assets/image/entity/coin/coin.png" }
     };
 

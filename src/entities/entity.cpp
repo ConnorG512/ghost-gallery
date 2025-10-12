@@ -7,6 +7,12 @@ Entity::Entity( const int pos_x, const int pos_y, const std::vector<std::string>
   , m_pos_y { pos_y }
   , m_sprite { texture_paths, pos_x, pos_y } {}
 
+Entity::Entity( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths )
+  : m_pos_x { pos_x }
+  , m_pos_y { pos_y }
+  , m_is_hidden { is_hidden }
+  , m_sprite { texture_paths, pos_x, pos_y } {}
+
 Entity::Entity( const int max_health, const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths )
   : m_health { max_health }
   , m_pos_x { pos_x }
@@ -17,13 +23,27 @@ Entity::~Entity() {}
 
 void Entity::drawToScreen( const int texture_index )
 {
-  m_sprite.drawSprite( texture_index );
+  if ( !m_is_hidden )
+  {
+    m_sprite.drawSprite( texture_index );
+  }
 }
 
-void Entity::drawToScreen(const int texture_index, const int pos_x, const int pos_y )
+void Entity::drawToScreen()
 {
-  m_sprite.drawSprite( texture_index, pos_x, pos_y );
-  m_collision.updateCollisionPosition( pos_x, pos_y );
+  if ( !m_is_hidden )
+  {
+    m_sprite.drawSprite( 0 );
+  }
+}
+
+void Entity::drawToScreen( const int texture_index, const int pos_x, const int pos_y )
+{
+  if ( !m_is_hidden )
+  {
+    m_sprite.drawSprite( texture_index, pos_x, pos_y );
+    m_collision.updateCollisionPosition( pos_x, pos_y );
+  }
 }
 
 bool Entity::checkCollision( const Rectangle& collider )
@@ -50,4 +70,14 @@ Rectangle& Entity::getCollision()
 void Entity::reviveEntity()
 {
   m_health.resetHealthToMax();
+}
+
+void Entity::setHidden(bool is_hidden )
+{
+  m_is_hidden = is_hidden;
+}
+
+bool Entity::isHidden()
+{
+  return m_is_hidden;
 }

@@ -10,28 +10,14 @@ HeartCollectable::HeartCollectable
 (
       const int pos_x, 
       const int pos_y, 
+      const bool is_hidden,
       const std::vector<std::string>& texture_paths 
 ) 
-  : Entity{ pos_x, pos_y, texture_paths} {}
-
-void HeartCollectable::drawToScreen()
-{
-  if ( m_is_active == true )
-  {
-    m_sprite.drawSprite( 0 );
-  }
-}
-void HeartCollectable::drawToScreen( int x_pos, int y_pos )
-{
-  if ( m_is_active == true )
-  {
-    m_sprite.drawSprite( 0, x_pos, y_pos );
-  }
-}
+  : Entity{ pos_x, pos_y, is_hidden, texture_paths} {}
 
 int HeartCollectable::giveHealth()
 {
-  if ( m_is_active == true )
+  if ( !m_is_hidden  )
   {
     return m_health_to_restore;
   }
@@ -46,16 +32,6 @@ void HeartCollectable::changePosition()
 
 void HeartCollectable::moveAndActivateToNewLocation()
 {
-  m_is_active = true;
+  setHidden( false );
   changePosition();
-}
-
-bool HeartCollectable::isHeartActive()
-{
-  return m_is_active;
-}
-    
-void HeartCollectable::deactivatePickup()
-{
-  m_is_active = false;
 }

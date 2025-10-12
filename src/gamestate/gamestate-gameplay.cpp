@@ -51,11 +51,11 @@ void GameStateGameplay::cursorHoverOverEnemy()
   {
     m_player.changePlayerCursor(Player::TextureName::targeted, m_game_window );
   } 
-  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && m_heart_collectable.isHeartActive() )
+  else if ( m_player.checkCollision( m_heart_collectable.getCollision()) && !m_heart_collectable.isHidden())
   {
     m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
   }
-  else if ( m_player.checkCollision( m_coin_collectable.getCollision()))
+  else if ( m_player.checkCollision( m_coin_collectable.getCollision()) && !m_coin_collectable.isHidden())
   {
     m_player.changePlayerCursor(Player::TextureName::targeted_friendly, m_game_window );
   }
@@ -94,7 +94,6 @@ void GameStateGameplay::playerShoot()
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
     drawGameUi();
-    m_heart_collectable.deactivatePickup();
   }
 }
 
@@ -155,8 +154,8 @@ void GameStateGameplay::gameOver()
 void GameStateGameplay::drawSprites()
 {
   m_heart_collectable.drawToScreen();
-  m_coin_collectable.drawToScreen(0);
-  m_enemy_sprite.drawToScreen( 0 );
+  m_coin_collectable.drawToScreen();
+  m_enemy_sprite.drawToScreen();
 }
 
 void GameStateGameplay::playerClickedHeartPickup()
@@ -166,7 +165,7 @@ void GameStateGameplay::playerClickedHeartPickup()
 
 void GameStateGameplay::spawnHeartCollectable()
 {
-  if ( !m_heart_collectable.isHeartActive() )
+  if ( m_heart_collectable.isHidden() )
   {
     constexpr int success_threshold { 5 };
     if ( RandomGeneration::HasHitThreshold( RandomGeneration::NumberBetween( 1, 100 ), success_threshold ))

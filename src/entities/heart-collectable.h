@@ -11,20 +11,15 @@ class HeartCollectable : public Entity
     ( 
       const int pos_x, 
       const int pos_y, 
+      const bool is_hidden,
       const std::vector<std::string>& texture_paths
     );
 
-    void drawToScreen();
-    void drawToScreen( int x_pos, int y_pos );
     int giveHealth();
-    bool isHeartActive();
-    void deactivatePickup();
-
     void moveAndActivateToNewLocation();
 
   
   protected:
-    bool m_is_active { false };
     int m_health_to_restore { 2 };
     
     void changePosition();
