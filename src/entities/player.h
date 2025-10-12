@@ -1,9 +1,9 @@
 #pragma once
 
 #include "entity.h"
-#include "../window.h"
+#include "../damage-component.h"
 
-#include <raylib.h>
+class Window;
 
 class Player : public Entity
 {
@@ -25,7 +25,5 @@ class Player : public Entity
     int addToScore(int score_to_add);
     void changePlayerCursor( TextureName texture_to_swap_to, Window& game_window );
 
-    int fire_damage { 2 };
-
-  private:
+    DamageComponent damage_component { 2, 30, 1 };
 };

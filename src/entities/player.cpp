@@ -1,6 +1,8 @@
 #include <string>
 
 #include "player.h"
+#include "../window.h"
+
 namespace 
 {
   constexpr int cursor_offset { 64 };
@@ -18,8 +20,8 @@ Player::Player
       pos_y, 
       { 
         "assets/image/ui/cursor-target.png", 
-        "assets/image/ui/cursor-target-found.png",
-        "assets/image/ui/cursor-target-found-friendly.png"
+        "assets/image/ui/cursor-target-found.png", 
+        "assets/image/ui/cursor-target-found-friendly.png" 
       }
     } {}
 
