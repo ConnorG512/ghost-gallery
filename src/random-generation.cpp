@@ -8,3 +8,8 @@ int RandomGeneration::NumberBetween(const int min, const int max)
 
   return distrib(gen);
 }
+
+bool RandomGeneration::HasHitThreshold(const int number, const int success_threshold )
+{
+  return number <= success_threshold;
+}

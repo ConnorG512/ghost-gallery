@@ -4,5 +4,6 @@
 
 namespace RandomGeneration
 {
-  int NumberBetween(const int min, const int max);
+  int NumberBetween( const int min, const int max);
+  bool HasHitThreshold(const int number, const int success_threshold );
 }
