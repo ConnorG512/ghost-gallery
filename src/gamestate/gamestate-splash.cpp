@@ -47,29 +47,30 @@ void GameStateSplash::startGameplayLoop()
 void GameStateSplash::drawSplashText()
 {
   constexpr int font_size { 32 };
-  constexpr int screen_size_x { 1600 };
-  constexpr int screen_size_y { 900 };
   constexpr int edit_text_y_offset { 50 };
   constexpr int high_score_text_y_offset { 100 };
 
   const std::string& start_text { "Press space key to start..." };
-  TextRender::drawTextToScreen( 
-    start_text, screen_size_x / 2 - MeasureText(start_text.c_str(), 32 ) / 2, 
-    screen_size_y / 2, 
+  TextRender::drawTextToScreen
+    ( 
+    start_text, m_game_window.m_width / 2 - MeasureText(start_text.c_str(), 32 ) / 2, 
+    m_game_window.m_height / 2, 
     font_size 
   );
   
   const std::string& exit_text { "Press escape to exit..." };
-  TextRender::drawTextToScreen( 
-    exit_text, screen_size_x / 2 - MeasureText(exit_text.c_str(), 32 ) / 2, 
-    screen_size_y / 2 + edit_text_y_offset, 
+  TextRender::drawTextToScreen
+    ( 
+    exit_text, m_game_window.m_width / 2 - MeasureText(exit_text.c_str(), 32 ) / 2, 
+    m_game_window.m_height / 2 + edit_text_y_offset, 
     font_size 
   );
   
   const std::string& high_score_text { "High Score:" };
-  TextRender::drawTextToScreen( 
-    std::format("{} {}", high_score_text, std::to_string( m_score_manager.current_score )), screen_size_x / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
-    screen_size_y / 2 + high_score_text_y_offset, 
+  TextRender::drawTextToScreen
+    ( 
+    std::format("{} {}", high_score_text, std::to_string( m_score_manager.current_score )), m_game_window.m_width / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
+    m_game_window.m_height / 2 + high_score_text_y_offset, 
     font_size 
   );
 }
