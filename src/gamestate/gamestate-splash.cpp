@@ -7,8 +7,8 @@
 #include <raylib.h>
 #include <string>
 
-GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window )
-  : GameState { game_manager, game_window } 
+GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window, ScoreManager& score_manager )
+  : GameState { game_manager, game_window, score_manager }
 {
   m_game_window.changeCursorStatus( Window::CursorStatus::show );
 }
@@ -68,7 +68,7 @@ void GameStateSplash::drawSplashText()
   
   const std::string& high_score_text { "High Score:" };
   TextRender::drawTextToScreen( 
-    std::format("{} {}", high_score_text, std::to_string(0)), screen_size_x / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
+    std::format("{} {}", high_score_text, std::to_string( m_score_manager.current_score )), screen_size_x / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
     screen_size_y / 2 + high_score_text_y_offset, 
     font_size 
   );

@@ -4,11 +4,12 @@
 
 class GameManager;
 class Window;
+class ScoreManager;
 
 class GameState 
 {
   public:
-    GameState( GameManager* game_manager, Window& game_window );
+    GameState( GameManager* game_manager, Window& game_window, ScoreManager& score_manager );
     virtual ~GameState();
     virtual void initialiseState() = 0;
     virtual void inputLoop() = 0;
@@ -17,4 +18,5 @@ class GameState
   protected:
     GameManager* m_game_manager;
     Window& m_game_window;
+    ScoreManager& m_score_manager;
 };

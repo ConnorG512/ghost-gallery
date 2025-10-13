@@ -14,7 +14,7 @@
 class GameStateGameplay : public GameState
 {
   public: 
-    GameStateGameplay( GameManager* game_manager, Window& game_window );
+    GameStateGameplay( GameManager* game_manager, Window& game_window, ScoreManager& score_manager );
     void initialiseState() override;
     void inputLoop() override;
     void gameplayLoop() override;
@@ -22,7 +22,6 @@ class GameStateGameplay : public GameState
   protected:
     ImageSprite m_background_image {{ "assets/image/background/manor-1.png" }, 0, 0 };
     TickManager m_game_tick {};
-    ScoreManager m_score_manager {};
     
     Enemy m_enemy_sprite 
     {

@@ -11,8 +11,8 @@
 #include <string>
 #include <unistd.h>
 
-GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_window )
-  : GameState { game_manager, game_window } 
+GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_window, ScoreManager& score_manager )
+  : GameState { game_manager, game_window, score_manager } 
 {
   m_game_window.changeCursorStatus( Window::CursorStatus::hide );
 };

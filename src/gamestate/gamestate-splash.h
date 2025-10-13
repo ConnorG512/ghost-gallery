@@ -6,7 +6,7 @@
 class GameStateSplash : public GameState 
 {
   public:
-    GameStateSplash(GameManager* game_manager, Window& game_window );
+    GameStateSplash(GameManager* game_manager, Window& game_window, ScoreManager& score_manager );
     
     void initialiseState() override;
     void inputLoop() override;
@@ -17,5 +17,4 @@ class GameStateSplash : public GameState
     void drawSplashText();
 
     ImageSprite m_background_image { { "assets/image/background/manor-1.png" }, 0, 0 };
-
 };
