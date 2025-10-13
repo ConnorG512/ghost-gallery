@@ -10,7 +10,7 @@ AudioManager::AudioManager()
 {
   InitAudioDevice(); 
   loadSounds();
-  SetMasterVolume( 50.0 );
+  SetMasterVolume( 25.0 );
 }
 
 AudioManager::~AudioManager()
