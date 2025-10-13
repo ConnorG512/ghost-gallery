@@ -69,7 +69,7 @@ void GameStateSplash::drawSplashText()
   const std::string& high_score_text { "High Score:" };
   TextRender::drawTextToScreen
     ( 
-    std::format("{} {}", high_score_text, std::to_string( m_score_manager.current_score )), m_game_window.m_width / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
+    std::format("{} {}", high_score_text, std::to_string( m_score_manager.high_score )), m_game_window.m_width / 2 - MeasureText(high_score_text.c_str(), 32 ) / 2, 
     m_game_window.m_height / 2 + high_score_text_y_offset, 
     font_size 
   );

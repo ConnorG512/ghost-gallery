@@ -148,6 +148,7 @@ void GameStateGameplay::drawGameUi()
 
 void GameStateGameplay::gameOver()
 {
+  m_score_manager.checkForNewHighScore();
   m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
 }
 

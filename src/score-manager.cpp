@@ -23,3 +23,11 @@ void ScoreManager::addToScoreMultiplier( int multiplier )
 {
   current_multiplier += multiplier;
 }
+
+void ScoreManager::checkForNewHighScore()
+{
+  if ( current_score > high_score )
+  {
+    high_score = current_score;
+  }
+}
