@@ -38,22 +38,8 @@ void GameStateGameplay::gameplayLoop()
   m_background_image.drawSprite( 0 );
 
   drawSprites();
-
-  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
-  {
-    m_player.changePlayerCursor( m_game_window, m_enemy_sprite );
-  }
-  else if ( m_player.checkCollision(m_heart_collectable.getCollision()))
-  {
-    m_player.changePlayerCursor( m_game_window, m_heart_collectable );
-  }
-  else if ( m_player.checkCollision(m_coin_collectable.getCollision()))
-  {
-    m_player.changePlayerCursor( m_game_window, m_coin_collectable );
-  }
-  else {
-    m_player.changePlayerCursor( m_game_window );
-  }
+  
+  checkEntityCollisions();
 
   drawGameUi();
 
@@ -182,5 +168,24 @@ void GameStateGameplay::spawnCollectables()
     {
       m_coin_collectable.respawnToNewLocation();
     }
+  }
+}
+
+void GameStateGameplay::checkEntityCollisions()
+{
+  if ( m_player.checkCollision( m_enemy_sprite.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_enemy_sprite );
+  }
+  else if ( m_player.checkCollision(m_heart_collectable.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_heart_collectable );
+  }
+  else if ( m_player.checkCollision(m_coin_collectable.getCollision()))
+  {
+    m_player.changePlayerCursor( m_game_window, m_coin_collectable );
+  }
+  else {
+    m_player.changePlayerCursor( m_game_window );
   }
 }

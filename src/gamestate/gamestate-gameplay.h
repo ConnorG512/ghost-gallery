@@ -67,5 +67,6 @@ class GameStateGameplay : public GameState
     void drawSprites();
     void playerClickedHeartPickup();
     void spawnCollectables();
+    void checkEntityCollisions();
     bool hasPlayerDied();
 }; 
