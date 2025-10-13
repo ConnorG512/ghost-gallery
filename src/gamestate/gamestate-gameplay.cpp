@@ -121,26 +121,9 @@ void GameStateGameplay::drawGameUi()
   constexpr int health_vertical_offset { ui_text_offset + 40 };
   constexpr int multiplier_vertical_offset { health_vertical_offset + 40 };
 
-  TextRender::drawTextToScreen 
-  ( 
-    std::format("Score: {}",  std::to_string(m_score_manager.current_score)), 
-    ui_text_offset, 
-    ui_text_offset
-  ); 
-
-  TextRender::drawTextToScreen 
-  ( 
-    std::format("Health: {}", std::to_string( m_player.m_health.m_current_health )), 
-    ui_text_offset, 
-    health_vertical_offset 
-  ); 
-  
-  TextRender::drawTextToScreen 
-  ( 
-    std::format("Score Multiplier: {}", std::to_string( m_score_manager.current_multiplier )), 
-    ui_text_offset, 
-    multiplier_vertical_offset 
-  ); 
+  TextRender::drawGameUi( "Score", m_score_manager.current_score, ui_text_offset );
+  TextRender::drawGameUi( "Health", m_player.m_health.m_current_health, health_vertical_offset );
+  TextRender::drawGameUi( "ScoreMultiplier", m_score_manager.current_multiplier, multiplier_vertical_offset );
 }
 
 void GameStateGameplay::gameOver()
