@@ -1,6 +1,7 @@
 #include "damage-component.h"
 #include "score-manager.h"
 #include "random-generation.h"
+#include <array>
 
 DamageComponent::DamageComponent() {}
 
@@ -32,22 +33,16 @@ int DamageComponent::CalculateDamage()
 
 int DamageComponent::CalculateDamage( const ScoreManager& score_component )
 {
-  if ( score_component.current_score > 2200 ) 
+  constexpr std::array<int, 6> enemy_damage { 6, 5, 4, 3, 2, 1 }; 
+
+  for ( int index = 0; index < score_component.score_thresholds.size(); ++index )
   {
-    return CalculateDamage(m_critical_chance *= 4, m_critical_multiplier *= 3);
+    if ( score_component.current_score > score_component.score_thresholds[ index ])
+    {
+      return enemy_damage[ index ];
+    }
   }
-  else if ( score_component.current_score > 1750 )
-  {
-    return CalculateDamage(m_critical_chance *= 3, m_critical_multiplier *= 2);
-  }
-  else if ( score_component.current_score > 1200 )
-  {
-    return CalculateDamage(m_critical_chance *= 2, m_critical_multiplier *= 1);
-  }
-  else 
-  {
-    return CalculateDamage();
-  }
+  return enemy_damage[ 5 ]; 
 }
 
 int DamageComponent::CalculateDamage( const int critical_chance, const int critical_multiplier )
