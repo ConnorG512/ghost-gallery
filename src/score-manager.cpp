@@ -13,9 +13,10 @@ int ScoreManager::increaseScore( int num_to_increase_by )
   return current_score;
 }
 
-void ScoreManager::resetCurrentScore()
+void ScoreManager::resetScoreManager()
 {
   current_score = 0;
+  current_multiplier = 1;
 }
 
 void ScoreManager::addToScoreMultiplier( int multiplier )

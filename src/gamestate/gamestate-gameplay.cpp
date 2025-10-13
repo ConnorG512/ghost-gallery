@@ -15,7 +15,7 @@ GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_wi
   : GameState { game_manager, game_window, score_manager, audio_manager } 
 {
   m_game_window.changeCursorStatus( Window::CursorStatus::hide );
-  m_score_manager.resetCurrentScore();
+  m_score_manager.resetScoreManager();
 };
 
 namespace 

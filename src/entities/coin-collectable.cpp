@@ -27,6 +27,7 @@ int CoinCollectable::GivePoints( ScoreManager& score_manager )
     }
   }
 
+  score_manager.addToScoreMultiplier( 1 );
   constexpr int default_score_given = 300;
   return default_score_given;
 }
