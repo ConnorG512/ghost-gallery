@@ -177,11 +177,11 @@ void GameStateGameplay::checkEntityCollisions()
   {
     m_player.changePlayerCursor( m_game_window, m_enemy_sprite );
   }
-  else if ( m_player.checkCollision(m_heart_collectable.getCollision()))
+  else if ( m_player.checkCollision(m_heart_collectable.getCollision()) && !m_heart_collectable.isHidden())
   {
     m_player.changePlayerCursor( m_game_window, m_heart_collectable );
   }
-  else if ( m_player.checkCollision(m_coin_collectable.getCollision()))
+  else if ( m_player.checkCollision(m_coin_collectable.getCollision()) && !m_coin_collectable.isHidden())
   {
     m_player.changePlayerCursor( m_game_window, m_coin_collectable );
   }
