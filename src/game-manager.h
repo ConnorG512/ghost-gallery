@@ -23,4 +23,5 @@ struct GameManager
   private:
     Window m_game_window;
     std::unique_ptr<GameState> m_current_gamestate { nullptr };
+    int m_high_score { 0 };
 };
