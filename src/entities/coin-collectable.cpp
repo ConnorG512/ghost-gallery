@@ -20,7 +20,8 @@ int CoinCollectable::GivePoints( ScoreManager& score_manager )
 void CoinCollectable::respawnToNewLocation()
 {
   setHidden( false );
-  drawToScreen(0, RandomGeneration::NumberBetween(100, 1400), RandomGeneration::NumberBetween(100, 800));
+  m_pos_x = RandomGeneration::NumberBetween( 300, 1400);
+  m_pos_y = RandomGeneration::NumberBetween( 200, 700);
 }
 
 CoinCollectable::EntityType CoinCollectable::getEntityType()
