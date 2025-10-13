@@ -69,6 +69,7 @@ void GameStateGameplay::playerShoot()
       m_game_tick.resetTickCounter();
       respawnEnemy();
       m_score_manager.increaseScore( score_amount_to_add ); 
+      m_audio_manager.playAudio( AudioManager::SoundId::ghost_death );
       spawnCollectables();
     }
   }

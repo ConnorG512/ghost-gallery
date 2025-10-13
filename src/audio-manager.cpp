@@ -21,6 +21,11 @@ AudioManager::~AudioManager()
 
 void AudioManager::playAudio( const SoundId sound_to_play )
 {
+  switch ( sound_to_play ) 
+  {
+    case AudioManager::SoundId::ghost_death:
+      PlaySound(m_loaded_sounds.at( 0 ));
+  }
 }
 
 void AudioManager::loadSounds()
