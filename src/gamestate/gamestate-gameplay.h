@@ -14,7 +14,7 @@
 class GameStateGameplay : public GameState
 {
   public: 
-    GameStateGameplay( GameManager* game_manager, Window& game_window, ScoreManager& score_manager );
+    GameStateGameplay( GameManager* game_manager, Window& game_window, ScoreManager& score_manager, AudioManager& audio_manager );
     void initialiseState() override;
     void inputLoop() override;
     void gameplayLoop() override;

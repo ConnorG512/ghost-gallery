@@ -1,5 +1,6 @@
 #pragma once
 
+#include "audio-manager.h"
 #include "window.h"
 #include "gamestate/gamestate-base.h"
 #include "score-manager.h"
@@ -25,4 +26,5 @@ struct GameManager
     Window m_game_window;
     std::unique_ptr<GameState> m_current_gamestate { nullptr };
     ScoreManager m_score_manager {}; 
+    AudioManager m_audio_manager {};
 };
