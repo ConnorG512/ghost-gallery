@@ -9,6 +9,7 @@
 #include "../entities/heart-collectable.h"
 #include "../score-manager.h"
 #include "../entities/coin-collectable.h"
+#include <array>
 
 class GameStateGameplay : public GameState
 {
@@ -31,7 +32,7 @@ class GameStateGameplay : public GameState
       { "assets/image/entity/enemy/ghost/ghost-1.png" },
       2
     };
-    
+
     Player m_player 
     {
       0, 
