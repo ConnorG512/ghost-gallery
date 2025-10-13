@@ -20,7 +20,6 @@ struct GameManager
   void startGameLoop();
   bool shouldGameClose();
   void changeCurrentGameState( GameType gamestate );
-  void closeGame();
   
   private:
     Window m_game_window;

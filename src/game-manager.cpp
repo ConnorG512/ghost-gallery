@@ -53,7 +53,3 @@ void GameManager::changeCurrentGameState( GameType gamestate )
   }
 }
 
-void GameManager::closeGame()
-{
-  m_game_window.requestWindowClose();
-}
