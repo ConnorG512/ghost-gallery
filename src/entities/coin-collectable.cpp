@@ -4,17 +4,31 @@
 #include "../random-generation.h"
 
 #include <array>
+#include <cassert>
 
 CoinCollectable::CoinCollectable( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths )
   : Entity(pos_x, pos_y, is_hidden, texture_paths ) {}
 
 int CoinCollectable::GivePoints( ScoreManager& score_manager )
 {
-  constexpr std::array<int, 3> score_thresholds { 700, 1200, 1500 };
-  constexpr std::array<int, 3> score_amounts { 500, 750, 900 };
-  constexpr int bonus_chance { 10 };
+  constexpr std::array<int , 6> score_to_give { 2500, 2000, 1400, 1000, 700, 400 };
+  
+  assert( score_to_give.size() == score_manager.score_thresholds.size() );
 
-  return 300;
+  for (int index = 0; index < score_manager.score_thresholds.size(); ++index )
+  {
+    if ( score_manager.current_score > score_manager.score_thresholds[ index ])
+    {
+      if ( RandomGeneration::HasHitThreshold(::RandomGeneration::NumberBetween(1, 100), 25))
+      {
+        return score_to_give[ index ] * 2;
+      }
+      return score_to_give[ index ];     
+    }
+  }
+
+  constexpr int default_score_given = 300;
+  return default_score_given;
 }
 
 void CoinCollectable::respawnToNewLocation()
