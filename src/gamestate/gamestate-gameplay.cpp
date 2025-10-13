@@ -73,14 +73,14 @@ void GameStateGameplay::playerShoot()
       spawnCollectables();
     }
   }
-  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()))
+  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()) && !m_heart_collectable.isHidden())
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
     m_audio_manager.playAudio( AudioManager::SoundId::heart_pickup );
     m_heart_collectable.setHidden( true );
     drawGameUi();
   }
-  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_coin_collectable.getCollision()))
+  else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_coin_collectable.getCollision()) && !m_coin_collectable.isHidden())
   {
     m_score_manager.increaseScore(m_coin_collectable.GivePoints( m_score_manager ));
     m_audio_manager.playAudio( AudioManager::SoundId::coin_pickup );
