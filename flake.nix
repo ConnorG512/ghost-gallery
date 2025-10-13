@@ -16,7 +16,6 @@
   {
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
-        # neovim
         clang-tools
 
         llvmPackages_21.libcxxClang
@@ -86,7 +85,6 @@
           "-DCMAKE_BUILD_TYPE=Release"
         ];
       });
-
     };
   };
 }
