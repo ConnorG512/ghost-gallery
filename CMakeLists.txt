@@ -45,6 +45,8 @@ add_executable(app
   src/damage-component.cpp
   src/entities/coin-collectable.h
   src/entities/coin-collectable.cpp
+  src/audio-manager.h
+  src/audio-manager.cpp
 )
 
 find_package(raylib REQUIRED)
