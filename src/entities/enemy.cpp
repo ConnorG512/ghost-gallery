@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "../random-generation.h"
 
 Enemy::Enemy
 ( 
@@ -15,3 +16,9 @@ Enemy::EntityType Enemy::getEntityType()
 {
   return Entity::EntityType::hostile;
 }
+
+int Enemy::GiveScore()
+{
+  return RandomGeneration::NumberBetween( 25, 50 );
+}
+

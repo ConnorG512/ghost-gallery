@@ -18,10 +18,7 @@ GameStateGameplay::GameStateGameplay( GameManager* game_manager, Window& game_wi
   m_score_manager.resetScoreManager();
 };
 
-namespace 
-{
-  constexpr int score_amount_to_add { 20 };
-}
+namespace { }
 
 void GameStateGameplay::initialiseState() { }
 
@@ -68,7 +65,7 @@ void GameStateGameplay::playerShoot()
     {
       m_game_tick.resetTickCounter();
       respawnEnemy();
-      m_score_manager.increaseScore( score_amount_to_add ); 
+      m_score_manager.increaseScore( m_enemy_sprite.GiveScore() ); 
       m_audio_manager.playAudio( AudioManager::SoundId::ghost_death );
       spawnCollectables();
     }
