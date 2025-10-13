@@ -6,7 +6,7 @@ Window::Window(int width, int height, int target_fps)
   , m_height { height }
   , m_target_fps { target_fps }
 {
-  InitWindow(m_width, m_height, "app");
+  InitWindow(m_width, m_height, "Ghost Gallery");
   SetTargetFPS(m_target_fps);
 }
 
