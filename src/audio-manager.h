@@ -13,6 +13,8 @@ class AudioManager
     enum class SoundId 
     {
       ghost_death,
+      heart_pickup,
+      coin_pickup,
     };
     void playAudio( const SoundId sound_to_play );
 

@@ -76,12 +76,14 @@ void GameStateGameplay::playerShoot()
   else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()))
   {
     m_player.recieveHealth( m_heart_collectable.giveHealth());
+    m_audio_manager.playAudio( AudioManager::SoundId::heart_pickup );
     m_heart_collectable.setHidden( true );
     drawGameUi();
   }
   else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_coin_collectable.getCollision()))
   {
     m_score_manager.increaseScore(m_coin_collectable.GivePoints( m_score_manager ));
+    m_audio_manager.playAudio( AudioManager::SoundId::coin_pickup );
     m_coin_collectable.setHidden( true );
     drawGameUi();
   }
