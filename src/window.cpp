@@ -2,9 +2,9 @@
 #include <raylib.h>
 
 Window::Window(int width, int height, int target_fps) 
-  : m_width ( width )
-  , m_height ( height )
-  , m_target_fps ( target_fps )
+  : m_width { width }
+  , m_height { height }
+  , m_target_fps { target_fps }
 {
   InitWindow(m_width, m_height, "app");
   SetTargetFPS(m_target_fps);
@@ -56,9 +56,4 @@ void Window::changeCursorStatus( CursorStatus status_to_change_to )
       ShowCursor();
       break;
   }
-}
-
-void Window::requestWindowClose()
-{
-  CloseWindow();
 }

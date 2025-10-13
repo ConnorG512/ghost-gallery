@@ -12,7 +12,9 @@ class Window
     void clearWindow();
     int getCursorX();
     int getCursorY();
-    void requestWindowClose();
+    
+    int m_width;
+    int m_height;
     
     enum class CursorStatus
     {
@@ -23,7 +25,5 @@ class Window
     void changeCursorStatus( CursorStatus status_to_change_to );
   
   private: 
-    int m_width;
-    int m_height;
     int m_target_fps;
 };
