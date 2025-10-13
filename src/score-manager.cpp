@@ -12,3 +12,8 @@ int ScoreManager::increaseScore( int num_to_increase_by )
   }
   return current_score;
 }
+
+void ScoreManager::resetCurrentScore()
+{
+  current_score = 0;
+}
