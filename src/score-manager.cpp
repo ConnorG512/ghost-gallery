@@ -1,16 +1,15 @@
 #include "score-manager.h"
 #include <limits>
 
-int ScoreManager::increaseScore( int num_to_increase_by )
+void ScoreManager::increaseScore( int num_to_increase_by )
 {
   constexpr int max_score { std::numeric_limits<int>::max() };
 
   current_score += num_to_increase_by * current_multiplier;
-  if ( current_score == max_score )
+  if ( current_score >= max_score )
   {
     current_score = max_score;
   }
-  return current_score;
 }
 
 void ScoreManager::resetScoreManager()
