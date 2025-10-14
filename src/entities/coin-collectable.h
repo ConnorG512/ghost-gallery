@@ -14,4 +14,7 @@ class CoinCollectable : public Entity
     void respawnToNewLocation();
 
     EntityType getEntityType() override;
+
+  private:
+    void increaseScoreMultiplier( ScoreManager& score_manager );
 };
