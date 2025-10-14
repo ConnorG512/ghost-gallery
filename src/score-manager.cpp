@@ -6,7 +6,7 @@ void ScoreManager::increaseScore( int num_to_increase_by )
   constexpr int max_score { std::numeric_limits<int>::max() };
 
   current_score += ( num_to_increase_by * current_multiplier );
-  if ( current_score >= max_score )
+  if ( current_score >= max_score - 1 )
   {
     current_score = max_score;
   }
