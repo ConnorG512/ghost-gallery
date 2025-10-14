@@ -6,7 +6,6 @@
 #include "../game-manager.h"
 
 #include <array>
-#include <format>
 #include <raylib.h>
 #include <string>
 #include <unistd.h>
