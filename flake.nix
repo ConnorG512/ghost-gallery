@@ -43,6 +43,7 @@
       '';
     };
     packages.${system} = {
+
       # nix build .#packages.x86_64-linux.debug
       ${debug} = pkgs.stdenv.mkDerivation (finalAttrs: {
         pname = "app-debug";
@@ -95,6 +96,7 @@
         pname = "app-mingwW64";
         version = "1.0.0";
         src = ./.;
+        dontFixup = true;
 
         nativeBuildInputs = with pkgs; [
           cmake
@@ -110,7 +112,16 @@
           "-DCMAKE_CXX_COMPILER=${crossPkgs.stdenv.cc.targetPrefix}g++"
         ];
 
-        dontFixup = true;
+
+        installPhase = ''
+          mkdir -p $out/bin
+          cp app.exe $out/bin/
+
+          # Move DLL's with the exe
+          cp "${crossPkgs.raylib}/bin/libraylib.dll" $out/bin/ || true
+          cp "${crossPkgs.glfw}/bin/glfw3.dll" $out/bin/ || true
+          cp "/nix/store/gikxh7vvkq3s91qga2lzrmbf4k8503rs-mcfgthread-x86_64-w64-mingw32-2.1.1/bin/libmcfgthread-2.dll" $out/bin/ || true
+         '';
       };
     };
   };

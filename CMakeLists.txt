@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.31)
 
 project(App CXX)
 
+if(MINGW)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static-libgcc")
+endif()
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
