@@ -23,7 +23,7 @@ struct GameManager
   void changeCurrentGameState( GameType gamestate );
   
   private:
-    Window m_game_window;
+    Window m_game_window { 1600, 896, 60 };
     std::unique_ptr<GameState> m_current_gamestate { nullptr };
     ScoreManager m_score_manager {}; 
     AudioManager m_audio_manager {};

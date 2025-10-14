@@ -7,16 +7,10 @@
 #include <memory>
 
 
-namespace 
-{
-  constexpr int window_width { 1600 };
-  constexpr int window_height { 896 };
-  constexpr int target_framerate { 60 };
-}
+namespace { }
 
 GameManager::GameManager()
-  : m_game_window( window_width, window_height, target_framerate )
-  , m_current_gamestate { std::make_unique<GameStateSplash>( this, m_game_window, m_score_manager, m_audio_manager )} {}
+  : m_current_gamestate { std::make_unique<GameStateSplash>( this, m_game_window, m_score_manager, m_audio_manager )} {}
 
 void GameManager::initGameState()
 {
