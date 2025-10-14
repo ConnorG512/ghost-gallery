@@ -10,6 +10,9 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
+    windows = "mingwW64";
+    crossPkgs = pkgs.pkgsCross.${windows};
+
     debug = "debug";
     release = "release";
   in 
@@ -64,6 +67,7 @@
         ];
       });
 
+      # nix build .#packages.x86_64-linux.release
       ${release} = pkgs.stdenv.mkDerivation (finalAttrs: {
         pname = "app";
         version = "1.0.0";
@@ -85,6 +89,29 @@
           "-DCMAKE_BUILD_TYPE=Release"
         ];
       });
+
+      # nix build .#packages.x86_64-linux.mingwW64
+      ${windows} = crossPkgs.stdenv.mkDerivation {
+        pname = "app-mingwW64";
+        version = "1.0.0";
+        src = ./.;
+
+        nativeBuildInputs = with pkgs; [
+          cmake
+        ];
+
+        buildInputs = with crossPkgs; [
+          raylib
+        ];
+
+        cmakeFlags = [
+          "-DCMAKE_BUILD_TYPE=Release"
+          "-DCMAKE_C_COMPILER=${crossPkgs.stdenv.cc.targetPrefix}gcc"
+          "-DCMAKE_CXX_COMPILER=${crossPkgs.stdenv.cc.targetPrefix}g++"
+        ];
+
+        dontFixup = true;
+      };
     };
   };
 }
