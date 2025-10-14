@@ -10,7 +10,7 @@
 namespace 
 {
   constexpr int window_width { 1600 };
-  constexpr int window_height { 900 };
+  constexpr int window_height { 896 };
   constexpr int target_framerate { 60 };
 }
 
