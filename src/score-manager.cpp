@@ -1,7 +1,5 @@
 #include "score-manager.h"
-#include <iostream>
 #include <limits>
-#include <ostream>
 
 void ScoreManager::increaseScore( int num_to_increase_by )
 {
@@ -23,7 +21,6 @@ void ScoreManager::resetScoreManager()
 void ScoreManager::addToScoreMultiplier( int multiplier )
 {
   current_multiplier += multiplier;
-  std::cout << "Multiplier: " << current_multiplier << std::endl;
 }
 
 void ScoreManager::checkForNewHighScore()

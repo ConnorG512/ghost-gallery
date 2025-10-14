@@ -2,8 +2,6 @@
 #include "entity.h"
 #include "../score-manager.h"
 #include "../random-generation.h"
-#include <format>
-#include <iostream>
 #include <string>
 
 CoinCollectable::CoinCollectable( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths )
@@ -20,11 +18,8 @@ int CoinCollectable::GivePoints( ScoreManager& score_manager )
   {
     if ( score_manager.current_score > score_threshold )
     {
-      std::cout << std::format("Score Bigger than: {}!", std::to_string( score_threshold )) << std::endl;
-      
       constexpr int score_threshold_division_amount { 4 };
       return RandomGeneration::NumberBetween( 250, 400 ) + ( score_threshold / score_threshold_division_amount );
-      break;
     }
   }
   
