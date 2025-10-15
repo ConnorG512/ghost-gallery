@@ -1,7 +1,5 @@
 #include "spawn-manager.h"
 #include "random-generation.h"
-#include <format>
-#include <iostream>
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
@@ -10,7 +8,6 @@ SpawnManager::SpawnManager( int num_spawn_slots )
   {
     m_collectables_list.push_back( nullptr );
   }
-  std::cout << std::format("Number of slots available: {}", m_collectables_list.size()) << std::endl;
 }
 
 namespace 
