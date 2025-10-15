@@ -3,6 +3,7 @@
 #include "entities/collectable/heart-collectable.h"
 #include "entities/collectable/coin-collectable.h"
 #include "entities/player.h"
+#include "input-handler.h"
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
@@ -122,7 +123,7 @@ void SpawnManager::checkForPlayerCollision( Player& current_player )
   {
     if ( collectable_slot != nullptr )
     {
-      if (collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ))
+      if ( collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ) && InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse)
       {
         delete collectable_slot;
         collectable_slot = nullptr;
