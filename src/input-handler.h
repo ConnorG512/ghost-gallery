@@ -10,6 +10,8 @@ namespace InputHandler
     r_key,
     left_mouse
   };
-  
   ButtonPress receiveInput(); 
+
+  int GetMousePosX();
+  int GetMousePosY();
 }
