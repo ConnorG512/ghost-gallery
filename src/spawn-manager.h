@@ -6,6 +6,7 @@
 
 class CoinCollectable;
 class HeartCollectable;
+class Player;
 
 class SpawnManager 
 {
@@ -15,6 +16,7 @@ class SpawnManager
 
     void drawCollectables();
     void requestCollectable();
+    void checkForPlayerCollision( Player& current_player );
 
   private:
     int m_spawn_slots { 5 };

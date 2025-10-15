@@ -2,6 +2,7 @@
 #include "random-generation.h"
 #include "entities/collectable/heart-collectable.h"
 #include "entities/collectable/coin-collectable.h"
+#include "entities/player.h"
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
@@ -112,5 +113,20 @@ void SpawnManager::unloadManager()
       delete collectable_slot;
       collectable_slot = nullptr;
     }
+  }
+}
+
+void SpawnManager::checkForPlayerCollision( Player& current_player )
+{
+  for ( auto*& collectable_slot : m_collectables_list )
+  {
+    if ( collectable_slot != nullptr )
+    {
+      if (collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ))
+      {
+        delete collectable_slot;
+        collectable_slot = nullptr;
+      }
+    };
   }
 }
