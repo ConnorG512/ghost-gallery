@@ -1,8 +1,17 @@
 #include "spawn-manager.h"
 #include "random-generation.h"
+#include <format>
+#include <iostream>
 
 SpawnManager::SpawnManager( int num_spawn_slots )
-  : m_spawn_slots { num_spawn_slots } {}
+  : m_spawn_slots { num_spawn_slots } 
+{
+  for (int i = 0; i < num_spawn_slots; ++i )
+  {
+    m_collectables_list.push_back( nullptr );
+  }
+  std::cout << std::format("Number of slots available: {}", m_collectables_list.size()) << std::endl;
+}
 
 namespace 
 {
@@ -19,7 +28,7 @@ void SpawnManager::drawCollectables()
 {
   for ( auto*& collectable_slot : m_collectables_list )
   {
-    if (collectable_slot != nullptr )
+    if ( collectable_slot != nullptr )
     {
       collectable_slot->sprite.drawSprite();
     }
@@ -40,27 +49,15 @@ void SpawnManager::requestCollectable()
 
 Collectable* SpawnManager::createCollectable()
 {
-  if ( !isManagerFull())
+  int result = RandomGeneration::NumberBetween(0, 1); 
+  if ( result == 1)
   {
-    if ( RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(), 50 ))
-    {
-      if ( RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(), 50 ))
-      {
-        return createCoinCollectable();
-      }
-      else 
-      {
-        return createHeartCollectable();
-      }
-    }
+    return createCoinCollectable();
   }
-
-  return nullptr;
-}
-
-bool SpawnManager::isManagerFull()
-{
-  return m_collectables_list.size() >= m_spawn_slots;
+  else 
+  {
+    return createHeartCollectable();
+  }
 }
 
 Collectable* SpawnManager::createCoinCollectable()

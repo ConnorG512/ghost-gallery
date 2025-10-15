@@ -7,7 +7,7 @@
 class SpawnManager 
 {
   public: 
-    SpawnManager( int num_spawn_slots = 5);
+    SpawnManager( int num_spawn_slots = 5 );
     ~SpawnManager();
 
     void drawCollectables();
