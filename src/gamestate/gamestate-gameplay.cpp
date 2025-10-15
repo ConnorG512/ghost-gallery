@@ -53,14 +53,14 @@ void GameStateGameplay::respawnEnemy()
     RandomGeneration::NumberBetween( x_screen_pos_min_max[ 0 ], x_screen_pos_min_max[ 1 ] ),
     RandomGeneration::NumberBetween( y_screen_pos_min_max[ 0 ], y_screen_pos_min_max[ 1 ] )
   );
-  m_enemy_sprite.reviveEntity();
+  m_enemy_sprite.health_component.resetHealthToMax();
 }
 
 void GameStateGameplay::playerShoot()
 {
   if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_enemy_sprite.getCollision()))
   {
-    if (m_enemy_sprite.takeDamage(m_player.damage_component.CalculateDamage()) <= 0 )
+    if (m_enemy_sprite.health_component.reduceHealth(m_player.damage_component.CalculateDamage()) <= 0 )
     {
       m_game_tick.resetTickCounter();
       respawnEnemy();
@@ -71,7 +71,7 @@ void GameStateGameplay::playerShoot()
   }
   else if ( InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse && m_player.checkCollision( m_heart_collectable.getCollision()) && !m_heart_collectable.isHidden())
   {
-    m_player.recieveHealth( m_heart_collectable.giveHealth());
+    m_player.health_component.increaseHealth( m_heart_collectable.giveHealth());
     m_audio_manager.playAudio( AudioManager::SoundId::heart_pickup );
     m_heart_collectable.setHidden( true );
     drawGameUi();
@@ -87,7 +87,7 @@ void GameStateGameplay::playerShoot()
 
 bool GameStateGameplay::hasPlayerDied()
 {
-  if ( m_player.takeDamage( m_enemy_sprite.damage_component.CalculateDamage( m_score_manager )) <= 0)
+  if ( m_player.health_component.reduceHealth( m_enemy_sprite.damage_component.CalculateDamage( m_score_manager )) <= 0)
   {
     return true;
   }
@@ -121,7 +121,7 @@ void GameStateGameplay::drawGameUi()
   constexpr int multiplier_vertical_offset { health_vertical_offset + 40 };
 
   TextRender::drawGameUi( "Score", m_score_manager.current_score, ui_text_offset );
-  TextRender::drawGameUi( "Health", m_player.m_health.m_current_health, health_vertical_offset );
+  TextRender::drawGameUi( "Health", m_player.health_component.m_current_health, health_vertical_offset );
   TextRender::drawGameUi( "ScoreMultiplier", m_score_manager.current_multiplier, multiplier_vertical_offset );
 }
 
@@ -140,7 +140,7 @@ void GameStateGameplay::drawSprites()
 
 void GameStateGameplay::playerClickedHeartPickup()
 {
-  m_player.recieveHealth( m_heart_collectable.giveHealth());
+  m_player.health_component.increaseHealth( m_heart_collectable.giveHealth());
 }
 
 void GameStateGameplay::spawnCollectables()

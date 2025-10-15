@@ -13,23 +13,19 @@ class Entity
     Entity( const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths );
     Entity( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths );
     Entity( const int max_health, const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths );
-    virtual~Entity();
+    virtual ~Entity();
 
-    void drawToScreen( const int texture_index );
+    void drawToScreen( const int texture_index = 0 );
     void drawToScreen( const int texture_index, const int pos_x, const int pos_y );
-    void drawToScreen();
 
     bool checkCollision( const Rectangle& collider );
     
-    int takeDamage( int health_to_reduce );
-    int recieveHealth( int health_to_add );
-    void reviveEntity();
     void setHidden( bool is_hidden );
     bool isHidden();
 
     Rectangle& getCollision();
     
-    HealthComponent m_health { 8, 8 };
+    HealthComponent health_component { 8, 8 };
 
     enum class EntityType 
     {

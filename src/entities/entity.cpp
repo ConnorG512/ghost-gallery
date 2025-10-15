@@ -14,7 +14,7 @@ Entity::Entity( const int pos_x, const int pos_y, const bool is_hidden, const st
   , m_sprite { texture_paths, pos_x, pos_y } {}
 
 Entity::Entity( const int max_health, const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths )
-  : m_health { max_health }
+  : health_component { max_health }
   , m_pos_x { pos_x }
   , m_pos_y { pos_y }
   , m_sprite { texture_paths, pos_x, pos_y } {}
@@ -26,14 +26,6 @@ void Entity::drawToScreen( const int texture_index )
   if ( !m_is_hidden )
   {
     m_sprite.drawSprite( texture_index );
-  }
-}
-
-void Entity::drawToScreen()
-{
-  if ( !m_is_hidden )
-  {
-    m_sprite.drawSprite( 0 );
   }
 }
 
@@ -51,25 +43,9 @@ bool Entity::checkCollision( const Rectangle& collider )
   return m_collision.isCollidingWith(collider);
 }
 
-int Entity::takeDamage( int health_to_reduce )
-{
-  return m_health.reduceHealth( health_to_reduce );
-}
-
-int Entity::recieveHealth( int health_to_add )
-{
-  m_health.increaseHealth( health_to_add );
-  return m_health.m_current_health;
-}
-
 Rectangle& Entity::getCollision()
 {
   return m_collision.m_collision_shape;
-}
-
-void Entity::reviveEntity()
-{
-  m_health.resetHealthToMax();
 }
 
 void Entity::setHidden(bool is_hidden )
