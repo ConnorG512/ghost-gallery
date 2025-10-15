@@ -54,6 +54,8 @@ add_executable(app
   src/entities/collectable/collectable.cpp
   src/spawn-manager.h 
   src/spawn-manager.cpp
+  src/game-ui.h
+  src/game-ui.cpp
 )
 
 find_package(raylib REQUIRED)
