@@ -24,8 +24,6 @@ add_executable(app
   src/text-render.cpp
   src/entities/entity.h
   src/entities/entity.cpp
-  src/health-component.h
-  src/health-component.cpp
   src/collision-shape.h
   src/collision-shape.cpp
   src/random-generation.h
@@ -40,16 +38,18 @@ add_executable(app
   src/gamestate/gamestate-gameplay.cpp
   src/gamestate/gamestate-splash.h
   src/gamestate/gamestate-splash.cpp
-  src/entities/heart-collectable.h
-  src/entities/heart-collectable.cpp
   src/entities/enemy.h
   src/entities/enemy.cpp
   src/score-manager.h
   src/score-manager.cpp
-  src/damage-component.h
-  src/damage-component.cpp
-  src/entities/coin-collectable.h
-  src/entities/coin-collectable.cpp
+  src/components/damage-component.h
+  src/components/damage-component.cpp
+  src/components/health-component.h
+  src/components/health-component.cpp
+  src/entities/collectable/coin-collectable.h
+  src/entities/collectable/coin-collectable.cpp
+  src/entities/collectable/heart-collectable.h
+  src/entities/collectable/heart-collectable.cpp
   src/audio-manager.h
   src/audio-manager.cpp
 )
