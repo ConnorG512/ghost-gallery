@@ -121,7 +121,7 @@ void GameStateGameplay::drawGameUi()
   constexpr int multiplier_vertical_offset { health_vertical_offset + 40 };
 
   TextRender::drawGameUi( "Score", m_score_manager.current_score, ui_text_offset );
-  TextRender::drawGameUi( "Health", m_player.health_component.m_current_health, health_vertical_offset );
+  TextRender::drawGameUi( "Health", m_player.health_component.current_health, health_vertical_offset );
   TextRender::drawGameUi( "ScoreMultiplier", m_score_manager.current_multiplier, multiplier_vertical_offset );
 }
 
