@@ -46,6 +46,8 @@ add_executable(app
   src/components/damage-component.cpp
   src/components/health-component.h
   src/components/health-component.cpp
+  src/entities/collectable/collectable.h
+  src/entities/collectable/collectable.cpp
   src/entities/collectable/coin-collectable.h
   src/entities/collectable/coin-collectable.cpp
   src/entities/collectable/heart-collectable.h
