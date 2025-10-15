@@ -3,7 +3,7 @@
 #include "score-manager.h"
 #include <array>
 
-struct ScoreManager
+struct ScoreComponent
 {
     void increaseScore( int num_to_increase_by );
     void addToScoreMultiplier ( int multiplier );

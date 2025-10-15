@@ -1,7 +1,7 @@
 #include "score-manager.h"
 #include <limits>
 
-void ScoreManager::increaseScore( int num_to_increase_by )
+void ScoreComponent::increaseScore( int num_to_increase_by )
 {
   constexpr int max_score { std::numeric_limits<int>::max() };
 
@@ -12,18 +12,18 @@ void ScoreManager::increaseScore( int num_to_increase_by )
   }
 }
 
-void ScoreManager::resetScoreManager()
+void ScoreComponent::resetScoreManager()
 {
   current_score = 0;
   current_multiplier = 1;
 }
 
-void ScoreManager::addToScoreMultiplier( int multiplier )
+void ScoreComponent::addToScoreMultiplier( int multiplier )
 {
   current_multiplier += multiplier;
 }
 
-void ScoreManager::checkForNewHighScore()
+void ScoreComponent::checkForNewHighScore()
 {
   if ( current_score > high_score )
   {
