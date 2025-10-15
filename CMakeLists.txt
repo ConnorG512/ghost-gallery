@@ -52,10 +52,8 @@ add_executable(app
   src/entities/components/movement-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
-  src/entities/collectable/coin-collectable.h
-  src/entities/collectable/coin-collectable.cpp
-  src/entities/collectable/heart-collectable.h
-  src/entities/collectable/heart-collectable.cpp
+  src/spawn_manager.h 
+  src/spawn_manager.cpp
 )
 
 find_package(raylib REQUIRED)
