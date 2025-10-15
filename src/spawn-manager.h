@@ -1,8 +1,11 @@
 #pragma once
 
+#include <vector>
+
 #include "entities/collectable/collectable.h"
 
-#include <vector>
+class CoinCollectable;
+class HeartCollectable;
 
 class SpawnManager 
 {
@@ -18,8 +21,8 @@ class SpawnManager
     std::vector<Collectable*> m_collectables_list; 
 
     Collectable* createCollectable();
-    Collectable* createCoinCollectable();
-    Collectable* createHeartCollectable();
+    CoinCollectable* createCoinCollectable();
+    HeartCollectable* createHeartCollectable();
     bool isManagerFull();
     void unloadManager();
 };

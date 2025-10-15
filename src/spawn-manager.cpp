@@ -1,5 +1,7 @@
 #include "spawn-manager.h"
 #include "random-generation.h"
+#include "entities/collectable/heart-collectable.h"
+#include "entities/collectable/coin-collectable.h"
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
@@ -57,9 +59,9 @@ Collectable* SpawnManager::createCollectable()
   }
 }
 
-Collectable* SpawnManager::createCoinCollectable()
+CoinCollectable* SpawnManager::createCoinCollectable()
 {
-  return new Collectable 
+  return new CoinCollectable 
   {
     { 
       "assets/image/entity/coin/coin.png" 
@@ -79,9 +81,9 @@ Collectable* SpawnManager::createCoinCollectable()
   };
 }
 
-Collectable* SpawnManager::createHeartCollectable()
+HeartCollectable* SpawnManager::createHeartCollectable()
 {
-  return new Collectable
+  return new HeartCollectable
   {
     {
       "assets/image/entity/heart/heart-pickup.png"
