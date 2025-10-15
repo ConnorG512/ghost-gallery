@@ -52,7 +52,7 @@ add_executable(app
   src/entities/components/score-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
-  src/spawn-manager.h 
+  src/spawn-manager.h
   src/spawn-manager.cpp
   src/game-ui.h
   src/game-ui.cpp
