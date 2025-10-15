@@ -3,6 +3,7 @@
 #include "gamestate/gamestate-gameplay.h"
 #include "gamestate/gamestate-splash.h"
 #include "window.h"
+
 #include <cassert>
 #include <memory>
 
