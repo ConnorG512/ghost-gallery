@@ -18,42 +18,42 @@ add_executable(app
   src/entities/player.cpp
   src/image-sprite.h
   src/image-sprite.cpp
-  src/game-manager.h
-  src/game-manager.cpp
   src/text-render.h
   src/text-render.cpp
-  src/entities/entity.h
-  src/entities/entity.cpp
   src/collision-shape.h
   src/collision-shape.cpp
   src/random-generation.h
   src/random-generation.cpp
-  src/tick-manager.h
-  src/tick-manager.cpp
   src/input-handler.h
   src/input-handler.cpp
+  src/audio-manager.h
+  src/audio-manager.cpp
+  src/game-manager.h
+  src/game-manager.cpp
+  src/score-manager.h
+  src/score-manager.cpp
+  src/tick-manager.h
+  src/tick-manager.cpp
   src/gamestate/gamestate-base.h
   src/gamestate/gamestate-base.cpp
   src/gamestate/gamestate-gameplay.h
   src/gamestate/gamestate-gameplay.cpp
   src/gamestate/gamestate-splash.h
   src/gamestate/gamestate-splash.cpp
+  src/entities/entity.h
+  src/entities/entity.cpp
   src/entities/enemy.h
   src/entities/enemy.cpp
-  src/score-manager.h
-  src/score-manager.cpp
-  src/components/damage-component.h
-  src/components/damage-component.cpp
-  src/components/health-component.h
-  src/components/health-component.cpp
+  src/entities/components/damage-component.h
+  src/entities/components/damage-component.cpp
+  src/entities/components/health-component.h
+  src/entities/components/health-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
   src/entities/collectable/coin-collectable.h
   src/entities/collectable/coin-collectable.cpp
   src/entities/collectable/heart-collectable.h
   src/entities/collectable/heart-collectable.cpp
-  src/audio-manager.h
-  src/audio-manager.cpp
 )
 
 find_package(raylib REQUIRED)
