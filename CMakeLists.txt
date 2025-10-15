@@ -52,8 +52,8 @@ add_executable(app
   src/entities/components/movement-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
-  src/spawn_manager.h 
-  src/spawn_manager.cpp
+  src/spawn-manager.h 
+  src/spawn-manager.cpp
 )
 
 find_package(raylib REQUIRED)
