@@ -1,6 +1,7 @@
 #pragma once
 
 #include "collectable.h"
+#include <raylib.h>
 
 class CoinCollectable : public Collectable
 {
@@ -13,9 +14,9 @@ class CoinCollectable : public Collectable
       const int coins_given = 300
     );
 
-    void givePoweUp(Player& current_player) override;
-
+    void givePoweUp( Player& current_player ) override;
+    void playSound( AudioManager& audio_manager ) override;
+    
   private:
     int m_score_given { 300 };
-
 };

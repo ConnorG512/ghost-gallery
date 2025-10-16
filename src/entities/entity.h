@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-class Player;
+class AudioManager;
 
 class Entity 
 {
@@ -22,8 +22,12 @@ class Entity
       const int x_pos,
       const int y_pos
     );
+    virtual ~Entity() = default;
+
     bool checkCollision( const Rectangle& collider );
-    void moveSprite( const int x_pos, const int y_pos );
+    void moveSprite( const int x_pos, const int y_pos, const int texture_index = 0 );
+
+    virtual void playSound( AudioManager& audio_manager );
     
     ImageSprite sprite;
     HealthComponent health_component { };

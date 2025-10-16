@@ -1,5 +1,6 @@
 #include "entity.h"
 #include "components/movement-component.h"
+#include "../audio-manager.h"
 
 Entity::Entity
 (
@@ -19,9 +20,14 @@ bool Entity::checkCollision( const Rectangle& collider )
   return collision.isCollidingWith(collider);
 }
 
-void Entity::moveSprite( const int x_pos, const int y_pos )
+void Entity::moveSprite( const int x_pos, const int y_pos, const int texture_index )
 {
-  movement_component.setNewPosition( x_pos, y_pos );
-  sprite.drawSprite( movement_component.x_position, movement_component.y_position );
+  movement_component.setNewPosition( x_pos, y_pos);
+  sprite.drawSprite( movement_component.x_position, movement_component.y_position, texture_index );
   collision.updateCollisionPosition( movement_component.x_position, movement_component.y_position );
+}
+
+void Entity::playSound( AudioManager& audio_manager )
+{
+  audio_manager.playAudio( AudioManager::SoundId::ghost_death );
 }

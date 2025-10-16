@@ -1,6 +1,7 @@
 #include "coin-collectable.h"
 #include "../player.h"
 #include "../../random-generation.h"
+#include "../../audio-manager.h"
 
 CoinCollectable::CoinCollectable
 (
@@ -18,4 +19,9 @@ void CoinCollectable::givePoweUp( Player& current_player )
     current_player.score_component.addToScoreMultiplier( 1 );
   }
   current_player.score_component.increaseScore( m_score_given );
+}
+
+void CoinCollectable::playSound( AudioManager& audio_manager )
+{
+  audio_manager.playAudio( AudioManager::SoundId::coin_pickup );
 }
