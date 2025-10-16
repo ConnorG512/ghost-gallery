@@ -5,8 +5,5 @@
 
 namespace TextRender 
 {
-  void drawTextToScreen(const std::string& displayed_text, const int pos_x, const int pos_y, const int size );
-  void drawTextToScreen(const std::string& displayed_text, const int pos_x, const int pos_y );
-  void drawTextToScreen(const std::string& displayed_text );
-  void drawGameUi( const std::string& displayed_text, const int value, const int y_pos );
+  void drawTextToScreen(const std::string& displayed_text, const int pos_x = 0, const int pos_y = 0, const int size = 32 );
 }
