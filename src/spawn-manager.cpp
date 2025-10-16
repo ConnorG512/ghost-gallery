@@ -43,7 +43,7 @@ void SpawnManager::drawCollectables()
   }
 }
 
-void SpawnManager::requestCollectable()
+void SpawnManager::spawnCollectable()
 {
   for ( auto*& collectable_slot : m_collectables_list )
   {
@@ -128,12 +128,15 @@ void SpawnManager::checkForPlayerInteraction( Player& current_player, AudioManag
         delete collectable_slot;
         collectable_slot = nullptr;
       }
-    };
+    }
   }
 }
 
-bool SpawnManager::isSpawnerReady()
+void SpawnManager::checkForReady()
 {
   m_tick_component.incrementTickCount();
-  return m_tick_component.hasHitTickThreshold();
+  if ( m_tick_component.hasHitTickThreshold())
+  {
+    spawnCollectable();
+  }
 }

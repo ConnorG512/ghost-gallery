@@ -16,21 +16,20 @@ class SpawnManager
     SpawnManager( int num_spawn_slots = 5 );
     ~SpawnManager();
 
-    bool isSpawnerReady();
+    void checkForReady();
     void drawCollectables();
-    void requestCollectable();
     void checkForPlayerInteraction( Player& current_player, AudioManager& audio_manager );
 
   private:
     int m_spawn_slots { 5 };
     std::vector<Collectable*> m_collectables_list; 
     TickComponent m_tick_component { 180 };
-    
-
-    void allocateSlots();
     Collectable* createCollectable();
     CoinCollectable* createCoinCollectable();
     HeartCollectable* createHeartCollectable();
+
+    void allocateSlots();
     bool isManagerFull();
     void unloadManager();
+    void spawnCollectable();
 };
