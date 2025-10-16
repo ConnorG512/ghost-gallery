@@ -7,7 +7,7 @@
 ImageSprite::ImageSprite( 
     const std::vector<std::string>& texture_path_strings, 
     const int x_pos, 
-    const int y_pos 
+    const int y_pos
 )
   : m_pos_x { x_pos }
   , m_pos_y { y_pos } 

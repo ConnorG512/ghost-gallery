@@ -8,7 +8,7 @@
 class ImageSprite 
 {
   public:
-    ImageSprite( const std::vector<std::string>& texture_path_strings, const int x_pos, const int y_pos );
+    ImageSprite( const std::vector<std::string>& texture_path_strings, const int x_pos = 0, const int y_pos = 0 );
     ~ImageSprite();
 
     void drawSprite( const int texture_index = 0 );
