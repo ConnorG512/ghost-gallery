@@ -1,8 +1,8 @@
 #include "gamestate-splash.h"
 #include "../text-render.h"
-#include "../input-handler.h"
 #include "../window.h"
 #include "../game-manager.h"
+#include "../entities/components/user-input-component.h"
 #include <format>
 #include <raylib.h>
 #include <string>
@@ -20,8 +20,8 @@ void GameStateSplash::initialiseState()
 
 void GameStateSplash::inputLoop()
 {
-  // TODO
-  if ( InputHandler::receiveInput() == InputHandler::ButtonPress::space_key )
+  using enum UserInput::InputAction;
+  if ( m_current_player.user_input.UserAction() == start_game )
   {
     startGameplayLoop();
   }
