@@ -22,12 +22,12 @@ InputHandler::ButtonPress InputHandler::receiveInput()
   }
 }
 
-int GetMousePosX()
+int InputHandler::GetMousePosX()
 {
   return GetMouseX();
 }
 
-int GetMousePosY()
+int InputHandler::GetMousePosY()
 {
   return GetMouseY();
 }
