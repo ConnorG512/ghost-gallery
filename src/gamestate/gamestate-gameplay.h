@@ -6,6 +6,8 @@
 #include "../entities/player.h"
 #include "../spawn-manager.h"
 #include "../game-ui.h"
+#include "../entities/enemy.h"
+#include "../random-generation.h"
 
 class Collectable;
 
@@ -25,6 +27,15 @@ class GameStateGameplay : public GameState
 
     SpawnManager m_collectable_spawn_manager { };
     GameUi m_game_ui { 10, 10 };
+
+    Enemy m_enemy { 
+      { "assets/image/entity/enemy/ghost/ghost-1.png" },
+      2,
+      2,
+      RandomGeneration::NumberBetween( 100, 1500 ),
+      RandomGeneration::NumberBetween( 100, 600 ),
+    };
     
     void onGameTicks();
+    void onEnemyClicked();
 }; 
