@@ -16,12 +16,9 @@ CoinCollectable::CoinCollectable
 
 void CoinCollectable::givePoweUp( Player& current_player )
 {
-  if ( RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(), 30 ))
+  if ( RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(), 35 ))
   {
-    current_player.score_component.increaseScore( m_score_given * current_player.score_component.current_score / 4 );
+    current_player.score_component.addToScoreMultiplier( 1 );
   }
-  else 
-  {
-    current_player.score_component.increaseScore( m_score_given );
-  }
+  current_player.score_component.increaseScore( m_score_given );
 }
