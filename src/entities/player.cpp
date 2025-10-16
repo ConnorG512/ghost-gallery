@@ -10,13 +10,18 @@ namespace
 
 Player::Player
 (
-  const std::vector<std::string>& texture_paths,
-  const int max_health,
-  const int current_health,
   const int x_pos,
   const int y_pos
 ) 
-  : Entity { texture_paths, max_health, current_health, x_pos, y_pos } {}
+  : Entity { 
+    {
+      "assets/image/ui/cursor-target.png",
+      "assets/image/ui/cursor-target-found.png",
+      "assets/image/ui/cursor-target-found-friendly.png"
+    },
+    8,
+    8,
+    x_pos, y_pos } {}
 
 void Player::ResetPlayerStats()
 {
