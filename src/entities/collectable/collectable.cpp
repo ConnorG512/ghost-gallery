@@ -1,5 +1,4 @@
 #include "collectable.h"
-#include "../player.h"
 
 Collectable::Collectable 
 (
@@ -13,7 +12,3 @@ Collectable::Collectable
   : Entity { texture_paths, max_health, current_health, x_pos, y_pos }
   , m_is_visible { is_visible } {}
 
-void Collectable::onPlayerHover( Player& player )
-{
-
-}
