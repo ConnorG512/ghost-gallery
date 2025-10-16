@@ -18,8 +18,6 @@ add_executable(app
   src/entities/player.cpp
   src/image-sprite.h
   src/image-sprite.cpp
-  src/text-render.h
-  src/text-render.cpp
   src/collision-shape.h
   src/collision-shape.cpp
   src/random-generation.h
@@ -58,8 +56,8 @@ add_executable(app
   src/entities/collectable/heart-collectable.cpp
   src/spawn-manager.h
   src/spawn-manager.cpp
-  src/game-ui.h
-  src/game-ui.cpp
+  src/ui/ui.h
+  src/ui/ui.cpp
 )
 
 find_package(raylib REQUIRED)
