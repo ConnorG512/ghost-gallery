@@ -29,11 +29,6 @@ struct GameManager
     
     Player m_current_player 
     { 
-      { 
-        "assets/image/ui/cursor-target.png", 
-        "assets/image/ui/cursor-target-found.png", 
-        "assets/image/ui/cursor-target-found-friendly.png" 
-      },
       8, 
       8, 
     };
