@@ -1,4 +1,4 @@
-#include "score-manager.h"
+#include "score-component.h"
 #include <limits>
 
 void ScoreComponent::increaseScore( int num_to_increase_by )
@@ -12,7 +12,7 @@ void ScoreComponent::increaseScore( int num_to_increase_by )
   }
 }
 
-void ScoreComponent::resetScoreManager()
+void ScoreComponent::resetScore()
 {
   current_score = 0;
   current_multiplier = 1;
