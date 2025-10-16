@@ -24,8 +24,6 @@ add_executable(app
   src/collision-shape.cpp
   src/random-generation.h
   src/random-generation.cpp
-  src/input-handler.h
-  src/input-handler.cpp
   src/audio-manager.h
   src/audio-manager.cpp
   src/game-manager.h
@@ -50,6 +48,8 @@ add_executable(app
   src/entities/components/score-component.cpp
   src/entities/components/tick-component.h
   src/entities/components/tick-component.cpp
+  src/entities/components/user-input-component.h
+  src/entities/components/user-input-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
   src/entities/collectable/coin-collectable.h
