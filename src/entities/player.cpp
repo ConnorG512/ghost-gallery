@@ -1,7 +1,6 @@
-#include <string>
-
 #include "player.h"
 #include "entity.h"
+#include <utility>
 
 namespace 
 { 
@@ -21,10 +20,17 @@ Player::Player
     },
     8,
     8,
-    x_pos, y_pos } {}
+    x_pos,
+    y_pos 
+  } {}
 
 void Player::ResetPlayerStats()
 {
   health_component.resetHealthToMax();
   score_component.resetScore();
+}
+
+void Player::drawPlayerCursor( const CursorType cursor_to_change_to )
+{
+  moveSprite(user_input.GetMousePos().at( 0 ), user_input.GetMousePos().at( 1 ), std::to_underlying( cursor_to_change_to ));
 }

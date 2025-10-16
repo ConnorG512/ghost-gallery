@@ -1,9 +1,11 @@
 #pragma once
 
 #include "components/health-component.h"
+#include "components/user-input-component.h"
 #include "entity.h"
 #include "components/damage-component.h"
 #include "components/score-component.h"
+#include "components/user-input-component.h"
 
 class Window;
 class ScoreComponent;
@@ -17,6 +19,7 @@ class Player : public Entity
       const int y_pos = 0
     );
     ScoreComponent score_component { };
+    UserInput user_input {};
 
     void ResetPlayerStats();
     
@@ -26,6 +29,8 @@ class Player : public Entity
       enemy = 1,
       friendly = 2,
     };
+
+    void drawPlayerCursor( const CursorType cursor_to_change_to );
   
   protected: 
 
