@@ -1,32 +1,24 @@
-#include "tick-manager.h"
+#include "tick-component.h"
 
-#include <cstdint>
-#include <limits>
+TickComponent::TickComponent( const int maximum_tick, const int tick_rate )
+  : m_maximum_tick { maximum_tick }, m_tick_rate { tick_rate } {}
 
-namespace 
+bool TickComponent::hasHitTickThreshold()
 {
-  uint64_t current_tick { 0 };
-}
-
-void TickManager::incrementTick()
-{
-  constexpr uint64_t max_tick_amount { std::numeric_limits<int>::max() };
-  current_tick ++;
-
-  if ( current_tick > max_tick_amount - 1 )
+  if ( m_current_tick % m_maximum_tick == 0 )
   {
-    resetTickCounter();
+    resetTickCount();
+    return true;
   }
+  return false;
 }
 
-bool TickManager::hasHitTick( int tick_to_check )
+void TickComponent::incrementTickCount()
 {
-  // Returns true every tick_to_check increments.
-  // Eg tick_to_check = 30, every 30 increments.
-  return current_tick % tick_to_check == 0;
+  m_current_tick += m_tick_rate; 
 }
 
-void TickManager::resetTickCounter()
+void TickComponent::resetTickCount()
 {
-  current_tick = 0;
+  m_current_tick = 0;
 }
