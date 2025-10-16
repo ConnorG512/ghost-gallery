@@ -58,6 +58,8 @@ add_executable(app
   src/spawn-manager.cpp
   src/ui/ui.h
   src/ui/ui.cpp
+  src/ui/ui-splash.h
+  src/ui/ui-splash.cpp
 )
 
 find_package(raylib REQUIRED)
