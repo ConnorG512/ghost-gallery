@@ -1,17 +1,22 @@
 #pragma once
 
-namespace InputHandler 
-{
-  
-  enum class ButtonPress 
-  {
-    none,
-    space_key,
-    r_key,
-    left_mouse
-  };
-  ButtonPress receiveInput(); 
+#include <array>
+#include <map>
+#include <string>
 
-  int GetMousePosX();
-  int GetMousePosY();
-}
+class UserInput
+{
+  public: 
+    enum class InputAction
+    {
+      none = 0,
+      fire = 0,
+      start_game = 32,
+    };
+
+    InputAction UserAction();
+    std::array<int, 2> GetMousePos();
+
+  private:
+
+};

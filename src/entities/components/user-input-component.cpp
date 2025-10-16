@@ -1,33 +1,23 @@
-#include "input-handler.h"
+#include "user-input-component.h"
 
 #include <raylib.h>
+#include <utility>
 
-InputHandler::ButtonPress InputHandler::receiveInput()
+UserInput::InputAction UserInput::UserAction()
 {
-  if ( IsMouseButtonPressed( MOUSE_BUTTON_LEFT ))
+  using enum UserInput::InputAction;
+  if ( IsMouseButtonPressed( std::to_underlying( InputAction::fire )))
   {
-    return InputHandler::ButtonPress::left_mouse;
+    return fire;
   }
-  else if ( IsKeyPressed( KEY_SPACE ))
+  else if ( IsKeyPressed( std::to_underlying(InputAction::start_game )))
   {
-    return InputHandler::ButtonPress::space_key;
+    return start_game;
   }
-  else if ( IsKeyPressed( KEY_R ))
-  {
-    return InputHandler::ButtonPress::r_key;
-  }
-  else 
-  { 
-    return InputHandler::ButtonPress::none; 
-  }
+  return none;
 }
 
-int InputHandler::GetMousePosX()
+std::array<int, 2> UserInput::GetMousePos()
 {
-  return GetMouseX();
-}
-
-int InputHandler::GetMousePosY()
-{
-  return GetMouseY();
+  return { GetMouseX(), GetMouseY() };
 }
