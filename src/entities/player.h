@@ -1,29 +1,35 @@
 #pragma once
 
+#include "components/health-component.h"
 #include "entity.h"
-#include "../damage-component.h"
+#include "components/damage-component.h"
+#include "components/score-component.h"
 
 class Window;
+class ScoreComponent;
 
 class Player : public Entity
 {
   public:
     Player
-    ( 
-      const int pos_x, 
-      const int pos_y, 
-      const std::vector<std::string>& texture_paths 
+    (
+      const std::vector<std::string>& texture_paths,
+      const int max_health,
+      const int current_health,
+      const int x_pos = 0,
+      const int y_pos = 0
     );
+    ScoreComponent score_component { };
 
-    enum class TextureName 
+    void ResetPlayerStats();
+    
+    enum class CursorType
     {
-      not_targeted = 0,
-      targeted = 1,
-      targeted_friendly = 2
+      neutral = 0,
+      enemy = 1,
+      friendly = 2,
     };
+  
+  protected: 
 
-    void changePlayerCursor( Window& game_window, Entity& collided_entity );
-    void changePlayerCursor( Window& game_window );
-
-    DamageComponent damage_component { 2, 30, 1 };
 };

@@ -1,64 +1,27 @@
 #include "entity.h"
-#include <string>
-#include <vector>
+#include "components/movement-component.h"
 
-Entity::Entity( const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths )
-  : m_pos_x { pos_x }
-  , m_pos_y { pos_y }
-  , m_sprite { texture_paths, pos_x, pos_y } {}
-
-Entity::Entity( const int pos_x, const int pos_y, const bool is_hidden, const std::vector<std::string>& texture_paths )
-  : m_pos_x { pos_x }
-  , m_pos_y { pos_y }
-  , m_is_hidden { is_hidden }
-  , m_sprite { texture_paths, pos_x, pos_y } {}
-
-Entity::Entity( const int max_health, const int pos_x, const int pos_y, const std::vector<std::string>& texture_paths )
-  : health_component { max_health }
-  , m_pos_x { pos_x }
-  , m_pos_y { pos_y }
-  , m_sprite { texture_paths, pos_x, pos_y } {}
-
-Entity::~Entity() = default;
-
-void Entity::drawToScreen( const int texture_index )
-{
-  if ( !m_is_hidden )
-  {
-    m_sprite.drawSprite( texture_index );
-  }
-}
-
-void Entity::drawToScreen( const int texture_index, const int pos_x, const int pos_y )
-{
-  if ( !m_is_hidden )
-  {
-    m_sprite.drawSprite( texture_index, pos_x, pos_y );
-    m_collision.updateCollisionPosition( pos_x, pos_y );
-  }
-}
+Entity::Entity
+(
+  const std::vector<std::string>& texture_paths,
+  const int max_health,
+  const int current_health,
+  const int x_pos,
+  const int y_pos
+) 
+  : sprite{ texture_paths, x_pos, y_pos }
+  , health_component { max_health, current_health }
+  , collision { x_pos, y_pos } 
+  , movement_component { x_pos, y_pos } { }
 
 bool Entity::checkCollision( const Rectangle& collider )
 {
-  return m_collision.isCollidingWith(collider);
+  return collision.isCollidingWith(collider);
 }
 
-Rectangle& Entity::getCollision()
+void Entity::moveSprite( const int x_pos, const int y_pos )
 {
-  return m_collision.m_collision_shape;
-}
-
-void Entity::setHidden(bool is_hidden )
-{
-  m_is_hidden = is_hidden;
-}
-
-bool Entity::isHidden()
-{
-  return m_is_hidden;
-}
-
-Entity::EntityType Entity::getEntityType()
-{
-  return EntityType::neutral;
+  movement_component.setNewPosition( x_pos, y_pos );
+  sprite.drawSprite( movement_component.x_position, movement_component.y_position );
+  collision.updateCollisionPosition( movement_component.x_position, movement_component.y_position );
 }

@@ -1,7 +1,6 @@
 #include <string>
 
 #include "player.h"
-#include "../window.h"
 #include "entity.h"
 
 namespace 
@@ -10,57 +9,17 @@ namespace
 }
 
 Player::Player
-( 
-    const int pos_x, 
-    const int pos_y, 
-    const std::vector<std::string>& texture_paths
-)
-  : Entity 
-    { 
-      pos_x, 
-      pos_y, 
-      { 
-        "assets/image/ui/cursor-target.png", 
-        "assets/image/ui/cursor-target-found.png", 
-        "assets/image/ui/cursor-target-found-friendly.png" 
-      }
-    } {}
+(
+  const std::vector<std::string>& texture_paths,
+  const int max_health,
+  const int current_health,
+  const int x_pos,
+  const int y_pos
+) 
+  : Entity { texture_paths, max_health, current_health, x_pos, y_pos } {}
 
-void Player::changePlayerCursor( Window& game_window, Entity& collided_entity )
+void Player::ResetPlayerStats()
 {
-  
-  switch (collided_entity.getEntityType()) 
-  {
-    case Entity::EntityType::hostile:
-      drawToScreen
-      ( 
-          static_cast<int>( TextureName::targeted ), 
-          game_window.getCursorX() - cursor_offset, 
-          game_window.getCursorY() - cursor_offset
-      );
-      return;
-
-    case Entity::EntityType::friendly:
-      drawToScreen
-      ( 
-          static_cast<int>( TextureName::targeted_friendly ), 
-          game_window.getCursorX() - cursor_offset, 
-          game_window.getCursorY() - cursor_offset
-      );
-      return;
-
-    default:
-      changePlayerCursor( game_window );
-  }
-}
-
-void Player::changePlayerCursor( Window& game_window )
-{
-  drawToScreen
-  ( 
-      static_cast<int>( TextureName::not_targeted ), 
-      game_window.getCursorX() - cursor_offset, 
-      game_window.getCursorY() - cursor_offset
-  );
-  return;
+  health_component.resetHealthToMax();
+  score_component.resetScore();
 }

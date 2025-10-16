@@ -1,28 +1,23 @@
 #pragma once
 
 #include "entity.h"
-#include "../damage-component.h"
+#include "components/damage-component.h"
 
-class ScoreManager;
 
 class Enemy : public Entity 
 {
   public:
     Enemy
     ( 
-      const int max_health, 
-      const int pos_x, 
-      const int pos_y, 
-      const std::vector<std::string>& texture_paths, 
-      const int enemy_damage 
+      const std::vector<std::string>& texture_paths,
+      const int max_health,
+      const int current_health,
+      const int x_pos,
+      const int y_pos,
+      const int score_to_give = 30
     );
-    
-    DamageComponent damage_component { 1, 10, 1 };
-    
-    int GiveScore();
-    EntityType getEntityType() override;
-    
-  protected:
-    int m_base_damage{ 1 };
 
+
+  protected:
+    const int m_score_to_give { 30 };
 };
