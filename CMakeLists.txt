@@ -30,8 +30,6 @@ add_executable(app
   src/audio-manager.cpp
   src/game-manager.h
   src/game-manager.cpp
-  src/tick-manager.h
-  src/tick-manager.cpp
   src/gamestate/gamestate-base.h
   src/gamestate/gamestate-base.cpp
   src/gamestate/gamestate-gameplay.h
@@ -50,6 +48,8 @@ add_executable(app
   src/entities/components/movement-component.cpp
   src/entities/components/score-component.h
   src/entities/components/score-component.cpp
+  src/entities/components/tick-component.h
+  src/entities/components/tick-component.cpp
   src/entities/collectable/collectable.h
   src/entities/collectable/collectable.cpp
   src/entities/collectable/coin-collectable.h
