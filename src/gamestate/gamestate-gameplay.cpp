@@ -14,7 +14,7 @@ GameStateGameplay::GameStateGameplay
   : GameState { game_manager, game_window, current_player, audio_manager } 
 {
   m_game_window.changeCursorStatus( Window::CursorStatus::hide );
-  m_current_player.score_component.resetScore();
+  m_current_player.ResetPlayerStats();
 };
 
 namespace { }
@@ -44,6 +44,7 @@ void GameStateGameplay::gameplayLoop()
      m_current_player.score_component.current_multiplier
    }
   );
+
   m_game_window.endDraw();
 }
 
