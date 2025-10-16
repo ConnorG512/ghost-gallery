@@ -9,9 +9,9 @@ class UserInput
   public: 
     enum class InputAction
     {
-      none = 0,
-      fire = 0,
-      start_game = 32,
+      none,
+      fire,
+      start_game,
     };
 
     InputAction UserAction();

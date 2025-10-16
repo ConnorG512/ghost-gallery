@@ -1,20 +1,22 @@
 #include "user-input-component.h"
 
 #include <raylib.h>
-#include <utility>
 
 UserInput::InputAction UserInput::UserAction()
 {
   using enum UserInput::InputAction;
-  if ( IsMouseButtonPressed( std::to_underlying( InputAction::fire )))
+  if ( IsMouseButtonPressed( MOUSE_BUTTON_LEFT )) 
   {
     return fire;
   }
-  else if ( IsKeyPressed( std::to_underlying(InputAction::start_game )))
+  else if ( GetKeyPressed() == KEY_SPACE )
   {
     return start_game;
   }
-  return none;
+  else 
+  {
+    return none;
+  }
 }
 
 std::array<int, 2> UserInput::GetMousePos()
