@@ -1,17 +1,16 @@
 #include "spawn-manager.h"
+#include "audio-manager.h"
+#include "entities/components/user-input-component.h"
 #include "random-generation.h"
 #include "entities/collectable/heart-collectable.h"
 #include "entities/collectable/coin-collectable.h"
 #include "entities/player.h"
-#include "input-handler.h"
+#include "audio-manager.h"
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
 {
-  for (int i = 0; i < num_spawn_slots; ++i )
-  {
-    m_collectables_list.push_back( nullptr );
-  }
+  allocateSlots();
 }
 
 namespace 
@@ -23,6 +22,14 @@ namespace
 SpawnManager::~SpawnManager()
 {
   unloadManager();
+}
+
+void SpawnManager::allocateSlots()
+{
+  for (int i = 0; i < m_spawn_slots; ++i )
+  {
+    m_collectables_list.push_back( nullptr );
+  }
 }
 
 void SpawnManager::drawCollectables()
@@ -51,7 +58,7 @@ void SpawnManager::requestCollectable()
 Collectable* SpawnManager::createCollectable()
 {
   int result = RandomGeneration::NumberBetween(0, 1); 
-  if ( result == 1)
+  if ( result == 1 )
   {
     return createCoinCollectable();
   }
@@ -65,11 +72,6 @@ CoinCollectable* SpawnManager::createCoinCollectable()
 {
   return new CoinCollectable 
   {
-    { 
-      "assets/image/entity/coin/coin.png" 
-    },
-    1,
-    1,
     RandomGeneration::NumberBetween
     (
       collectable_spawn_threshold_x.at( 0 ),
@@ -87,11 +89,6 @@ HeartCollectable* SpawnManager::createHeartCollectable()
 {
   return new HeartCollectable
   {
-    {
-      "assets/image/entity/heart/heart-pickup.png"
-    },
-    1,
-    1,
     RandomGeneration::NumberBetween
     (
       collectable_spawn_threshold_x.at( 0 ),
@@ -109,25 +106,34 @@ void SpawnManager::unloadManager()
 {
   for ( auto*& collectable_slot : m_collectables_list )
   {
-    if ( collectable_slot != nullptr )
-    {
-      delete collectable_slot;
-      collectable_slot = nullptr;
-    }
+    delete collectable_slot;
+    collectable_slot = nullptr;
   }
 }
 
-void SpawnManager::checkForPlayerCollision( Player& current_player )
+void SpawnManager::checkForPlayerInteraction( Player& current_player, AudioManager& audio_manager )
 {
   for ( auto*& collectable_slot : m_collectables_list )
   {
-    if ( collectable_slot != nullptr )
+    if ( collectable_slot != nullptr && collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ))
     {
-      if ( collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ) && InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse)
+      current_player.drawPlayerCursor( Player::CursorType::friendly );
+      
+      using enum UserInput::InputAction;
+      if ( current_player.user_input.UserAction() == fire )
       {
+        collectable_slot->givePoweUp( current_player );
+        collectable_slot->playSound( audio_manager );
+
         delete collectable_slot;
         collectable_slot = nullptr;
       }
     };
   }
+}
+
+bool SpawnManager::isSpawnerReady()
+{
+  m_tick_component.incrementTickCount();
+  return m_tick_component.hasHitTickThreshold();
 }
