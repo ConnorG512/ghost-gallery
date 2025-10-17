@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "entities/collectable/collectable.h"
@@ -14,7 +15,7 @@ class SpawnManager
 {
   public: 
     SpawnManager( int num_spawn_slots = 5 );
-    ~SpawnManager();
+    ~SpawnManager() = default;
 
     void checkForReady();
     void drawCollectables();
@@ -22,14 +23,12 @@ class SpawnManager
 
   private:
     int m_spawn_slots { 5 };
-    std::vector<Collectable*> m_collectables_list; 
+    std::vector<std::unique_ptr<Collectable>> m_collectables_list; 
     TickComponent m_tick_component { 180 };
-    Collectable* createCollectable();
-    CoinCollectable* createCoinCollectable();
-    HeartCollectable* createHeartCollectable();
+    std::unique_ptr<Collectable> assignCollectableToAvailableSlot();
+    std::unique_ptr<CoinCollectable> createCoinCollectable();
+    std::unique_ptr<HeartCollectable> createHeartCollectable();
 
-    void allocateSlots();
     bool isManagerFull();
-    void unloadManager();
-    void spawnCollectable();
+    bool hasCollectableBeenInteractedWith( std::unique_ptr<Collectable>& current_collectable, const Player& current_player );
 };

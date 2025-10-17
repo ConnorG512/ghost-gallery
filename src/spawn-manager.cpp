@@ -1,16 +1,20 @@
 #include "spawn-manager.h"
 #include "audio-manager.h"
-#include "entities/components/user-input-component.h"
 #include "random-generation.h"
 #include "entities/collectable/heart-collectable.h"
 #include "entities/collectable/coin-collectable.h"
 #include "entities/player.h"
 #include "audio-manager.h"
+#include <array>
+#include <format>
+#include <iostream>
+#include <memory>
+#include <string>
 
 SpawnManager::SpawnManager( int num_spawn_slots )
   : m_spawn_slots { num_spawn_slots } 
 {
-  allocateSlots();
+  m_collectables_list.resize( m_spawn_slots );
 }
 
 namespace 
@@ -19,114 +23,80 @@ namespace
   constexpr std::array<int, 2> collectable_spawn_threshold_y { 100, 700 };
 }
 
-SpawnManager::~SpawnManager()
-{
-  unloadManager();
-}
-
-void SpawnManager::allocateSlots()
-{
-  for (int i = 0; i < m_spawn_slots; ++i )
-  {
-    m_collectables_list.push_back( nullptr );
-  }
-}
-
 void SpawnManager::drawCollectables()
 {
-  for ( auto*& collectable_slot : m_collectables_list )
+  for ( const auto& collectable_instance : m_collectables_list )
   {
-    if ( collectable_slot != nullptr )
+    if ( collectable_instance != nullptr )
     {
-      collectable_slot->sprite.drawSprite();
+      collectable_instance->sprite.drawSprite();
     }
   }
 }
 
-void SpawnManager::spawnCollectable()
+std::unique_ptr<Collectable> SpawnManager::assignCollectableToAvailableSlot()
 {
-  for ( auto*& collectable_slot : m_collectables_list )
+  for ( auto& collectable_instance : m_collectables_list )
   {
-    if ( collectable_slot == nullptr )
+    if ( collectable_instance == nullptr )
     {
-      collectable_slot = createCollectable();
-      break;
+      int random_result { RandomGeneration::NumberBetween( 0, 1 )};
+      if ( random_result == 0 )
+      {
+        collectable_instance = createCoinCollectable();
+        std::cout << "Object created at address: " << collectable_instance.get() << std::endl;
+        break;
+      }
+      else 
+      {
+        collectable_instance = createHeartCollectable();
+        break;
+      }
     }
   }
+  return nullptr;
 }
 
-Collectable* SpawnManager::createCollectable()
+std::unique_ptr<CoinCollectable> SpawnManager::createCoinCollectable()
 {
-  int result = RandomGeneration::NumberBetween(0, 1); 
-  if ( result == 1 )
-  {
-    return createCoinCollectable();
-  }
-  else 
-  {
-    return createHeartCollectable();
-  }
+  constexpr std::array<int, 2> coin_value_range { 200, 600 };
+
+  using namespace RandomGeneration;
+  return std::make_unique<CoinCollectable>
+  (
+    NumberBetween( collectable_spawn_threshold_x.at( 0 ), collectable_spawn_threshold_x.at( 1 )),
+    NumberBetween( collectable_spawn_threshold_y.at( 0 ), collectable_spawn_threshold_y.at( 1 )),
+    true,
+    NumberBetween( coin_value_range.at(0), coin_value_range.at(1))
+  ); 
 }
 
-CoinCollectable* SpawnManager::createCoinCollectable()
+std::unique_ptr<HeartCollectable> SpawnManager::createHeartCollectable()
 {
-  return new CoinCollectable 
-  {
-    RandomGeneration::NumberBetween
-    (
-      collectable_spawn_threshold_x.at( 0 ),
-      collectable_spawn_threshold_x.at( 1 )
-    ),
-    RandomGeneration::NumberBetween
-    (
-      collectable_spawn_threshold_y.at( 0 ),
-      collectable_spawn_threshold_y.at( 1 )
-    ),
-  };
-}
+  constexpr std::array<int, 2> health_restoration_range { 1, 4 };
 
-HeartCollectable* SpawnManager::createHeartCollectable()
-{
-  return new HeartCollectable
-  {
-    RandomGeneration::NumberBetween
-    (
-      collectable_spawn_threshold_x.at( 0 ),
-      collectable_spawn_threshold_x.at( 1 )
-    ),
-    RandomGeneration::NumberBetween
-    (
-      collectable_spawn_threshold_y.at( 0 ),
-      collectable_spawn_threshold_y.at( 1 )
-    ),
-  };
-}
-
-void SpawnManager::unloadManager()
-{
-  for ( auto*& collectable_slot : m_collectables_list )
-  {
-    delete collectable_slot;
-    collectable_slot = nullptr;
-  }
+  using namespace RandomGeneration;
+  return std::make_unique<HeartCollectable> 
+  (
+    NumberBetween( collectable_spawn_threshold_x.at( 0 ), collectable_spawn_threshold_x.at( 1 )),
+    NumberBetween( collectable_spawn_threshold_y.at( 0 ), collectable_spawn_threshold_y.at( 1 )),
+    true,
+    NumberBetween( health_restoration_range.at(0), health_restoration_range.at( 1 ))
+  );
 }
 
 void SpawnManager::checkForPlayerInteraction( Player& current_player, AudioManager& audio_manager )
 {
-  for ( auto*& collectable_slot : m_collectables_list )
+  for ( auto& collectable_instance : m_collectables_list )
   {
-    if ( collectable_slot != nullptr && collectable_slot->collision.isCollidingWith( current_player.collision.m_collision_shape ))
+    if ( collectable_instance != nullptr && hasCollectableBeenInteractedWith( collectable_instance, current_player ))
     {
       current_player.drawPlayerCursor( Player::CursorType::friendly );
-      
-      using enum UserInput::InputAction;
-      if ( current_player.user_input.UserAction() == fire )
+      if ( current_player.user_input.UserAction() == UserInput::InputAction::fire )
       {
-        collectable_slot->givePoweUp( current_player );
-        collectable_slot->playSound( audio_manager );
-
-        delete collectable_slot;
-        collectable_slot = nullptr;
+        collectable_instance->givePoweUp( current_player );
+        collectable_instance->playSound( audio_manager );
+        collectable_instance.reset();
       }
     }
   }
@@ -137,6 +107,11 @@ void SpawnManager::checkForReady()
   m_tick_component.incrementTickCount();
   if ( m_tick_component.hasHitTickThreshold())
   {
-    spawnCollectable();
+    assignCollectableToAvailableSlot();
   }
+}
+
+bool SpawnManager::hasCollectableBeenInteractedWith( std::unique_ptr<Collectable>& current_collectable, const Player& current_player )
+{
+  return current_collectable->collision.isCollidingWith( current_player.collision.m_collision_shape );
 }
