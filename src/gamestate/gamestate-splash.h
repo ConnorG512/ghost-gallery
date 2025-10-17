@@ -2,6 +2,7 @@
 
 #include "gamestate-base.h"
 #include "../image-sprite.h"
+#include "../ui/ui-splash.h"
 
 class GameStateSplash : public GameState 
 {
@@ -14,7 +15,7 @@ class GameStateSplash : public GameState
 
   protected:
     void startGameplayLoop();
-    void drawSplashText();
 
-    ImageSprite m_background_image { { "assets/image/background/manor-1.png" }, 0, 0 };
+    ImageSprite m_background_image {{ "assets/image/background/manor-1.png" }, 0, 0 };
+    UiSplash m_ui { 10, 10, 40 };
 };
