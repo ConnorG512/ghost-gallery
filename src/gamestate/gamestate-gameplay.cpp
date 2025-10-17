@@ -22,8 +22,6 @@ void GameStateGameplay::initialiseState() { }
 void GameStateGameplay::inputLoop() 
 {
   m_collectable_spawn_manager.checkForReady();
-  m_enemy.incrementAttackClock( m_current_player );
-
   if ( m_current_player.health_component.GetHealth() == 0 )
   {
     gameOver();
@@ -33,9 +31,11 @@ void GameStateGameplay::inputLoop()
 void GameStateGameplay::gameplayLoop()
 {
   m_game_window.beginDraw();
-  m_game_window.clearWindow();
+  m_game_window.drawAndClear();
   m_background_image.drawSprite();
   m_enemy.sprite.drawSprite();
+  
+  m_current_player.health_component.ReduceHealthBy( m_enemy.InitiateAttack());
 
   m_current_player.drawPlayerCursor( Player::CursorType::neutral );
   m_enemy.collidedWithPlayer( m_current_player, m_audio_manager );
@@ -58,4 +58,3 @@ void GameStateGameplay::gameOver()
   m_current_player.score_component.checkForNewHighScore(); 
   m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
 }
-
