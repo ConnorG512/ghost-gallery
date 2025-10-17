@@ -1,42 +1,37 @@
 #include "gamestate-splash.h"
-#include "../window.h"
-#include "../game-manager.h"
 #include "../entities/components/user-input-component.h"
+#include "../game-manager.h"
+#include "../window.h"
 
-GameStateSplash::GameStateSplash( GameManager* game_manager, Window& game_window, Player& current_player, AudioManager& audio_manager )
-  : GameState { game_manager, game_window, current_player, audio_manager }
-{
-  m_game_window.changeCursorStatus( Window::CursorStatus::show );
+GameStateSplash::GameStateSplash(GameManager *game_manager, Window &game_window,
+                                 Player &current_player,
+                                 AudioManager &audio_manager)
+    : GameState{game_manager, game_window, current_player, audio_manager} {
+  m_game_window.changeCursorStatus(Window::CursorStatus::show);
 }
 
-void GameStateSplash::initialiseState() 
-{
+void GameStateSplash::initialiseState() {
   // TODO
 }
 
-void GameStateSplash::inputLoop()
-{
+void GameStateSplash::inputLoop() {
   using enum UserInput::InputAction;
-  if ( m_current_player.user_input.UserAction() == start_game )
-  {
+  if (m_current_player.user_input.UserAction() == start_game) {
     startGameplayLoop();
   }
 }
 
-void GameStateSplash::gameplayLoop()
-{
+void GameStateSplash::gameplayLoop() {
   // TODO
   m_game_window.beginDraw();
   m_game_window.drawAndClear();
 
-  m_background_image.drawSprite( 0 );
-  m_ui.drawUi( m_current_player.score_component.high_score );
+  m_background_image.drawSprite(0);
+  m_ui.drawUi(m_current_player.score_component.high_score);
 
   m_game_window.endDraw();
 }
 
-void GameStateSplash::startGameplayLoop()
-{
-  m_game_manager->changeCurrentGameState( GameManager::GameType::gameplay );
+void GameStateSplash::startGameplayLoop() {
+  m_game_manager->changeCurrentGameState(GameManager::GameType::gameplay);
 };
-

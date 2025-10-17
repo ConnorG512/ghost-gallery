@@ -4,19 +4,16 @@
 #include <map>
 #include <string>
 
-class UserInput
-{
-  public: 
-    enum class InputAction
-    {
-      none,
-      fire,
-      start_game,
-    };
+class UserInput {
+public:
+  enum class InputAction {
+    none,
+    fire,
+    start_game,
+  };
 
-    InputAction UserAction();
-    std::array<int, 2> GetMousePos();
+  InputAction UserAction();
+  std::array<int, 2> GetMousePos();
 
-  private:
-
+private:
 };

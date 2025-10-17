@@ -1,18 +1,16 @@
 #pragma once
 
 #include "audio-manager.h"
-#include "window.h"
-#include "gamestate/gamestate-base.h"
 #include "entities/player.h"
+#include "gamestate/gamestate-base.h"
+#include "window.h"
 
 #include <memory>
 
-struct GameManager
-{
+struct GameManager {
   GameManager();
 
-  enum class GameType 
-  {
+  enum class GameType {
     gameplay,
     splash,
   };
@@ -20,16 +18,15 @@ struct GameManager
   void initGameState();
   void startGameLoop();
   bool shouldGameClose();
-  void changeCurrentGameState( GameType gamestate );
-  
-  private:
-    Window m_game_window { 1600, 896, 60 };
-    std::unique_ptr<GameState> m_current_gamestate { nullptr };
-    AudioManager m_audio_manager {};
-    
-    Player m_current_player 
-    { 
-      8, 
-      8, 
-    };
+  void changeCurrentGameState(GameType gamestate);
+
+private:
+  Window m_game_window{1600, 896, 60};
+  std::unique_ptr<GameState> m_current_gamestate{nullptr};
+  AudioManager m_audio_manager{};
+
+  Player m_current_player{
+      8,
+      8,
+  };
 };
