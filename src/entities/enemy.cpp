@@ -20,14 +20,6 @@ Enemy::Enemy
   : Entity { { "assets/image/entity/enemy/ghost/ghost-1.png" }, 2, 2, x_pos, y_pos }
   , score_to_give { RandomGeneration::NumberBetween( score_range.at( 0 ), score_range.at( 1 ))} { }
 
-void Enemy::attackPlayer( Player& current_player )
-{
-  if ( m_tick_component.hasHitTickThreshold()) {
-    current_player.health_component.ReduceHealthBy( damage_component.CalculateDamage());
-    respawnEnemy();
-  }
-}
-
 void Enemy::respawnEnemy()
 {
   moveSprite(RandomGeneration::NumberBetween( 100, 1400 ), RandomGeneration::NumberBetween( 200, 750 )); 
@@ -49,15 +41,6 @@ void Enemy::collidedWithPlayer( Player& current_player, AudioManager &audio_mana
   }
 }
 
-void Enemy::incrementAttackClock( Player& current_player )
-{
-  m_tick_component.incrementTickCount();
-  if ( m_tick_component.hasHitTickThreshold())
-  {
-    attackPlayer( current_player );
-  }
-}
-
 void Enemy::changeEnemyGivenScore()
 {
   score_to_give = RandomGeneration::NumberBetween( score_range.at( 0 ), score_range.at( 1 ));
@@ -66,4 +49,13 @@ void Enemy::changeEnemyGivenScore()
 void Enemy::playSound( AudioManager& audio_manager )
 {
   audio_manager.playAudio( AudioManager::SoundId::ghost_death );
+}
+
+int Enemy::InitiateAttack()
+{
+  if( m_tick_component.IncrementAndCheckThreshold())
+  {
+    return damage_component.CalculateDamage();
+  }
+  return 0;
 }
