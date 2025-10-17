@@ -104,8 +104,7 @@ void SpawnManager::checkForPlayerInteraction( Player& current_player, AudioManag
 
 void SpawnManager::checkForReady()
 {
-  m_tick_component.incrementTickCount();
-  if ( m_tick_component.hasHitTickThreshold())
+  if ( m_tick_component.IncrementAndCheckThreshold())
   {
     assignCollectableToAvailableSlot();
   }
