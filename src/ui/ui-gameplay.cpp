@@ -16,7 +16,7 @@ void UiGameplay::drawUi( const std::array<int, 3>& player_stats )
     "Health",
     "Multiplier",
   };
-  
+
   int text_y_pos { m_start_position_y };
   for ( int i = 0; i < ui_strings.size(); ++i )
   {
