@@ -23,7 +23,7 @@ Enemy::Enemy
 void Enemy::attackPlayer( Player& current_player )
 {
   if ( m_tick_component.hasHitTickThreshold()) {
-    current_player.health_component.reduceHealth( damage_component.CalculateDamage());
+    current_player.health_component.ReduceHealthBy( damage_component.CalculateDamage());
     respawnEnemy();
   }
 }

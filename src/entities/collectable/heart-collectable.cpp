@@ -13,7 +13,7 @@ HeartCollectable::HeartCollectable
 
 void HeartCollectable::givePoweUp( Player& current_player )
 {
-  current_player.health_component.increaseHealth( m_health_restored );
+  current_player.health_component.IncreaseHealthBy( m_health_restored );
 }
 
 void HeartCollectable::playSound( AudioManager& audio_manager )

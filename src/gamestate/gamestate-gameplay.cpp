@@ -24,7 +24,7 @@ void GameStateGameplay::inputLoop()
   m_collectable_spawn_manager.checkForReady();
   m_enemy.incrementAttackClock( m_current_player );
 
-  if ( m_current_player.health_component.current_health == 0 )
+  if ( m_current_player.health_component.GetHealth() == 0 )
   {
     gameOver();
   }
@@ -46,7 +46,7 @@ void GameStateGameplay::gameplayLoop()
   m_ui.drawUi(
   {
     m_current_player.score_component.current_score,
-    m_current_player.health_component.current_health,
+    m_current_player.health_component.GetHealth(),
     m_current_player.score_component.current_multiplier,
   });
 
