@@ -9,21 +9,23 @@
 class Window;
 class ScoreComponent;
 
-class Player : public Entity {
-public:
-  Player(const int x_pos = 0, const int y_pos = 0);
-  ScoreComponent score_component{};
-  UserInput user_input{};
+class Player : public Entity
+{
+  public:
+    Player(const int x_pos = 0, const int y_pos = 0);
+    ScoreComponent score_component{};
+    UserInput user_input{};
 
-  void ResetPlayerStats();
+    void ResetPlayerStats();
 
-  enum class CursorType {
-    neutral = 0,
-    enemy = 1,
-    friendly = 2,
-  };
+    enum class CursorType
+    {
+        neutral = 0,
+        enemy = 1,
+        friendly = 2,
+    };
 
-  void drawPlayerCursor(const CursorType cursor_to_change_to);
+    void drawPlayerCursor(const CursorType cursor_to_change_to);
 
-protected:
+  protected:
 };

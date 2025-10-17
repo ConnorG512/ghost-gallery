@@ -11,16 +11,21 @@ CoinCollectable::CoinCollectable(const int x_pos, const int y_pos,
                   x_pos,
                   y_pos,
                   is_visible},
-      m_score_given{coins_given} {}
-
-void CoinCollectable::givePoweUp(Player &current_player) {
-  if (RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(),
-                                        35)) {
-    current_player.score_component.addToScoreMultiplier(1);
-  }
-  current_player.score_component.increaseScore(m_score_given);
+      m_score_given{coins_given}
+{
 }
 
-void CoinCollectable::playSound(AudioManager &audio_manager) {
-  audio_manager.playAudio(AudioManager::SoundId::coin_pickup);
+void CoinCollectable::givePoweUp(Player &current_player)
+{
+    if (RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(),
+                                          35))
+    {
+        current_player.score_component.addToScoreMultiplier(1);
+    }
+    current_player.score_component.increaseScore(m_score_given);
+}
+
+void CoinCollectable::playSound(AudioManager &audio_manager)
+{
+    audio_manager.playAudio(AudioManager::SoundId::coin_pickup);
 }

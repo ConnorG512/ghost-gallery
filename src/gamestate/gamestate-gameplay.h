@@ -10,25 +10,26 @@
 
 class Collectable;
 
-class GameStateGameplay : public GameState {
-public:
-  GameStateGameplay(GameManager *game_manager, Window &game_window,
-                    Player &current_player, AudioManager &audio_manager);
-  ~GameStateGameplay() = default;
+class GameStateGameplay : public GameState
+{
+  public:
+    GameStateGameplay(GameManager *game_manager, Window &game_window,
+                      Player &current_player, AudioManager &audio_manager);
+    ~GameStateGameplay() = default;
 
-  void initialiseState() override;
-  void inputLoop() override;
-  void gameplayLoop() override;
+    void initialiseState() override;
+    void inputLoop() override;
+    void gameplayLoop() override;
 
-protected:
-  ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
-  SpawnManager m_collectable_spawn_manager{};
-  Enemy m_enemy{
-      RandomGeneration::NumberBetween(100, 1500),
-      RandomGeneration::NumberBetween(100, 600),
-  };
-  UiGameplay m_ui{10, 10, 40};
+  protected:
+    ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
+    SpawnManager m_collectable_spawn_manager{};
+    Enemy m_enemy{
+        RandomGeneration::NumberBetween(100, 1500),
+        RandomGeneration::NumberBetween(100, 600),
+    };
+    UiGameplay m_ui{10, 10, 40};
 
-  void onGameTicks();
-  void gameOver();
+    void onGameTicks();
+    void gameOver();
 };
