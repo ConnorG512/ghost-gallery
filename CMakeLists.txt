@@ -60,6 +60,8 @@ add_executable(app
   src/ui/ui.cpp
   src/ui/ui-splash.h
   src/ui/ui-splash.cpp
+  src/ui/ui-gameplay.h
+  src/ui/ui-gameplay.cpp
 )
 
 find_package(raylib REQUIRED)
