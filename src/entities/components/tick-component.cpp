@@ -3,7 +3,7 @@
 TickComponent::TickComponent( const int maximum_tick, const int tick_rate )
   : m_maximum_tick { maximum_tick }, m_tick_rate { tick_rate } {}
 
-bool TickComponent::hasHitTickThreshold()
+bool TickComponent::HasHitTickThreshold()
 {
   if ( m_current_tick % m_maximum_tick == 0 )
   {
@@ -21,4 +21,10 @@ void TickComponent::incrementTickCount()
 void TickComponent::resetTickCount()
 {
   m_current_tick = 0;
+}
+
+bool TickComponent::IncrementAndCheckThreshold()
+{
+  incrementTickCount();
+  return HasHitTickThreshold();
 }
