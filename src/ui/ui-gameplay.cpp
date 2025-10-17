@@ -1,6 +1,8 @@
 #include "ui-gameplay.h"
 #include <array>
+#include <format>
 #include <raylib.h>
+#include <format>
 
 UiGameplay::UiGameplay( const int start_pos_x, const int start_pos_y, const int spacing, const int font_size )
   : Ui { start_pos_x, start_pos_y, spacing, font_size } {}
@@ -15,10 +17,16 @@ void UiGameplay::drawUi( const std::array<int, 3>& player_stats )
     "Multiplier",
   };
   
-  int text_start_pos_y { m_start_position_y };
-  for ( auto* current_string : ui_strings )
+  int text_y_pos { m_start_position_y };
+  for ( int i = 0; i < ui_strings.size(); ++i )
   {
-    DrawText( current_string, m_start_position_x, text_start_pos_y, m_font_size, WHITE );
-    text_start_pos_y += m_spacing;
+    DrawText
+    ( std::format("{}: {}", ui_strings.at(i), player_stats.at(i)).c_str(),
+      m_start_position_x, 
+      text_y_pos,
+      m_font_size,
+      WHITE 
+    );
+    text_y_pos += m_spacing;
   }
 }
