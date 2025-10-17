@@ -19,7 +19,7 @@ void GameManager::startGameLoop()
 {
   initGameState();
 
-  while ( !shouldGameClose() ) 
+  while ( !shouldGameClose()) 
   {
     assert( m_current_gamestate );
     m_current_gamestate->inputLoop();
