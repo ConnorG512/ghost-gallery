@@ -20,6 +20,7 @@
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
         clang-tools
+        valgrind
 
         llvmPackages_21.libcxxClang
         llvmPackages_21.libcxx
