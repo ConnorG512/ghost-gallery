@@ -1,14 +1,18 @@
 #pragma once
 
-struct HealthComponent {
+class HealthComponent 
+{
+  public:
     HealthComponent( int max_health = 8, int current_health = 8 );
     HealthComponent( int max_health );
 
-    int reduceHealth( int health_to_reduce );
-    int increaseHealth( int health_to_add );
+    int ReduceHealthBy( int health_to_reduce );
+    int IncreaseHealthBy( int health_to_add );
+    int SetCurrentHealthTo( int health );
     void resetHealthToMax();
-    
-    int max_health { 8 };
-    int current_health { max_health };
+  
+  private:
+    int m_max_health { 8 };
+    int m_current_health { m_max_health };
 
 };
