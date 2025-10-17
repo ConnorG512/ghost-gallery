@@ -5,10 +5,8 @@
 #include "entities/player.h"
 #include "random-generation.h"
 #include <array>
-#include <format>
 #include <iostream>
 #include <memory>
-#include <string>
 
 SpawnManager::SpawnManager(int num_spawn_slots) : m_spawn_slots{num_spawn_slots}
 {
