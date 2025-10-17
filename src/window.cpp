@@ -2,11 +2,11 @@
 #include <raylib.h>
 
 Window::Window(int width, int height, int target_fps) 
-  : m_width { width }
-  , m_height { height }
+  : m_window_width { width }
+  , m_window_height { height }
   , m_target_fps { target_fps }
 {
-  InitWindow(m_width, m_height, "Ghost Gallery");
+  InitWindow(m_window_width, m_window_height, "Ghost Gallery");
   SetTargetFPS(m_target_fps);
 }
 
@@ -15,7 +15,7 @@ Window::~Window()
   CloseWindow();
 }
 
-bool Window::shouldWindowClose() 
+bool Window::ShouldWindowClose() 
 {
   return WindowShouldClose();
 }
@@ -30,22 +30,19 @@ void Window::endDraw()
   EndDrawing();
 }
 
-void Window::clearWindow()
+void Window::clearWindow( const Color& colour )
 {
-  ClearBackground(YELLOW);
+  ClearBackground( colour );
 }
 
-int Window::getCursorX()
+void Window::drawAndClear()
 {
-  return GetMouseX();
+  beginDraw();
+  constexpr Color default_window_colour { 0, 0, 0, 0 };
+  clearWindow( default_window_colour );
 }
 
-int Window::getCursorY()
-{
-  return GetMouseY();
-}
-
-void Window::changeCursorStatus( CursorStatus status_to_change_to )
+void Window::changeCursorStatus( const CursorStatus status_to_change_to )
 {
   switch ( status_to_change_to ) 
   {

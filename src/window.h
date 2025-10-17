@@ -4,17 +4,12 @@
 class Window 
 {
   public:
-    Window( int width, int height, int target_fps );
+    Window( int width = 900, int height = 1600, int target_fps = 60 );
     ~Window();
-    bool shouldWindowClose();
+    bool ShouldWindowClose();
     void beginDraw();
     void endDraw();
-    void clearWindow();
-    int getCursorX();
-    int getCursorY();
-    
-    int m_width;
-    int m_height;
+    void drawAndClear();
     
     enum class CursorStatus
     {
@@ -22,8 +17,12 @@ class Window
       show,
     };
     
-    void changeCursorStatus( CursorStatus status_to_change_to );
+    void changeCursorStatus( const CursorStatus status_to_change_to );
   
   private: 
-    int m_target_fps;
+    int m_target_fps { 60 };
+    int m_window_height { 1600 };
+    int m_window_width { 900 };
+    
+    void clearWindow( const Color& colour );
 };
