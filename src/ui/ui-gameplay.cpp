@@ -19,5 +19,6 @@ void UiGameplay::drawUi( const std::array<int, 3>& player_stats )
   for ( auto* current_string : ui_strings )
   {
     DrawText( current_string, m_start_position_x, text_start_pos_y, m_font_size, WHITE );
+    text_start_pos_y += m_spacing;
   }
 }

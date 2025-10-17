@@ -2,8 +2,7 @@
 #include "gamestate-base.h"
 #include "../window.h"
 #include "../game-manager.h"
-#include "../input-handler.h"
-#include <array>
+#include "../entities/player.h"
 
 GameStateGameplay::GameStateGameplay
 ( 
@@ -18,70 +17,45 @@ GameStateGameplay::GameStateGameplay
   m_current_player.ResetPlayerStats();
 };
 
-namespace { }
-
 void GameStateGameplay::initialiseState() { }
 
 void GameStateGameplay::inputLoop() 
 {
-  onEnemyClicked();
-  m_collectable_spawn_manager.checkForPlayerCollision( m_current_player );
+  m_collectable_spawn_manager.checkForReady();
+  m_enemy.incrementAttackClock( m_current_player );
+
+  if ( m_current_player.health_component.current_health == 0 )
+  {
+    gameOver();
+  }
 }
 
 void GameStateGameplay::gameplayLoop()
 {
   m_game_window.beginDraw();
   m_game_window.clearWindow();
-  
-  onGameTicks();
   m_background_image.drawSprite();
-  m_collectable_spawn_manager.drawCollectables();
   m_enemy.sprite.drawSprite();
-  m_current_player.moveSprite(InputHandler::GetMousePosX(), InputHandler::GetMousePosY());
 
-  m_game_ui.drawAll
-  (
-   { 
-     m_current_player.score_component.current_score,
-     m_current_player.health_component.current_health,
-     m_current_player.score_component.current_multiplier
-   }
-  );
+  m_current_player.drawPlayerCursor( Player::CursorType::neutral );
+  m_enemy.collidedWithPlayer( m_current_player );
+  
+  m_collectable_spawn_manager.drawCollectables();
+  m_collectable_spawn_manager.checkForPlayerInteraction( m_current_player, m_audio_manager );
+  
+  m_ui.drawUi(
+  {
+    m_current_player.score_component.current_score,
+    m_current_player.health_component.current_health,
+    m_current_player.score_component.current_multiplier,
+  });
 
   m_game_window.endDraw();
 }
 
-GameStateGameplay::~GameStateGameplay()
+void GameStateGameplay::gameOver()
 {
   m_current_player.score_component.checkForNewHighScore(); 
+  m_game_manager->changeCurrentGameState( GameManager::GameType::splash );
 }
 
-void GameStateGameplay::onGameTicks()
-{
-  m_game_tick.incrementTick();
-  constexpr std::array<int, 2> tick_thresholds { 60, 180 };
-  if ( m_game_tick.hasHitTick( tick_thresholds.at( 0 )))
-  {
-    m_current_player.health_component.reduceHealth( m_enemy.damage_component.CalculateDamage());
-    m_enemy.moveLocation();
-  }
-  else if ( m_game_tick.hasHitTick( tick_thresholds.at( 1 )))
-  {
-    m_collectable_spawn_manager.requestCollectable();
-  } 
-}
-
-void GameStateGameplay::onEnemyClicked()
-{
-  if ( m_enemy.hasCollidedWithPlayer( m_current_player ) && InputHandler::receiveInput() == InputHandler::ButtonPress::left_mouse )
-  {
-    m_enemy.moveLocation();
-    m_current_player.score_component.increaseScore( m_enemy.score_to_give );
-
-    if ( RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(), 15))
-    {
-      m_collectable_spawn_manager.requestCollectable();
-    }
-    m_audio_manager.playAudio( AudioManager::SoundId::ghost_death );
-  }
-}
