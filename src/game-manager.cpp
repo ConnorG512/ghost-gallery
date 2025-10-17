@@ -29,7 +29,7 @@ void GameManager::startGameLoop()
 
 bool GameManager::shouldGameClose() 
 {
-  return m_game_window.shouldWindowClose();
+  return m_game_window.ShouldWindowClose();
 }
 
 void GameManager::changeCurrentGameState( GameType gamestate ) 
