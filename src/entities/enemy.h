@@ -16,8 +16,10 @@ class Enemy : public Entity
     );
     
     void respawnEnemy();
-    void collidedWithPlayer( Player& current_player );
+    void collidedWithPlayer( Player& current_player, AudioManager &audio_manager );
     void incrementAttackClock( Player& current_player );
+
+    void playSound( AudioManager& audio_manager );
 
     DamageComponent damage_component { 2, 10 };
     int score_to_give { 30 };

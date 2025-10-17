@@ -38,7 +38,7 @@ void GameStateGameplay::gameplayLoop()
   m_enemy.sprite.drawSprite();
 
   m_current_player.drawPlayerCursor( Player::CursorType::neutral );
-  m_enemy.collidedWithPlayer( m_current_player );
+  m_enemy.collidedWithPlayer( m_current_player, m_audio_manager );
   
   m_collectable_spawn_manager.drawCollectables();
   m_collectable_spawn_manager.checkForPlayerInteraction( m_current_player, m_audio_manager );
