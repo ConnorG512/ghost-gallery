@@ -21,7 +21,7 @@ void UiGameplay::drawUi(const std::array<int, 3> &player_stats)
 
     int text_y_pos{m_start_position_y};
 
-    for (auto [current_string, player_stat] :
+    for (const auto [current_string, player_stat] :
          std::views::zip(ui_strings, player_stats))
     {
         DrawText(std::format("{}: {}", current_string, player_stat).c_str(),
