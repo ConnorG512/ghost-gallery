@@ -6,6 +6,7 @@
 #include "player.h"
 
 #include <array>
+#include <ranges>
 
 namespace
 {
@@ -59,12 +60,33 @@ void Enemy::playSound(AudioManager &audio_manager)
     audio_manager.playAudio(AudioManager::SoundId::ghost_death);
 }
 
-int Enemy::InitiateAttack()
+int Enemy::InitiateAttack(const int &current_game_score)
 {
+    setAggression(current_game_score);
     if (m_tick_component.IncrementAndCheckThreshold())
     {
         respawnEnemy();
         return damage_component.CalculateDamage();
     }
     return 0;
+}
+
+void Enemy::setAggression(const int &current_game_score)
+{
+    constexpr std::array<int, 8> score_thresholds{500,  1500,  3000,  6000,
+                                                  9000, 18000, 36000, 72000};
+    constexpr std::array<int, 8> attack_tick_speed{120, 100, 75, 60,
+                                                   50,  40,  35, 20};
+    static_assert(
+        score_thresholds.size() == attack_tick_speed.size(),
+        "score_thresholds and attack_tick_speed must be the same size!");
+
+    for (auto [score_threshold, enemy_attack_speed] :
+         std::views::zip(score_thresholds, attack_tick_speed))
+    {
+        if (current_game_score >= score_threshold)
+        {
+            m_tick_component.setNewTickThreshold(enemy_attack_speed);
+        }
+    }
 }

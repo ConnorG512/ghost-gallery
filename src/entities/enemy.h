@@ -14,7 +14,7 @@ class Enemy : public Entity
     void respawnEnemy();
     void collidedWithPlayer(Player &current_player,
                             AudioManager &audio_manager);
-    int InitiateAttack();
+    int InitiateAttack(const int &current_game_score);
 
     void playSound(AudioManager &audio_manager);
 
@@ -23,6 +23,7 @@ class Enemy : public Entity
 
   private:
     void changeEnemyGivenScore();
+    void setAggression(const int &current_game_score);
 
-    TickComponent m_tick_component{};
+    TickComponent m_tick_component{140};
 };

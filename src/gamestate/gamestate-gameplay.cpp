@@ -32,7 +32,8 @@ void GameStateGameplay::gameplayLoop()
     m_background_image.drawSprite();
     m_enemy.sprite.drawSprite(m_enemy.positional_component.GetXYPos());
 
-    m_current_player.health_component.ReduceHealthBy(m_enemy.InitiateAttack());
+    m_current_player.health_component.ReduceHealthBy(
+        m_enemy.InitiateAttack(m_current_player.score_component.current_score));
 
     m_current_player.drawPlayerCursor(Player::CursorType::neutral);
     m_enemy.collidedWithPlayer(m_current_player, m_audio_manager);
