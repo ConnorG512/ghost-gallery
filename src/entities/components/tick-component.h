@@ -15,4 +15,5 @@ class TickComponent
 
     void incrementTickCount();
     bool HasHitTickThreshold();
+    void setNewTickThreshold(const int new_tick);
 };

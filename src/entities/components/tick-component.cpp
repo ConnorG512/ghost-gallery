@@ -24,3 +24,8 @@ bool TickComponent::IncrementAndCheckThreshold()
     incrementTickCount();
     return HasHitTickThreshold();
 }
+
+void TickComponent::setNewTickThreshold(const int new_tick)
+{
+    m_maximum_tick = new_tick;
+}
