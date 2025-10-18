@@ -63,6 +63,7 @@ int Enemy::InitiateAttack()
 {
     if (m_tick_component.IncrementAndCheckThreshold())
     {
+        respawnEnemy();
         return damage_component.CalculateDamage();
     }
     return 0;
