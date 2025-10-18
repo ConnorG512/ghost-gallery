@@ -31,7 +31,7 @@ void GameStateSplash::gameplayLoop()
     m_game_window.beginDraw();
     m_game_window.drawAndClear();
 
-    m_background_image.drawSprite(0);
+    m_background_image.drawSprite();
     m_ui.drawUi(m_current_player.score_component.high_score);
 
     m_game_window.endDraw();

@@ -25,7 +25,8 @@ void SpawnManager::drawCollectables()
     {
         if (collectable_instance != nullptr)
         {
-            collectable_instance->sprite.drawSprite();
+            collectable_instance->sprite.drawSprite(
+                {collectable_instance->positional_component.GetXYPos()});
         }
     }
 }
@@ -112,9 +113,8 @@ void SpawnManager::checkForReady()
 }
 
 bool SpawnManager::hasCollectableBeenInteractedWith(
-    std::unique_ptr<Collectable> &current_collectable,
-    const Player &current_player)
+    std::unique_ptr<Collectable> &current_collectable, Player &current_player)
 {
-    return current_collectable->collision.isCollidingWith(
-        current_player.collision.m_collision_shape);
+    return current_collectable->collision.IsCollidingWith(
+        current_player.collision.GetCollisionPosition());
 }

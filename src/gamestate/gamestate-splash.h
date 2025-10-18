@@ -17,7 +17,6 @@ class GameStateSplash : public GameState
   protected:
     void startGameplayLoop();
 
-    ImageSprite m_background_image{
-        {"assets/image/background/manor-1.png"}, 0, 0};
+    ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
     UiSplash m_ui{10, 10, 40};
 };

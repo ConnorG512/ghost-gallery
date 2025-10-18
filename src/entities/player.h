@@ -25,7 +25,6 @@ class Player : public Entity
         friendly = 2,
     };
 
+    void drawPlayerCursor();
     void drawPlayerCursor(const CursorType cursor_to_change_to);
-
-  protected:
 };

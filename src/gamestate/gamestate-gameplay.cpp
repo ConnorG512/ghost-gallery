@@ -30,7 +30,7 @@ void GameStateGameplay::gameplayLoop()
     m_game_window.beginDraw();
     m_game_window.drawAndClear();
     m_background_image.drawSprite();
-    m_enemy.sprite.drawSprite();
+    m_enemy.sprite.drawSprite(m_enemy.positional_component.GetXYPos());
 
     m_current_player.health_component.ReduceHealthBy(m_enemy.InitiateAttack());
 

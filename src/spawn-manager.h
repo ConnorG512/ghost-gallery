@@ -33,5 +33,5 @@ class SpawnManager
     bool isManagerFull();
     bool hasCollectableBeenInteractedWith(
         std::unique_ptr<Collectable> &current_collectable,
-        const Player &current_player);
+        Player &current_player);
 };

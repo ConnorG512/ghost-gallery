@@ -6,6 +6,7 @@
 #include "player.h"
 
 #include <array>
+#include <iostream>
 
 namespace
 {
@@ -25,8 +26,8 @@ Enemy::Enemy(const int x_pos, const int y_pos)
 
 void Enemy::respawnEnemy()
 {
-    moveSprite(RandomGeneration::NumberBetween(100, 1400),
-               RandomGeneration::NumberBetween(200, 750));
+    setNewEntityPosition({RandomGeneration::NumberBetween(100, 1400),
+                          RandomGeneration::NumberBetween(200, 750)});
     changeEnemyGivenScore();
     m_tick_component.resetTickCount();
 }
@@ -34,7 +35,8 @@ void Enemy::respawnEnemy()
 void Enemy::collidedWithPlayer(Player &current_player,
                                AudioManager &audio_manager)
 {
-    if (collision.isCollidingWith(current_player.collision.m_collision_shape))
+    if (collision.IsCollidingWith(
+            current_player.collision.GetCollisionPosition()))
     {
         current_player.drawPlayerCursor(Player::CursorType::enemy);
         if (current_player.user_input.UserAction() ==

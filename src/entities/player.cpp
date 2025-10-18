@@ -24,8 +24,17 @@ void Player::ResetPlayerStats()
     score_component.resetScore();
 }
 
-void Player::drawPlayerCursor(const CursorType cursor_to_change_to)
+void Player::drawPlayerCursor()
 {
-    moveSprite(user_input.GetMousePos().at(0), user_input.GetMousePos().at(1),
-               std::to_underlying(cursor_to_change_to));
+    sprite.drawSprite(
+        {user_input.GetMousePos().at(0), user_input.GetMousePos().at(1)});
+    collision.updateCollisionPosition(user_input.GetMousePos());
+}
+
+void Player::drawPlayerCursor(const Player::CursorType cursor_to_change_to)
+{
+    sprite.drawSprite(
+        {user_input.GetMousePos().at(0), user_input.GetMousePos().at(1)},
+        std::to_underlying(cursor_to_change_to));
+    collision.updateCollisionPosition(user_input.GetMousePos());
 }
