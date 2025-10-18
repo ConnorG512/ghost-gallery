@@ -11,11 +11,11 @@ class HeartCollectable;
 class Player;
 class AudioManager;
 
-class SpawnManager
+class SpawnManagerCollectable
 {
   public:
-    SpawnManager(int num_spawn_slots = 5);
-    ~SpawnManager() = default;
+    SpawnManagerCollectable(int num_spawn_slots = 5);
+    ~SpawnManagerCollectable() = default;
 
     void checkForReady();
     void drawCollectables();
