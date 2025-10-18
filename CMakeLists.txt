@@ -40,8 +40,8 @@ add_executable(app
   src/entities/components/damage-component.cpp
   src/entities/components/health-component.h
   src/entities/components/health-component.cpp
-  src/entities/components/movement-component.h
-  src/entities/components/movement-component.cpp
+  src/entities/components/positional-component.h
+  src/entities/components/positional-component.cpp
   src/entities/components/score-component.h
   src/entities/components/score-component.cpp
   src/entities/components/tick-component.h
