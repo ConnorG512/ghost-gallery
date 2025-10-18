@@ -7,6 +7,7 @@ class TickComponent
 
     bool IncrementAndCheckThreshold();
     void resetTickCount();
+    void setNewTickThreshold(const int new_tick);
 
   private:
     int m_maximum_tick{60};
@@ -15,5 +16,4 @@ class TickComponent
 
     void incrementTickCount();
     bool HasHitTickThreshold();
-    void setNewTickThreshold(const int new_tick);
 };
