@@ -6,7 +6,6 @@
 #include "player.h"
 
 #include <array>
-#include <iostream>
 
 namespace
 {
