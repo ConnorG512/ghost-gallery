@@ -1,9 +1,9 @@
-#include "spawn-manager.h"
-#include "audio-manager.h"
-#include "entities/collectable/coin-collectable.h"
-#include "entities/collectable/heart-collectable.h"
-#include "entities/player.h"
-#include "random-generation.h"
+#include "spawn-manager-collectable.h"
+#include "../audio-manager.h"
+#include "../entities/collectable/coin-collectable.h"
+#include "../entities/collectable/heart-collectable.h"
+#include "../entities/player.h"
+#include "../random-generation.h"
 #include <array>
 #include <iostream>
 #include <memory>

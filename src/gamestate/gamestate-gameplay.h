@@ -4,7 +4,7 @@
 #include "../entities/player.h"
 #include "../image-sprite.h"
 #include "../random-generation.h"
-#include "../spawn-manager.h"
+#include "../spawner/spawn-manager-collectable.h"
 #include "../ui/ui-gameplay.h"
 #include "gamestate-base.h"
 

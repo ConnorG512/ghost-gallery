@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 
-#include "entities/collectable/collectable.h"
-#include "entities/components/tick-component.h"
+#include "../entities/collectable/coin-collectable.h"
+#include "../entities/components/tick-component.h"
 
 class CoinCollectable;
 class HeartCollectable;
