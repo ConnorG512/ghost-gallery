@@ -5,16 +5,18 @@
 
 #include "../entities/collectable/coin-collectable.h"
 #include "../entities/components/tick-component.h"
+#include "spawn-manager.h"
 
 class CoinCollectable;
 class HeartCollectable;
 class Player;
 class AudioManager;
 
-class SpawnManagerCollectable
+class SpawnManagerCollectable : public SpawnManager
 {
   public:
-    SpawnManagerCollectable(int num_spawn_slots = 5);
+    SpawnManagerCollectable(const int tick_threshold,
+                            const int num_spawn_slots);
     ~SpawnManagerCollectable() = default;
 
     void checkForReady();
@@ -23,9 +25,7 @@ class SpawnManagerCollectable
                                    AudioManager &audio_manager);
 
   private:
-    int m_spawn_slots{5};
     std::vector<std::unique_ptr<Collectable>> m_collectables_list;
-    TickComponent m_tick_component{180};
     std::unique_ptr<Collectable> assignCollectableToAvailableSlot();
     std::unique_ptr<CoinCollectable> createCoinCollectable();
     std::unique_ptr<HeartCollectable> createHeartCollectable();

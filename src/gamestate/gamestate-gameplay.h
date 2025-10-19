@@ -23,7 +23,7 @@ class GameStateGameplay : public GameState
 
   protected:
     ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
-    SpawnManager m_collectable_spawn_manager{};
+    SpawnManagerCollectable m_collectable_spawn_manager{180, 5};
     Enemy m_enemy{
         RandomGeneration::NumberBetween(100, 1500),
         RandomGeneration::NumberBetween(100, 600),

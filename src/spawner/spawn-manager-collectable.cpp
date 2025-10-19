@@ -4,13 +4,15 @@
 #include "../entities/collectable/heart-collectable.h"
 #include "../entities/player.h"
 #include "../random-generation.h"
+#include "spawn-manager.h"
 #include <array>
-#include <iostream>
 #include <memory>
 
-SpawnManager::SpawnManager(int num_spawn_slots) : m_spawn_slots{num_spawn_slots}
+SpawnManagerCollectable::SpawnManagerCollectable(const int tick_threshold,
+                                                 const int num_spawn_slots)
+    : SpawnManager{tick_threshold, num_spawn_slots}
 {
-    m_collectables_list.resize(m_spawn_slots);
+    m_collectables_list.resize(m_num_available_slots);
 }
 
 namespace
@@ -19,7 +21,7 @@ constexpr std::array<int, 2> collectable_spawn_threshold_x{200, 1400};
 constexpr std::array<int, 2> collectable_spawn_threshold_y{100, 700};
 } // namespace
 
-void SpawnManager::drawCollectables()
+void SpawnManagerCollectable::drawCollectables()
 {
     for (const auto &collectable_instance : m_collectables_list)
     {
@@ -31,7 +33,8 @@ void SpawnManager::drawCollectables()
     }
 }
 
-std::unique_ptr<Collectable> SpawnManager::assignCollectableToAvailableSlot()
+std::unique_ptr<Collectable>
+SpawnManagerCollectable::assignCollectableToAvailableSlot()
 {
     for (auto &collectable_instance : m_collectables_list)
     {
@@ -41,8 +44,6 @@ std::unique_ptr<Collectable> SpawnManager::assignCollectableToAvailableSlot()
             if (random_result == 0)
             {
                 collectable_instance = createCoinCollectable();
-                std::cout << "Object created at address: "
-                          << collectable_instance.get() << std::endl;
                 break;
             }
             else
@@ -55,7 +56,8 @@ std::unique_ptr<Collectable> SpawnManager::assignCollectableToAvailableSlot()
     return nullptr;
 }
 
-std::unique_ptr<CoinCollectable> SpawnManager::createCoinCollectable()
+std::unique_ptr<CoinCollectable>
+SpawnManagerCollectable::createCoinCollectable()
 {
     constexpr std::array<int, 2> coin_value_range{200, 600};
 
@@ -68,7 +70,8 @@ std::unique_ptr<CoinCollectable> SpawnManager::createCoinCollectable()
         true, NumberBetween(coin_value_range.at(0), coin_value_range.at(1)));
 }
 
-std::unique_ptr<HeartCollectable> SpawnManager::createHeartCollectable()
+std::unique_ptr<HeartCollectable>
+SpawnManagerCollectable::createHeartCollectable()
 {
     constexpr std::array<int, 2> health_restoration_range{1, 4};
 
@@ -83,8 +86,8 @@ std::unique_ptr<HeartCollectable> SpawnManager::createHeartCollectable()
                       health_restoration_range.at(1)));
 }
 
-void SpawnManager::checkForPlayerInteraction(Player &current_player,
-                                             AudioManager &audio_manager)
+void SpawnManagerCollectable::checkForPlayerInteraction(
+    Player &current_player, AudioManager &audio_manager)
 {
     for (auto &collectable_instance : m_collectables_list)
     {
@@ -104,15 +107,15 @@ void SpawnManager::checkForPlayerInteraction(Player &current_player,
     }
 }
 
-void SpawnManager::checkForReady()
+void SpawnManagerCollectable::checkForReady()
 {
-    if (m_tick_component.IncrementAndCheckThreshold())
+    if (m_ticker.IncrementAndCheckThreshold())
     {
         assignCollectableToAvailableSlot();
     }
 }
 
-bool SpawnManager::hasCollectableBeenInteractedWith(
+bool SpawnManagerCollectable::hasCollectableBeenInteractedWith(
     std::unique_ptr<Collectable> &current_collectable, Player &current_player)
 {
     return current_collectable->collision.IsCollidingWith(
