@@ -58,6 +58,8 @@ add_executable(app
   src/spawner/spawn-manager.cpp
   src/spawner/spawn-manager-collectable.h
   src/spawner/spawn-manager-collectable.cpp
+  src/spawner/spawn-manager-enemy.h
+  src/spawner/spawn-manager-enemy.cpp
   src/ui/ui.h
   src/ui/ui.cpp
   src/ui/ui-splash.h
