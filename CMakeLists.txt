@@ -54,6 +54,8 @@ add_executable(app
   src/entities/collectable/coin-collectable.cpp
   src/entities/collectable/heart-collectable.h
   src/entities/collectable/heart-collectable.cpp
+  src/spawner/spawn-manager.h
+  src/spawner/spawn-manager.cpp
   src/spawner/spawn-manager-collectable.h
   src/spawner/spawn-manager-collectable.cpp
   src/ui/ui.h
