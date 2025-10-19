@@ -1,6 +1,6 @@
-#include "../entities/enemy.h"
-#include "../random-generation.h"
 #include "spawn-manager-enemy.h"
+#include "../entities/enemy.h"
+#include "../util/random-generation.h"
 
 #include <array>
 #include <memory>
@@ -33,18 +33,21 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
 
     return std::make_unique<Enemy>(
-        std::array<int, 2>{RandomGeneration::NumberBetween(
+        std::array<int, 2>{RandomGeneration::GenerateRandomNumber(
                                spawn_screen_positions.at(0).first,
                                spawn_screen_positions.at(0).second),
-                           RandomGeneration::NumberBetween(
+                           RandomGeneration::GenerateRandomNumber(
                                spawn_screen_positions.at(1).first,
                                spawn_screen_positions.at(1).second)},
-        RandomGeneration::NumberBetween(RandomGeneration::NumberBetween(
-            base_damage_thresholds.first, base_damage_thresholds.second)),
-        RandomGeneration::NumberBetween(RandomGeneration::NumberBetween(
-            critical_chance_thresholds.first, base_damage_thresholds.second)),
-        RandomGeneration::NumberBetween(RandomGeneration::NumberBetween(
-            given_score_thresholds.first, base_damage_thresholds.second)),
-        attack_thresholds.at(
-            RandomGeneration::NumberBetween(0, attack_thresholds.size() - 1)));
+        RandomGeneration::GenerateRandomNumber(
+            RandomGeneration::GenerateRandomNumber(
+                base_damage_thresholds.first, base_damage_thresholds.second)),
+        RandomGeneration::GenerateRandomNumber(
+            RandomGeneration::GenerateRandomNumber(
+                critical_chance_thresholds.first,
+                critical_chance_thresholds.second)),
+        RandomGeneration::GenerateRandomNumber(given_score_thresholds.first,
+                                               given_score_thresholds.second),
+        attack_thresholds.at(RandomGeneration::GenerateRandomNumber(
+            0, attack_thresholds.size() - 1)));
 }

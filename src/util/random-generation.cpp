@@ -1,16 +1,21 @@
 #include "random-generation.h"
+#include <cassert>
+#include <random>
 
-int RandomGeneration::NumberBetween(const int min, const int max)
+int RandomGeneration::GenerateRandomNumber(const int min, const int max)
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(min, max);
+    assert(min < max && "Min value cannot be bigger than the max!");
 
-    return distrib(gen);
+    std::random_device seed;
+    std::mt19937 rd{seed()};
+    std::uniform_int_distribution<int> uid(min, max);
+
+    return uid(rd);
 }
 
-bool RandomGeneration::HasHitThreshold(const int number,
-                                       const int success_threshold)
+bool RandomGeneration::HasHitRandomNumberThreshold(const int threshold,
+                                                   const int min, const int max)
 {
-    return number <= success_threshold;
+    const int result{GenerateRandomNumber(min, max)};
+    return result < threshold;
 }

@@ -3,7 +3,7 @@
 #include "../entities/collectable/coin-collectable.h"
 #include "../entities/collectable/heart-collectable.h"
 #include "../entities/player.h"
-#include "../random-generation.h"
+#include "../util/random-generation.h"
 #include "spawn-manager.h"
 #include <array>
 #include <memory>
@@ -40,7 +40,7 @@ SpawnManagerCollectable::assignCollectableToAvailableSlot()
     {
         if (collectable_instance == nullptr)
         {
-            int random_result{RandomGeneration::NumberBetween(0, 1)};
+            int random_result{RandomGeneration::GenerateRandomNumber(0, 1)};
             if (random_result == 0)
             {
                 collectable_instance = createCoinCollectable();
@@ -63,11 +63,12 @@ SpawnManagerCollectable::createCoinCollectable()
 
     using namespace RandomGeneration;
     return std::make_unique<CoinCollectable>(
-        NumberBetween(collectable_spawn_threshold_x.at(0),
-                      collectable_spawn_threshold_x.at(1)),
-        NumberBetween(collectable_spawn_threshold_y.at(0),
-                      collectable_spawn_threshold_y.at(1)),
-        true, NumberBetween(coin_value_range.at(0), coin_value_range.at(1)));
+        GenerateRandomNumber(collectable_spawn_threshold_x.at(0),
+                             collectable_spawn_threshold_x.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_y.at(0),
+                             collectable_spawn_threshold_y.at(1)),
+        true,
+        GenerateRandomNumber(coin_value_range.at(0), coin_value_range.at(1)));
 }
 
 std::unique_ptr<HeartCollectable>
@@ -77,13 +78,13 @@ SpawnManagerCollectable::createHeartCollectable()
 
     using namespace RandomGeneration;
     return std::make_unique<HeartCollectable>(
-        NumberBetween(collectable_spawn_threshold_x.at(0),
-                      collectable_spawn_threshold_x.at(1)),
-        NumberBetween(collectable_spawn_threshold_y.at(0),
-                      collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_x.at(0),
+                             collectable_spawn_threshold_x.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_y.at(0),
+                             collectable_spawn_threshold_y.at(1)),
         true,
-        NumberBetween(health_restoration_range.at(0),
-                      health_restoration_range.at(1)));
+        GenerateRandomNumber(health_restoration_range.at(0),
+                             health_restoration_range.at(1)));
 }
 
 void SpawnManagerCollectable::checkForPlayerInteraction(

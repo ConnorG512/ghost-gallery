@@ -1,5 +1,5 @@
 #include "damage-component.h"
-#include "../../random-generation.h"
+#include "../../util/random-generation.h"
 
 DamageComponent::DamageComponent() {}
 
@@ -13,8 +13,7 @@ DamageComponent::DamageComponent(const int base_damage,
 
 int DamageComponent::CalculateDamage()
 {
-    if (RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(),
-                                          m_critical_chance))
+    if (RandomGeneration::HasHitRandomNumberThreshold(30))
     {
         return m_base_damage * m_critical_multiplier;
     }

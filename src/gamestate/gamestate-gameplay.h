@@ -3,9 +3,10 @@
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../image-sprite.h"
-#include "../random-generation.h"
 #include "../spawner/spawn-manager-collectable.h"
+#include "../spawner/spawn-manager-enemy.h"
 #include "../ui/ui-gameplay.h"
+#include "../util/random-generation.h"
 #include "gamestate-base.h"
 
 class Collectable;
@@ -24,10 +25,7 @@ class GameStateGameplay : public GameState
   protected:
     ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
     SpawnManagerCollectable m_collectable_spawn_manager{180, 5};
-    Enemy m_enemy{
-        RandomGeneration::NumberBetween(100, 1500),
-        RandomGeneration::NumberBetween(100, 600),
-    };
+    SpawnManagerEnemy m_enemy_spawn_manager{180, 3};
     UiGameplay m_ui{10, 10, 40};
 
     void onGameTicks();

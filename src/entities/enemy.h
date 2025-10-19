@@ -4,12 +4,16 @@
 #include "components/tick-component.h"
 #include "entity.h"
 
+#include <array>
+
 class Player;
 
 class Enemy : public Entity
 {
   public:
-    Enemy(const int x_pos = 0, const int y_pos = 0);
+    Enemy(const std::array<int, 2> xy_pos = {0, 0}, const int base_damage = 2,
+          const int critical_chance = 0, const int given_score = 20,
+          const int tick_threshold = 140);
 
     void respawnEnemy();
     void collidedWithPlayer(Player &current_player,
@@ -23,7 +27,6 @@ class Enemy : public Entity
 
   private:
     void changeEnemyGivenScore();
-    void setAggression(const int &current_game_score);
 
     TickComponent m_tick_component{140};
 };

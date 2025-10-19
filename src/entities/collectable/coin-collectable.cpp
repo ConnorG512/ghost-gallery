@@ -1,6 +1,6 @@
 #include "coin-collectable.h"
 #include "../../audio-manager.h"
-#include "../../random-generation.h"
+#include "../../util/random-generation.h"
 #include "../player.h"
 
 CoinCollectable::CoinCollectable(const int x_pos, const int y_pos,
@@ -17,8 +17,8 @@ CoinCollectable::CoinCollectable(const int x_pos, const int y_pos,
 
 void CoinCollectable::givePoweUp(Player &current_player)
 {
-    if (RandomGeneration::HasHitThreshold(RandomGeneration::NumberBetween(),
-                                          35))
+    if (RandomGeneration::HasHitRandomNumberThreshold(
+            RandomGeneration::GenerateRandomNumber(), 35))
     {
         current_player.score_component.addToScoreMultiplier(1);
     }
