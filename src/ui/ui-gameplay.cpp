@@ -1,4 +1,5 @@
 #include "ui-gameplay.h"
+#include <algorithm>
 #include <array>
 #include <format>
 #include <ranges>
@@ -19,12 +20,13 @@ void UiGameplay::drawUi(const std::array<int, 3> &player_stats)
     };
 
     int text_y_pos{m_start_position_y};
-
-    for (const auto [current_string, player_stat] :
-         std::views::zip(ui_strings, player_stats))
-    {
-        DrawText(std::format("{}: {}", current_string, player_stat).c_str(),
-                 m_start_position_x, text_y_pos, m_font_size, WHITE);
-        text_y_pos += m_spacing;
-    }
+    std::ranges::for_each(
+        std::views::zip(ui_strings, player_stats),
+        [this, &text_y_pos](auto const &pair)
+        {
+            const auto &[string, stat] = pair;
+            DrawText(std::format("{}: {}", string, stat).c_str(),
+                     m_start_position_x, text_y_pos, m_font_size, WHITE);
+            text_y_pos += m_spacing;
+        });
 }
