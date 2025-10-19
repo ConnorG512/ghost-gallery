@@ -12,7 +12,6 @@ UiGameplay::UiGameplay(const int start_pos_x, const int start_pos_y,
 
 void UiGameplay::drawUi(const std::array<int, 3> &player_stats)
 {
-
     constexpr std::array<const char *, 3> ui_strings{
         "Score",
         "Health",
