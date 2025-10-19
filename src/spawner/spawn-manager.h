@@ -6,14 +6,11 @@
 class SpawnManager
 {
   public:
-    SpawnManager(const int tick_threshold);
-    virtual ~SpawnManager() = default;
+    SpawnManager(const int tick_threshold, const int num_spawn_slots);
 
-    bool IsSpawnerReady();
-    void drawSpawnedObjects();
-    int SetNewSpawnSlotsNum(const int slots);
-    virtual bool HasPlayerInteracted();
+    void setNewSpawnSlotsNum(const int slots);
 
-  private:
+  protected:
     TickComponent m_ticker{600};
+    int m_num_available_slots{3};
 };
