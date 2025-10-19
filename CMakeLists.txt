@@ -20,8 +20,8 @@ add_executable(app
   src/image-sprite.cpp
   src/collision-shape.h
   src/collision-shape.cpp
-  src/random-generation.h
-  src/random-generation.cpp
+  src/util/random-generation.h
+  src/util/random-generation.cpp
   src/audio-manager.h
   src/audio-manager.cpp
   src/game-manager.h
