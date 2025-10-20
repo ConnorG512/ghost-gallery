@@ -31,11 +31,13 @@ void GameStateGameplay::gameplayLoop()
     m_game_window.drawAndClear();
     m_background_image.drawSprite();
 
-    // m_current_player.health_component.ReduceHealthBy();
-
-    m_enemy_spawn_manager.requestEnemySpawn();
+    m_enemy_spawn_manager.requestEnemySpawn(
+        m_current_player.score_component.current_score);
+    m_enemy_spawn_manager.drawEnemySprites();
+    m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
 
     m_current_player.drawPlayerCursor(Player::CursorType::neutral);
+    m_enemy_spawn_manager.scanForPlayerCollision(m_current_player);
 
     m_collectable_spawn_manager.drawCollectables();
     m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player,

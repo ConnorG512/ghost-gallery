@@ -24,8 +24,8 @@ class GameStateGameplay : public GameState
 
   protected:
     ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};
-    SpawnManagerCollectable m_collectable_spawn_manager{180, 5};
-    SpawnManagerEnemy m_enemy_spawn_manager{180, 3};
+    SpawnManagerCollectable m_collectable_spawn_manager{5};
+    SpawnManagerEnemy m_enemy_spawn_manager{1};
     UiGameplay m_ui{10, 10, 40};
 
     void onGameTicks();
