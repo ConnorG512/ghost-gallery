@@ -31,8 +31,8 @@ void GameStateGameplay::gameplayLoop()
     m_game_window.drawAndClear();
     m_background_image.drawSprite();
 
-    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_enemy_spawn_manager.drawEnemySprites();
+    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
 
     m_current_player.drawPlayerCursor(Player::CursorType::neutral);

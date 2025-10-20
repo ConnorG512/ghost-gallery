@@ -1,9 +1,9 @@
-#include "spawn-manager-enemy.h"
 #include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -55,14 +55,22 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
 
 void SpawnManagerEnemy::scanForPlayerCollision(Player& current_player)
 {
-    auto collided_enemy = std::ranges::find_if(
+    std::ranges::for_each(
         m_enemy_list |
             std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
                                { return Utils::IsValidUniquePtr(enemy_instance); }) |
             std::views::filter(
                 [&current_player](std::unique_ptr<Enemy>& enemy_instance)
                 { return enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition()); }),
-        [&](std::unique_ptr<Enemy>& enemy_instance) { enemy_instance.reset(); });
+        [&](std::unique_ptr<Enemy>& enemy_instance)
+        {
+            current_player.drawPlayerCursor(Player::CursorType::enemy);
+            if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
+            {
+                current_player.score_component.increaseScore(enemy_instance->score_to_give);
+                enemy_instance.reset();
+            }
+        });
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
