@@ -1,53 +1,112 @@
 #include "spawn-manager-enemy.h"
+#include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
+#include "../entities/player.h"
 #include "../util/random-generation.h"
+#include "../util/utils.h"
 
+#include <algorithm>
 #include <array>
+#include <cassert>
 #include <memory>
+#include <ranges>
 
-SpawnManagerEnemy::SpawnManagerEnemy(const int tick_threshold,
-                                     const int num_spawn_slots)
-    : SpawnManager{tick_threshold, num_spawn_slots}
+SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots)
+    : SpawnManager{num_spawn_slots}
 {
     m_enemy_list.resize(m_num_available_slots);
 }
 
-void SpawnManagerEnemy::requestEnemySpawn()
+void SpawnManagerEnemy::requestEnemySpawn(const int &current_game_score)
 {
     for (auto &current_enemy_slot : m_enemy_list)
     {
-        if (current_enemy_slot == nullptr)
+        if (!Utils::IsValidUniquePtr(current_enemy_slot))
         {
             current_enemy_slot = createEnemy();
+            assert(current_enemy_slot != nullptr &&
+                   "Enemy slot should not be nullptr!");
         }
+    }
+}
+
+void SpawnManagerEnemy::drawEnemySprites()
+{
+    std::ranges::for_each(
+        m_enemy_list | std::views::filter(
+                           [](std::unique_ptr<Enemy> &enemy_instance)
+                           { return Utils::IsValidUniquePtr(enemy_instance); }),
+        [&](std::unique_ptr<Enemy> &enemy_instance)
+        {
+            enemy_instance->sprite.drawSprite(
+                enemy_instance->positional_component.GetXYPos());
+        });
+}
+
+void SpawnManagerEnemy::attackPlayer(HealthComponent &player_health)
+{
+    std::ranges::for_each(
+        m_enemy_list | std::views::filter(
+                           [](std::unique_ptr<Enemy> &enemy_instance)
+                           { return Utils::IsValidUniquePtr(enemy_instance); }),
+        [&](const std::unique_ptr<Enemy> &enemy_instance)
+        { player_health.ReduceHealthBy(enemy_instance->InitiateAttack()); });
+}
+
+void SpawnManagerEnemy::moveEntitiesToNewPos()
+{
+    for (auto &current_enemy_slot : m_enemy_list)
+        if (current_enemy_slot != nullptr)
+        {
+            current_enemy_slot->setNewEntityPosition();
+        }
+}
+
+void SpawnManagerEnemy::scanForPlayerCollision(Player &current_player)
+{
+    const bool has_collided_with_player = std::ranges::any_of(
+        m_enemy_list |
+            std::views::filter(
+                [](std::unique_ptr<Enemy> &enemy_instance)
+                { return Utils::IsValidUniquePtr(enemy_instance); }) |
+            std::views::filter(
+                [&current_player](std::unique_ptr<Enemy> &enemy_instance)
+                {
+                    return enemy_instance->collision.IsCollidingWith(
+                        current_player.collision.GetCollisionPosition());
+                }),
+        [](std::unique_ptr<Enemy> &) { return true; });
+
+    if (has_collided_with_player)
+    {
+        current_player.drawPlayerCursor(Player::CursorType::enemy);
+    }
+    else
+    {
     }
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
 {
-    constexpr std::array<int, 5> attack_thresholds{30, 50, 80, 100, 120};
-    constexpr std::array<std::pair<int, int>, 2> spawn_screen_positions{
-        {{200, 1400}, {200, 600}}};
-    constexpr std::pair<int, int> base_damage_thresholds{2, 4};
-    constexpr std::pair<int, int> critical_chance_thresholds{1, 25};
+    constexpr std::pair<int, int> screen_range_x{200, 1400};
+    constexpr std::pair<int, int> screen_range_y{200, 600};
+    constexpr std::pair<int, int> base_damage_thresholds{1, 3};
+    constexpr std::pair<int, int> critical_chance_thresholds{1, 10};
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
+    constexpr std::pair<int, int> tick_thresholds{65, 120};
 
     return std::make_unique<Enemy>(
         std::array<int, 2>{RandomGeneration::GenerateRandomNumber(
-                               spawn_screen_positions.at(0).first,
-                               spawn_screen_positions.at(0).second),
+                               screen_range_x.first, screen_range_x.second),
                            RandomGeneration::GenerateRandomNumber(
-                               spawn_screen_positions.at(1).first,
-                               spawn_screen_positions.at(1).second)},
+                               screen_range_y.first, screen_range_y.second)},
+        RandomGeneration::GenerateRandomNumber(base_damage_thresholds.first,
+                                               base_damage_thresholds.second),
         RandomGeneration::GenerateRandomNumber(
-            RandomGeneration::GenerateRandomNumber(
-                base_damage_thresholds.first, base_damage_thresholds.second)),
-        RandomGeneration::GenerateRandomNumber(
-            RandomGeneration::GenerateRandomNumber(
-                critical_chance_thresholds.first,
-                critical_chance_thresholds.second)),
+            critical_chance_thresholds.first,
+            critical_chance_thresholds.second),
         RandomGeneration::GenerateRandomNumber(given_score_thresholds.first,
                                                given_score_thresholds.second),
-        attack_thresholds.at(RandomGeneration::GenerateRandomNumber(
-            0, attack_thresholds.size() - 1)));
+        RandomGeneration::GenerateRandomNumber(tick_thresholds.first,
+                                               tick_thresholds.second));
 }
