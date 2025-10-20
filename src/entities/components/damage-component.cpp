@@ -13,7 +13,7 @@ DamageComponent::DamageComponent(const int base_damage,
 
 int DamageComponent::CalculateDamage()
 {
-    if (RandomGeneration::HasHitRandomNumberThreshold(30))
+    if (RandomGeneration::HasHitRandomNumberThreshold(m_critical_chance))
     {
         return m_base_damage * m_critical_multiplier;
     }
