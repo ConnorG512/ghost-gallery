@@ -24,27 +24,27 @@ void AudioManager::playAudio(const SoundId sound_to_play)
 {
     switch (sound_to_play)
     {
-    case AudioManager::SoundId::ghost_death:
-        PlaySound(m_loaded_sounds.at(0));
-        break;
-    case AudioManager::SoundId::heart_pickup:
-        PlaySound(m_loaded_sounds.at(1));
-        break;
-    case AudioManager::SoundId::coin_pickup:
-        PlaySound(m_loaded_sounds.at(2));
-        break;
+        case AudioManager::SoundId::ghost_death:
+            PlaySound(m_loaded_sounds.at(0));
+            break;
+        case AudioManager::SoundId::heart_pickup:
+            PlaySound(m_loaded_sounds.at(1));
+            break;
+        case AudioManager::SoundId::coin_pickup:
+            PlaySound(m_loaded_sounds.at(2));
+            break;
     }
 }
 
 void AudioManager::loadSounds()
 {
-    constexpr std::array<const char *, 3> sound_files{
+    constexpr std::array<const char*, 3> sound_files{
         "assets/audio/pepSound1.ogg",
         "assets/audio/powerUp2.ogg",
         "assets/audio/powerUp11.ogg",
     };
 
-    for (const char *file_path : sound_files)
+    for (const char* file_path : sound_files)
     {
         m_loaded_sounds.push_back(LoadSound(file_path));
     }

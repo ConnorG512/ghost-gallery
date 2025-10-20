@@ -15,14 +15,17 @@ class AudioManager;
 class Entity
 {
   public:
-    Entity(const std::vector<std::string> &texture_paths, const int max_health,
-           const int current_health, const int x_pos, const int y_pos);
+    Entity(const std::vector<std::string>& texture_paths,
+           const int max_health,
+           const int current_health,
+           const int x_pos,
+           const int y_pos);
     virtual ~Entity() = default;
 
-    bool checkCollision(const Rectangle &collider);
+    bool checkCollision(const Rectangle& collider);
     void setNewEntityPosition(std::array<int, 2> xy_pos = {0, 0});
 
-    virtual void playSound(AudioManager &audio_manager);
+    virtual void playSound(AudioManager& audio_manager);
 
     ImageSprite sprite;
 

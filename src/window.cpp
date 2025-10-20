@@ -16,7 +16,7 @@ void Window::beginDraw() { BeginDrawing(); }
 
 void Window::endDraw() { EndDrawing(); }
 
-void Window::clearWindow(const Color &colour) { ClearBackground(colour); }
+void Window::clearWindow(const Color& colour) { ClearBackground(colour); }
 
 void Window::drawAndClear()
 {
@@ -29,11 +29,11 @@ void Window::changeCursorStatus(const CursorStatus status_to_change_to)
 {
     switch (status_to_change_to)
     {
-    case CursorStatus::hide:
-        HideCursor();
-        break;
-    case CursorStatus::show:
-        ShowCursor();
-        break;
+        case CursorStatus::hide:
+            HideCursor();
+            break;
+        case CursorStatus::show:
+            ShowCursor();
+            break;
     }
 }

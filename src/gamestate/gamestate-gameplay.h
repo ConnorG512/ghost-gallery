@@ -14,8 +14,10 @@ class Collectable;
 class GameStateGameplay : public GameState
 {
   public:
-    GameStateGameplay(GameManager *game_manager, Window &game_window,
-                      Player &current_player, AudioManager &audio_manager);
+    GameStateGameplay(GameManager* game_manager,
+                      Window& game_window,
+                      Player& current_player,
+                      AudioManager& audio_manager);
     ~GameStateGameplay() = default;
 
     void initialiseState() override;

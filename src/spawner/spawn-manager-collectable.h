@@ -20,8 +20,7 @@ class SpawnManagerCollectable : public SpawnManager
 
     void checkForReady();
     void drawCollectables();
-    void checkForPlayerInteraction(Player &current_player,
-                                   AudioManager &audio_manager);
+    void checkForPlayerInteraction(Player& current_player, AudioManager& audio_manager);
 
   private:
     std::vector<std::unique_ptr<Collectable>> m_collectables_list;
@@ -31,7 +30,5 @@ class SpawnManagerCollectable : public SpawnManager
     TickComponent m_ticker{300};
 
     bool isManagerFull();
-    bool hasCollectableBeenInteractedWith(
-        std::unique_ptr<Collectable> &current_collectable,
-        Player &current_player);
+    bool hasCollectableBeenInteractedWith(std::unique_ptr<Collectable>& current_collectable, Player& current_player);
 };

@@ -13,8 +13,7 @@ int RandomGeneration::GenerateRandomNumber(const int min, const int max)
     return uid(rd);
 }
 
-bool RandomGeneration::HasHitRandomNumberThreshold(const int threshold,
-                                                   const int min, const int max)
+bool RandomGeneration::HasHitRandomNumberThreshold(const int threshold, const int min, const int max)
 {
     const int result{GenerateRandomNumber(min, max)};
     return result < threshold;

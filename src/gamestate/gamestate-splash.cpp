@@ -3,9 +3,10 @@
 #include "../game-manager.h"
 #include "../window.h"
 
-GameStateSplash::GameStateSplash(GameManager *game_manager, Window &game_window,
-                                 Player &current_player,
-                                 AudioManager &audio_manager)
+GameStateSplash::GameStateSplash(GameManager* game_manager,
+                                 Window& game_window,
+                                 Player& current_player,
+                                 AudioManager& audio_manager)
     : GameState{game_manager, game_window, current_player, audio_manager}
 {
     m_game_window.changeCursorStatus(Window::CursorStatus::show);
@@ -37,7 +38,4 @@ void GameStateSplash::gameplayLoop()
     m_game_window.endDraw();
 }
 
-void GameStateSplash::startGameplayLoop()
-{
-    m_game_manager->changeCurrentGameState(GameManager::GameType::gameplay);
-};
+void GameStateSplash::startGameplayLoop() { m_game_manager->changeCurrentGameState(GameManager::GameType::gameplay); };

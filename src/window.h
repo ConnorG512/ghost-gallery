@@ -24,5 +24,5 @@ class Window
     int m_window_height{1600};
     int m_window_width{900};
 
-    void clearWindow(const Color &colour);
+    void clearWindow(const Color& colour);
 };

@@ -4,10 +4,10 @@
 #include "../window.h"
 #include "gamestate-base.h"
 
-GameStateGameplay::GameStateGameplay(GameManager *game_manager,
-                                     Window &game_window,
-                                     Player &current_player,
-                                     AudioManager &audio_manager)
+GameStateGameplay::GameStateGameplay(GameManager* game_manager,
+                                     Window& game_window,
+                                     Player& current_player,
+                                     AudioManager& audio_manager)
     : GameState{game_manager, game_window, current_player, audio_manager}
 {
     m_game_window.changeCursorStatus(Window::CursorStatus::hide);
@@ -31,8 +31,7 @@ void GameStateGameplay::gameplayLoop()
     m_game_window.drawAndClear();
     m_background_image.drawSprite();
 
-    m_enemy_spawn_manager.requestEnemySpawn(
-        m_current_player.score_component.current_score);
+    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_enemy_spawn_manager.drawEnemySprites();
     m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
 
@@ -40,8 +39,7 @@ void GameStateGameplay::gameplayLoop()
     m_enemy_spawn_manager.scanForPlayerCollision(m_current_player);
 
     m_collectable_spawn_manager.drawCollectables();
-    m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player,
-                                                          m_audio_manager);
+    m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player, m_audio_manager);
 
     m_ui.drawUi({
         m_current_player.score_component.current_score,

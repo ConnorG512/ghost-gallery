@@ -18,10 +18,7 @@ void ScoreComponent::resetScore()
     current_multiplier = 1;
 }
 
-void ScoreComponent::addToScoreMultiplier(int multiplier)
-{
-    current_multiplier += multiplier;
-}
+void ScoreComponent::addToScoreMultiplier(int multiplier) { current_multiplier += multiplier; }
 
 void ScoreComponent::checkForNewHighScore()
 {

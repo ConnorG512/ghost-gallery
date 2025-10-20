@@ -6,11 +6,13 @@
 class CoinCollectable : public Collectable
 {
   public:
-    CoinCollectable(const int x_pos = 0, const int y_pos = 0,
-                    const bool is_visible = true, const int coins_given = 300);
+    CoinCollectable(const int x_pos = 0,
+                    const int y_pos = 0,
+                    const bool is_visible = true,
+                    const int coins_given = 300);
 
-    void givePoweUp(Player &current_player) override;
-    void playSound(AudioManager &audio_manager) override;
+    void givePoweUp(Player& current_player) override;
+    void playSound(AudioManager& audio_manager) override;
 
   private:
     int m_score_given{300};

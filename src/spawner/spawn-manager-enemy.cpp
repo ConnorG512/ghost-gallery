@@ -11,79 +11,58 @@
 #include <memory>
 #include <ranges>
 
-SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots)
-    : SpawnManager{num_spawn_slots}
+SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
 {
     m_enemy_list.resize(m_num_available_slots);
 }
 
-void SpawnManagerEnemy::requestEnemySpawn(const int &current_game_score)
+void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score)
 {
-    for (auto &current_enemy_slot : m_enemy_list)
+    for (auto& current_enemy_slot : m_enemy_list)
     {
         if (!Utils::IsValidUniquePtr(current_enemy_slot))
         {
             current_enemy_slot = createEnemy();
-            assert(current_enemy_slot != nullptr &&
-                   "Enemy slot should not be nullptr!");
+            assert(current_enemy_slot != nullptr && "Enemy slot should not be nullptr!");
         }
     }
 }
 
 void SpawnManagerEnemy::drawEnemySprites()
 {
-    std::ranges::for_each(
-        m_enemy_list | std::views::filter(
-                           [](std::unique_ptr<Enemy> &enemy_instance)
-                           { return Utils::IsValidUniquePtr(enemy_instance); }),
-        [&](std::unique_ptr<Enemy> &enemy_instance)
-        {
-            enemy_instance->sprite.drawSprite(
-                enemy_instance->positional_component.GetXYPos());
-        });
+    std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
+                                                            { return Utils::IsValidUniquePtr(enemy_instance); }),
+                          [&](std::unique_ptr<Enemy>& enemy_instance)
+                          { enemy_instance->sprite.drawSprite(enemy_instance->positional_component.GetXYPos()); });
 }
 
-void SpawnManagerEnemy::attackPlayer(HealthComponent &player_health)
+void SpawnManagerEnemy::attackPlayer(HealthComponent& player_health)
 {
-    std::ranges::for_each(
-        m_enemy_list | std::views::filter(
-                           [](std::unique_ptr<Enemy> &enemy_instance)
-                           { return Utils::IsValidUniquePtr(enemy_instance); }),
-        [&](const std::unique_ptr<Enemy> &enemy_instance)
-        { player_health.ReduceHealthBy(enemy_instance->InitiateAttack()); });
+    std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
+                                                            { return Utils::IsValidUniquePtr(enemy_instance); }),
+                          [&](const std::unique_ptr<Enemy>& enemy_instance)
+                          { player_health.ReduceHealthBy(enemy_instance->InitiateAttack()); });
 }
 
 void SpawnManagerEnemy::moveEntitiesToNewPos()
 {
-    for (auto &current_enemy_slot : m_enemy_list)
+    for (auto& current_enemy_slot : m_enemy_list)
         if (current_enemy_slot != nullptr)
         {
             current_enemy_slot->setNewEntityPosition();
         }
 }
 
-void SpawnManagerEnemy::scanForPlayerCollision(Player &current_player)
+void SpawnManagerEnemy::scanForPlayerCollision(Player& current_player)
 {
-    const bool has_collided_with_player = std::ranges::any_of(
+    auto collided_enemy = std::ranges::find_if(
         m_enemy_list |
+            std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
+                               { return Utils::IsValidUniquePtr(enemy_instance); }) |
             std::views::filter(
-                [](std::unique_ptr<Enemy> &enemy_instance)
-                { return Utils::IsValidUniquePtr(enemy_instance); }) |
-            std::views::filter(
-                [&current_player](std::unique_ptr<Enemy> &enemy_instance)
-                {
-                    return enemy_instance->collision.IsCollidingWith(
-                        current_player.collision.GetCollisionPosition());
-                }),
-        [](std::unique_ptr<Enemy> &) { return true; });
-
-    if (has_collided_with_player)
-    {
-        current_player.drawPlayerCursor(Player::CursorType::enemy);
-    }
-    else
-    {
-    }
+                [&current_player](std::unique_ptr<Enemy>& enemy_instance)
+                { return enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition()); }),
+        [&](std::unique_ptr<Enemy>& enemy_instance) { enemy_instance.reset(); });
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
@@ -96,17 +75,10 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     constexpr std::pair<int, int> tick_thresholds{65, 120};
 
     return std::make_unique<Enemy>(
-        std::array<int, 2>{RandomGeneration::GenerateRandomNumber(
-                               screen_range_x.first, screen_range_x.second),
-                           RandomGeneration::GenerateRandomNumber(
-                               screen_range_y.first, screen_range_y.second)},
-        RandomGeneration::GenerateRandomNumber(base_damage_thresholds.first,
-                                               base_damage_thresholds.second),
-        RandomGeneration::GenerateRandomNumber(
-            critical_chance_thresholds.first,
-            critical_chance_thresholds.second),
-        RandomGeneration::GenerateRandomNumber(given_score_thresholds.first,
-                                               given_score_thresholds.second),
-        RandomGeneration::GenerateRandomNumber(tick_thresholds.first,
-                                               tick_thresholds.second));
+        std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
+                           RandomGeneration::GenerateRandomNumber(screen_range_y.first, screen_range_y.second)},
+        RandomGeneration::GenerateRandomNumber(base_damage_thresholds.first, base_damage_thresholds.second),
+        RandomGeneration::GenerateRandomNumber(critical_chance_thresholds.first, critical_chance_thresholds.second),
+        RandomGeneration::GenerateRandomNumber(given_score_thresholds.first, given_score_thresholds.second),
+        RandomGeneration::GenerateRandomNumber(tick_thresholds.first, tick_thresholds.second));
 }

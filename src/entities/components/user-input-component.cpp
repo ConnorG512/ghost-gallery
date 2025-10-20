@@ -19,7 +19,4 @@ UserInput::InputAction UserInput::UserAction()
     }
 }
 
-std::array<int, 2> UserInput::GetMousePos()
-{
-    return {GetMouseX(), GetMouseY()};
-}
+std::array<int, 2> UserInput::GetMousePos() { return {GetMouseX(), GetMouseY()}; }

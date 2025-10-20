@@ -4,8 +4,7 @@ class DamageComponent
 {
   public:
     DamageComponent();
-    DamageComponent(const int base_damage, const int critical_chance,
-                    const int critical_multiplier = 1);
+    DamageComponent(const int base_damage, const int critical_chance, const int critical_multiplier = 1);
 
     int CalculateDamage();
 

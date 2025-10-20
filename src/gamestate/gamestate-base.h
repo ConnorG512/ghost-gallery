@@ -10,16 +10,15 @@ class AudioManager;
 class GameState
 {
   public:
-    GameState(GameManager *game_manager, Window &game_window,
-              Player &current_player, AudioManager &audio_manager);
+    GameState(GameManager* game_manager, Window& game_window, Player& current_player, AudioManager& audio_manager);
     virtual ~GameState();
     virtual void initialiseState() = 0;
     virtual void inputLoop() = 0;
     virtual void gameplayLoop() = 0;
 
   protected:
-    GameManager *m_game_manager;
-    Window &m_game_window;
-    Player &m_current_player;
-    AudioManager &m_audio_manager;
+    GameManager* m_game_manager;
+    Window& m_game_window;
+    Player& m_current_player;
+    AudioManager& m_audio_manager;
 };

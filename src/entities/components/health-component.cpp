@@ -39,4 +39,4 @@ int HealthComponent::SetCurrentHealthTo(const int health)
 
 void HealthComponent::resetHealthToMax() { m_current_health = m_max_health; }
 
-int &HealthComponent::GetHealth() { return m_current_health; }
+int& HealthComponent::GetHealth() { return m_current_health; }

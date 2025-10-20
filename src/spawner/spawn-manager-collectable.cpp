@@ -8,8 +8,7 @@
 #include <array>
 #include <memory>
 
-SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots)
-    : SpawnManager{num_spawn_slots}
+SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
 {
     m_collectables_list.resize(m_num_available_slots);
 }
@@ -22,20 +21,18 @@ constexpr std::array<int, 2> collectable_spawn_threshold_y{100, 700};
 
 void SpawnManagerCollectable::drawCollectables()
 {
-    for (const auto &collectable_instance : m_collectables_list)
+    for (const auto& collectable_instance : m_collectables_list)
     {
         if (collectable_instance != nullptr)
         {
-            collectable_instance->sprite.drawSprite(
-                {collectable_instance->positional_component.GetXYPos()});
+            collectable_instance->sprite.drawSprite({collectable_instance->positional_component.GetXYPos()});
         }
     }
 }
 
-std::unique_ptr<Collectable>
-SpawnManagerCollectable::assignCollectableToAvailableSlot()
+std::unique_ptr<Collectable> SpawnManagerCollectable::assignCollectableToAvailableSlot()
 {
-    for (auto &collectable_instance : m_collectables_list)
+    for (auto& collectable_instance : m_collectables_list)
     {
         if (collectable_instance == nullptr)
         {
@@ -55,49 +52,38 @@ SpawnManagerCollectable::assignCollectableToAvailableSlot()
     return nullptr;
 }
 
-std::unique_ptr<CoinCollectable>
-SpawnManagerCollectable::createCoinCollectable()
+std::unique_ptr<CoinCollectable> SpawnManagerCollectable::createCoinCollectable()
 {
     constexpr std::array<int, 2> coin_value_range{200, 600};
 
     using namespace RandomGeneration;
     return std::make_unique<CoinCollectable>(
-        GenerateRandomNumber(collectable_spawn_threshold_x.at(0),
-                             collectable_spawn_threshold_x.at(1)),
-        GenerateRandomNumber(collectable_spawn_threshold_y.at(0),
-                             collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
         true,
         GenerateRandomNumber(coin_value_range.at(0), coin_value_range.at(1)));
 }
 
-std::unique_ptr<HeartCollectable>
-SpawnManagerCollectable::createHeartCollectable()
+std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectable()
 {
     constexpr std::array<int, 2> health_restoration_range{1, 4};
 
     using namespace RandomGeneration;
     return std::make_unique<HeartCollectable>(
-        GenerateRandomNumber(collectable_spawn_threshold_x.at(0),
-                             collectable_spawn_threshold_x.at(1)),
-        GenerateRandomNumber(collectable_spawn_threshold_y.at(0),
-                             collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
         true,
-        GenerateRandomNumber(health_restoration_range.at(0),
-                             health_restoration_range.at(1)));
+        GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
 }
 
-void SpawnManagerCollectable::checkForPlayerInteraction(
-    Player &current_player, AudioManager &audio_manager)
+void SpawnManagerCollectable::checkForPlayerInteraction(Player& current_player, AudioManager& audio_manager)
 {
-    for (auto &collectable_instance : m_collectables_list)
+    for (auto& collectable_instance : m_collectables_list)
     {
-        if (collectable_instance != nullptr &&
-            hasCollectableBeenInteractedWith(collectable_instance,
-                                             current_player))
+        if (collectable_instance != nullptr && hasCollectableBeenInteractedWith(collectable_instance, current_player))
         {
             current_player.drawPlayerCursor(Player::CursorType::friendly);
-            if (current_player.user_input.UserAction() ==
-                UserInput::InputAction::fire)
+            if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
                 collectable_instance->givePoweUp(current_player);
                 collectable_instance->playSound(audio_manager);
@@ -115,9 +101,8 @@ void SpawnManagerCollectable::checkForReady()
     }
 }
 
-bool SpawnManagerCollectable::hasCollectableBeenInteractedWith(
-    std::unique_ptr<Collectable> &current_collectable, Player &current_player)
+bool SpawnManagerCollectable::hasCollectableBeenInteractedWith(std::unique_ptr<Collectable>& current_collectable,
+                                                               Player& current_player)
 {
-    return current_collectable->collision.IsCollidingWith(
-        current_player.collision.GetCollisionPosition());
+    return current_collectable->collision.IsCollidingWith(current_player.collision.GetCollisionPosition());
 }
