@@ -8,9 +8,8 @@
 #include <array>
 #include <memory>
 
-SpawnManagerCollectable::SpawnManagerCollectable(const int tick_threshold,
-                                                 const int num_spawn_slots)
-    : SpawnManager{tick_threshold, num_spawn_slots}
+SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots)
+    : SpawnManager{num_spawn_slots}
 {
     m_collectables_list.resize(m_num_available_slots);
 }

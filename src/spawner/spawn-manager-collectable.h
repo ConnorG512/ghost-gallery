@@ -15,8 +15,7 @@ class AudioManager;
 class SpawnManagerCollectable : public SpawnManager
 {
   public:
-    SpawnManagerCollectable(const int tick_threshold,
-                            const int num_spawn_slots);
+    SpawnManagerCollectable(const int num_spawn_slots);
     ~SpawnManagerCollectable() = default;
 
     void checkForReady();
@@ -29,6 +28,7 @@ class SpawnManagerCollectable : public SpawnManager
     std::unique_ptr<Collectable> assignCollectableToAvailableSlot();
     std::unique_ptr<CoinCollectable> createCoinCollectable();
     std::unique_ptr<HeartCollectable> createHeartCollectable();
+    TickComponent m_ticker{300};
 
     bool isManagerFull();
     bool hasCollectableBeenInteractedWith(
