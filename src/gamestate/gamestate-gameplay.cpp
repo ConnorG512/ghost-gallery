@@ -23,19 +23,7 @@ void GameStateGameplay::gameplayLoop()
     {
         gameOver();
     }
-
-    if (m_collectable_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
-    {
-        m_current_player.changeCursorState(Player::CursorType::friendly);
-    }
-    else if (m_enemy_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
-    {
-        m_current_player.changeCursorState(Player::CursorType::enemy);
-    }
-    else
-    {
-        m_current_player.changeCursorState(Player::CursorType::neutral);
-    }
+    playerCollisionActions();
 
     m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
@@ -66,4 +54,20 @@ void GameStateGameplay::gameOver()
 {
     m_current_player.score_component.checkForNewHighScore();
     m_game_manager->changeCurrentGameState(GameManager::GameType::splash);
+}
+
+void GameStateGameplay::playerCollisionActions()
+{
+    if (m_collectable_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
+    {
+        m_current_player.changeCursorState(Player::CursorType::friendly);
+    }
+    else if (m_enemy_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
+    {
+        m_current_player.changeCursorState(Player::CursorType::enemy);
+    }
+    else
+    {
+        m_current_player.changeCursorState(Player::CursorType::neutral);
+    }
 }

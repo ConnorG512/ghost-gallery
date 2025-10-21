@@ -32,4 +32,5 @@ class GameStateGameplay : public GameState
 
     void onGameTicks();
     void gameOver();
+    void playerCollisionActions();
 };
