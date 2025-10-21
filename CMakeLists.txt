@@ -2,11 +2,6 @@ cmake_minimum_required(VERSION 3.31)
 
 project(App CXX)
 
-if(MINGW)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static-libgcc")
-endif()
-
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -69,12 +64,25 @@ set(SOURCE_FILES
   src/ui/ui-gameplay.cpp
 )
 
-add_executable(app ${SOURCE_FILES})
+#Creating executable:
+if(WIN32)
+  add_executable(app WIN32 ${SOURCE_FILES})
+else()
+  add_executable(app ${SOURCE_FILES})
+endif()
 
-# Better GDB symbols 
-target_compile_options(app PRIVATE -ggdb)
+# Compile options:
+if(MINGW)
+  # Statically link standard library when compiling with the MinGW-W64 compiler:
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static-libgcc")
+elseif (UNIX AND NOT APPLE)
+  target_compile_options(app PRIVATE -ggdb) # Better GDB symbols
+endif()
 
+# Linking libraries:
 find_package(raylib REQUIRED)
 target_link_libraries(app PRIVATE raylib)
 
+# Installation Directory:
 install(TARGETS app RUNTIME DESTINATION bin)
