@@ -10,7 +10,8 @@ class CandyCollectable : public Collectable
     virtual ~CandyCollectable() = default;
 
     virtual void givePowerUp(Player& current_player);
+    virtual void playSound(AudioManager& audio_manager);
 
   private:
-    int m_multiplier_to_give { 2 };
+    int m_multiplier_to_give{2};
 };
