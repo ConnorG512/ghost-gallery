@@ -37,9 +37,9 @@ void GameStateGameplay::renderingLoop()
 
     // Drawing Sprites
     m_background_image.drawSprite();
-    m_current_player.drawPlayerCursor(Player::CursorType::neutral);
     m_collectable_spawn_manager.drawCollectables();
     m_enemy_spawn_manager.drawEnemySprites();
+    m_current_player.drawPlayerCursor(Player::CursorType::neutral);
     
     // UI
     m_ui.drawUi({
