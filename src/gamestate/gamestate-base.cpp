@@ -5,5 +5,3 @@ GameState::GameState(GameManager* game_manager, Window& game_window, Player& cur
       m_audio_manager{audio_manger}
 {
 }
-
-GameState::~GameState() = default;

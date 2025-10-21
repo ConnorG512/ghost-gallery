@@ -16,39 +16,38 @@ GameStateGameplay::GameStateGameplay(GameManager* game_manager,
 
 void GameStateGameplay::initialiseState() {}
 
-void GameStateGameplay::inputLoop()
+void GameStateGameplay::gameplayLoop()
 {
     m_collectable_spawn_manager.checkForReady();
     if (m_current_player.health_component.GetHealth() == 0)
     {
         gameOver();
     }
+    m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player, m_audio_manager);
+    m_enemy_spawn_manager.AreCollidingWithPlayer(m_current_player);
+    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
+    m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
+
 }
 
-void GameStateGameplay::gameplayLoop()
+void GameStateGameplay::renderingLoop()
 {
     m_game_window.beginDraw();
     m_game_window.drawAndClear();
-    
-    // Putting these before the drawing prevents the glitching sprite.
-    m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player, m_audio_manager);
-    m_enemy_spawn_manager.scanForPlayerCollision(m_current_player);
 
     // Drawing Sprites
     m_background_image.drawSprite();
+    m_current_player.drawPlayerCursor(Player::CursorType::neutral);
     m_collectable_spawn_manager.drawCollectables();
     m_enemy_spawn_manager.drawEnemySprites();
-    m_current_player.drawPlayerCursor(Player::CursorType::neutral);
+    
+    // UI
     m_ui.drawUi({
         m_current_player.score_component.current_score,
         m_current_player.health_component.GetHealth(),
         m_current_player.score_component.current_multiplier,
     });
     
-    // Gameplay
-    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
-    m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
-
     m_game_window.endDraw();
 }
 

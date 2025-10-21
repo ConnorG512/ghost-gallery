@@ -21,8 +21,8 @@ void GameManager::startGameLoop()
     while (!shouldGameClose())
     {
         assert(m_current_gamestate);
-        m_current_gamestate->inputLoop();
         m_current_gamestate->gameplayLoop();
+        m_current_gamestate->renderingLoop();
     }
 }
 

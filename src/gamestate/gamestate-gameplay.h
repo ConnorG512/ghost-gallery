@@ -21,8 +21,8 @@ class GameStateGameplay : public GameState
     ~GameStateGameplay() = default;
 
     void initialiseState() override;
-    void inputLoop() override;
     void gameplayLoop() override;
+    void renderingLoop() override;
 
   protected:
     ImageSprite m_background_image{{"assets/image/background/manor-1.png"}};

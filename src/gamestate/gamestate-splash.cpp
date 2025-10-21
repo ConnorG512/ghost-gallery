@@ -17,7 +17,7 @@ void GameStateSplash::initialiseState()
     // TODO
 }
 
-void GameStateSplash::inputLoop()
+void GameStateSplash::gameplayLoop()
 {
     using enum UserInput::InputAction;
     if (m_current_player.user_input.UserAction() == start_game)
@@ -26,9 +26,8 @@ void GameStateSplash::inputLoop()
     }
 }
 
-void GameStateSplash::gameplayLoop()
+void GameStateSplash::renderingLoop()
 {
-    // TODO
     m_game_window.beginDraw();
     m_game_window.drawAndClear();
 
