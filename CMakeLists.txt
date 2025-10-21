@@ -69,6 +69,9 @@ add_executable(app
   src/ui/ui-gameplay.cpp
 )
 
+# Better GDB symbols 
+target_compile_options(app PRIVATE -ggdb)
+
 find_package(raylib REQUIRED)
 target_link_libraries(app PRIVATE raylib)
 
