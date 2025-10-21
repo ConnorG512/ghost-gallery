@@ -9,6 +9,7 @@
 
 class CoinCollectable;
 class HeartCollectable;
+class CandyCollectable;
 class Player;
 class AudioManager;
 
@@ -27,6 +28,7 @@ class SpawnManagerCollectable : public SpawnManager
     std::unique_ptr<Collectable> assignCollectableToAvailableSlot();
     std::unique_ptr<CoinCollectable> createCoinCollectable();
     std::unique_ptr<HeartCollectable> createHeartCollectable();
+    std::unique_ptr<CandyCollectable> createCandyCollectable();
     TickComponent m_ticker{300};
 
     bool isManagerFull();

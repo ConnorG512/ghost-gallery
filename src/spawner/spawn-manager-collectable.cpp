@@ -1,5 +1,6 @@
 #include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
+#include "../entities/collectable/candy-collectable.h"
 #include "../entities/collectable/coin-collectable.h"
 #include "../entities/collectable/heart-collectable.h"
 #include "../entities/player.h"
@@ -42,16 +43,20 @@ std::unique_ptr<Collectable> SpawnManagerCollectable::assignCollectableToAvailab
     {
         if (collectable_instance == nullptr)
         {
-            int random_result{RandomGeneration::GenerateRandomNumber(0, 1)};
+            int random_result{RandomGeneration::GenerateRandomNumber(0, 2)};
             if (random_result == 0)
             {
                 collectable_instance = createCoinCollectable();
                 break;
             }
-            else
+            else if (random_result == 1)
             {
                 collectable_instance = createHeartCollectable();
                 break;
+            }
+            else
+            {
+                collectable_instance = createCandyCollectable();
             }
         }
     }
@@ -82,6 +87,17 @@ std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectabl
         GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
 }
 
+std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectable()
+{
+    constexpr std::array<int, 2> candy_multiplier_value_range{1, 5};
+
+    using namespace RandomGeneration;
+    return std::make_unique<CandyCollectable>(
+        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
+        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(candy_multiplier_value_range.at(0), candy_multiplier_value_range.at(1)));
+}
+
 bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
     bool has_player_collided{false};
@@ -98,7 +114,7 @@ bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
             has_player_collided = true;
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
-                collectable_instance->givePoweUp(current_player);
+                collectable_instance->givePowerUp(current_player);
                 collectable_instance->playSound(audio_manager);
                 collectable_instance.reset();
             }
