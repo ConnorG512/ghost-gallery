@@ -82,10 +82,10 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
 {
     constexpr std::pair<int, int> screen_range_x{200, 1400};
     constexpr std::pair<int, int> screen_range_y{200, 600};
-    constexpr std::pair<int, int> base_damage_thresholds{1, 3};
+    constexpr std::pair<int, int> base_damage_thresholds{1, 4};
     constexpr std::pair<int, int> critical_chance_thresholds{1, 10};
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
-    constexpr std::pair<int, int> tick_thresholds{65, 120};
+    constexpr std::pair<int, int> tick_thresholds{25, 90};
 
     return std::make_unique<Enemy>(
         std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
