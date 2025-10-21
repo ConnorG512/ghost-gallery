@@ -53,8 +53,10 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
         }
 }
 
-void SpawnManagerEnemy::scanForPlayerCollision(Player& current_player)
+bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player)
 {
+  bool has_player_collided { false };
+
     std::ranges::for_each(
         m_enemy_list |
             std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
@@ -64,13 +66,15 @@ void SpawnManagerEnemy::scanForPlayerCollision(Player& current_player)
                 { return enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition()); }),
         [&](std::unique_ptr<Enemy>& enemy_instance)
         {
-            current_player.drawPlayerCursor(Player::CursorType::enemy);
+            has_player_collided = true; 
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
                 current_player.score_component.increaseScore(enemy_instance->score_to_give);
                 enemy_instance.reset();
             }
         });
+
+    return has_player_collided;
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()

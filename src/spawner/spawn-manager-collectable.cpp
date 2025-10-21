@@ -1,12 +1,16 @@
-#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/coin-collectable.h"
 #include "../entities/collectable/heart-collectable.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
+#include "../util/utils.h"
+#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
+
+#include <algorithm>
 #include <array>
 #include <memory>
+#include <ranges>
 
 SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
 {
@@ -76,21 +80,29 @@ std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectabl
         GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
 }
 
-void SpawnManagerCollectable::checkForPlayerInteraction(Player& current_player, AudioManager& audio_manager)
+bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
-    for (auto& collectable_instance : m_collectables_list)
-    {
-        if (collectable_instance != nullptr && hasCollectableBeenInteractedWith(collectable_instance, current_player))
-        {
-            current_player.drawPlayerCursor(Player::CursorType::friendly);
+    bool has_player_collided{false};
+
+    std::ranges::for_each(
+        m_collectables_list |
+          std::views::filter([](std::unique_ptr<Collectable>& collectable_instance)
+            {return Utils::IsValidUniquePtr(collectable_instance); }) |
+          std::views::filter([&current_player](std::unique_ptr<Collectable>& collectable_instance)
+            {return collectable_instance->checkCollision(current_player.collision.GetCollisionPosition()); }),
+          [&](std::unique_ptr<Collectable>& collectable_instance)
+          {
+            has_player_collided = true;
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
-                collectable_instance->givePoweUp(current_player);
-                collectable_instance->playSound(audio_manager);
-                collectable_instance.reset();
+              collectable_instance->givePoweUp(current_player);
+              collectable_instance->playSound(audio_manager);
+              collectable_instance.reset();
             }
-        }
-    }
+          }
+        );
+
+    return has_player_collided;
 }
 
 void SpawnManagerCollectable::checkForReady()

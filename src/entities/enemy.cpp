@@ -36,7 +36,7 @@ void Enemy::collidedWithPlayer(Player& current_player, AudioManager& audio_manag
 {
     if (collision.IsCollidingWith(current_player.collision.GetCollisionPosition()))
     {
-        current_player.drawPlayerCursor(Player::CursorType::enemy);
+        current_player.changeCursorState(Player::CursorType::enemy);
         if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
         {
             respawnEnemy();

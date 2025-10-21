@@ -1,8 +1,8 @@
-#include "gamestate-gameplay.h"
 #include "../entities/player.h"
 #include "../game-manager.h"
 #include "../window.h"
 #include "gamestate-base.h"
+#include "gamestate-gameplay.h"
 
 GameStateGameplay::GameStateGameplay(GameManager* game_manager,
                                      Window& game_window,
@@ -23,11 +23,22 @@ void GameStateGameplay::gameplayLoop()
     {
         gameOver();
     }
-    m_collectable_spawn_manager.checkForPlayerInteraction(m_current_player, m_audio_manager);
-    m_enemy_spawn_manager.AreCollidingWithPlayer(m_current_player);
+
+    if (m_collectable_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
+    {
+        m_current_player.changeCursorState(Player::CursorType::friendly);
+    }
+    else if (m_enemy_spawn_manager.checkPlayerCollision(m_current_player))
+    {
+        m_current_player.changeCursorState(Player::CursorType::enemy);
+    }
+    else
+    {
+        m_current_player.changeCursorState(Player::CursorType::neutral);
+    }
+
     m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
-
 }
 
 void GameStateGameplay::renderingLoop()
@@ -39,15 +50,15 @@ void GameStateGameplay::renderingLoop()
     m_background_image.drawSprite();
     m_collectable_spawn_manager.drawCollectables();
     m_enemy_spawn_manager.drawEnemySprites();
-    m_current_player.drawPlayerCursor(Player::CursorType::neutral);
-    
+    m_current_player.drawPlayerCursor();
+
     // UI
     m_ui.drawUi({
         m_current_player.score_component.current_score,
         m_current_player.health_component.GetHealth(),
         m_current_player.score_component.current_multiplier,
     });
-    
+
     m_game_window.endDraw();
 }
 

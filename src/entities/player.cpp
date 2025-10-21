@@ -26,13 +26,12 @@ void Player::ResetPlayerStats()
 
 void Player::drawPlayerCursor()
 {
-    sprite.drawSprite({user_input.GetMousePos().at(0), user_input.GetMousePos().at(1)});
+    sprite.drawSprite({user_input.GetMousePos().at(0), user_input.GetMousePos().at(1)},
+                      std::to_underlying(m_current_cursor_state));
     collision.updateCollisionPosition(user_input.GetMousePos());
 }
 
-void Player::drawPlayerCursor(const Player::CursorType cursor_to_change_to)
+void Player::changeCursorState(const CursorType cursor_type_to_change)
 {
-    sprite.drawSprite({user_input.GetMousePos().at(0), user_input.GetMousePos().at(1)},
-                      std::to_underlying(cursor_to_change_to));
-    collision.updateCollisionPosition(user_input.GetMousePos());
+  m_current_cursor_state = cursor_type_to_change;
 }

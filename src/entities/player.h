@@ -17,6 +17,7 @@ class Player : public Entity
     UserInput user_input{};
 
     void ResetPlayerStats();
+    void drawPlayerCursor();
 
     enum class CursorType
     {
@@ -24,7 +25,8 @@ class Player : public Entity
         enemy = 1,
         friendly = 2,
     };
+    void changeCursorState(const CursorType cursor_type_to_change);
 
-    void drawPlayerCursor();
-    void drawPlayerCursor(const CursorType cursor_to_change_to);
+  private:
+    CursorType m_current_cursor_state { CursorType::neutral };
 };
