@@ -8,7 +8,7 @@ HeartCollectable::HeartCollectable(const int x_pos, const int y_pos, const bool 
 {
 }
 
-void HeartCollectable::givePoweUp(Player& current_player)
+void HeartCollectable::givePowerUp(Player& current_player)
 {
     current_player.health_component.IncreaseHealthBy(m_health_restored);
 }

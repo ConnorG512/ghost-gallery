@@ -10,7 +10,7 @@ class HeartCollectable : public Collectable
                      const bool is_visible = true,
                      const int health_provided = 2);
 
-    void givePoweUp(Player& current_player) override;
+    void givePowerUp(Player& current_player) override;
     void playSound(AudioManager& audio_manager) override;
 
   private:

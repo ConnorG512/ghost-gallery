@@ -8,7 +8,7 @@ CoinCollectable::CoinCollectable(const int x_pos, const int y_pos, const bool is
 {
 }
 
-void CoinCollectable::givePoweUp(Player& current_player)
+void CoinCollectable::givePowerUp(Player& current_player)
 {
     if (RandomGeneration::HasHitRandomNumberThreshold(RandomGeneration::GenerateRandomNumber(), 35))
     {
