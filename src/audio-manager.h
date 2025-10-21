@@ -15,6 +15,7 @@ class AudioManager
         ghost_death,
         heart_pickup,
         coin_pickup,
+        candy_pickup,
     };
     void playAudio(const SoundId sound_to_play);
 

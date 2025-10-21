@@ -33,15 +33,18 @@ void AudioManager::playAudio(const SoundId sound_to_play)
         case AudioManager::SoundId::coin_pickup:
             PlaySound(m_loaded_sounds.at(2));
             break;
+        case AudioManager::SoundId::candy_pickup:
+            PlaySound(m_loaded_sounds.at(3));
     }
 }
 
 void AudioManager::loadSounds()
 {
-    constexpr std::array<const char*, 3> sound_files{
+    constexpr std::array<const char*, 4> sound_files{
         "assets/audio/pepSound1.ogg",
         "assets/audio/powerUp2.ogg",
         "assets/audio/powerUp11.ogg",
+        "assets/audio/powerUp8.ogg",
     };
 
     for (const char* file_path : sound_files)
