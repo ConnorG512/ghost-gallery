@@ -7,10 +7,13 @@ TickComponent::TickComponent(const int maximum_tick, const int tick_rate)
 
 bool TickComponent::HasHitTickThreshold()
 {
-    if (m_current_tick % m_maximum_tick == 0)
+    if (m_current_tick != 0)
     {
-        resetTickCount();
-        return true;
+        if (m_current_tick % m_maximum_tick == 0)
+        {
+            resetTickCount();
+            return true;
+        }
     }
     return false;
 }
