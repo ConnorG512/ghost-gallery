@@ -18,7 +18,7 @@ class SpawnManagerEnemy : public SpawnManager
     void drawEnemySprites();
     void attackPlayer(HealthComponent& player_health);
     void moveEntitiesToNewPos();
-    bool checkPlayerCollision(Player& current_player);
+    bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
 
   protected:
     std::vector<std::unique_ptr<Enemy>> m_enemy_list;

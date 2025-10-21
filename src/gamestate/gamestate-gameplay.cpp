@@ -28,7 +28,7 @@ void GameStateGameplay::gameplayLoop()
     {
         m_current_player.changeCursorState(Player::CursorType::friendly);
     }
-    else if (m_enemy_spawn_manager.checkPlayerCollision(m_current_player))
+    else if (m_enemy_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager))
     {
         m_current_player.changeCursorState(Player::CursorType::enemy);
     }

@@ -53,7 +53,7 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
         }
 }
 
-bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player)
+bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
     bool has_player_collided{false};
 
@@ -70,6 +70,7 @@ bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player)
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
                 current_player.score_component.increaseScore(enemy_instance->score_to_give);
+                enemy_instance->playSound(audio_manager);
                 enemy_instance.reset();
             }
         });
