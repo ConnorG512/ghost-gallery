@@ -1,0 +1,1 @@
+#include "candy-collectable.h"

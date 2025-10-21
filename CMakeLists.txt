@@ -50,6 +50,8 @@ set(SOURCE_FILES
   src/entities/collectable/coin-collectable.cpp
   src/entities/collectable/heart-collectable.h
   src/entities/collectable/heart-collectable.cpp
+  src/entities/collectable/candy-collectable.h
+  src/entities/collectable/candy-collectable.cpp
   src/spawner/spawn-manager.h
   src/spawner/spawn-manager.cpp
   src/spawner/spawn-manager-collectable.h
