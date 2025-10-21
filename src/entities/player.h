@@ -28,5 +28,5 @@ class Player : public Entity
     void changeCursorState(const CursorType cursor_type_to_change);
 
   private:
-    CursorType m_current_cursor_state { CursorType::neutral };
+    CursorType m_current_cursor_state{CursorType::neutral};
 };

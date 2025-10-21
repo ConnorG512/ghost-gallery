@@ -1,9 +1,9 @@
+#include "spawn-manager-enemy.h"
 #include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -55,7 +55,7 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
 
 bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player)
 {
-  bool has_player_collided { false };
+    bool has_player_collided{false};
 
     std::ranges::for_each(
         m_enemy_list |
@@ -66,7 +66,7 @@ bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player)
                 { return enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition()); }),
         [&](std::unique_ptr<Enemy>& enemy_instance)
         {
-            has_player_collided = true; 
+            has_player_collided = true;
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
                 current_player.score_component.increaseScore(enemy_instance->score_to_give);

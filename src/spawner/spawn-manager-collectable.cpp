@@ -1,10 +1,10 @@
+#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/coin-collectable.h"
 #include "../entities/collectable/heart-collectable.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
 
 #include <algorithm>
@@ -86,21 +86,21 @@ bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
 
     std::ranges::for_each(
         m_collectables_list |
-          std::views::filter([](std::unique_ptr<Collectable>& collectable_instance)
-            {return Utils::IsValidUniquePtr(collectable_instance); }) |
-          std::views::filter([&current_player](std::unique_ptr<Collectable>& collectable_instance)
-            {return collectable_instance->checkCollision(current_player.collision.GetCollisionPosition()); }),
-          [&](std::unique_ptr<Collectable>& collectable_instance)
-          {
+            std::views::filter([](std::unique_ptr<Collectable>& collectable_instance)
+                               { return Utils::IsValidUniquePtr(collectable_instance); }) |
+            std::views::filter(
+                [&current_player](std::unique_ptr<Collectable>& collectable_instance)
+                { return collectable_instance->checkCollision(current_player.collision.GetCollisionPosition()); }),
+        [&](std::unique_ptr<Collectable>& collectable_instance)
+        {
             has_player_collided = true;
             if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
             {
-              collectable_instance->givePoweUp(current_player);
-              collectable_instance->playSound(audio_manager);
-              collectable_instance.reset();
+                collectable_instance->givePoweUp(current_player);
+                collectable_instance->playSound(audio_manager);
+                collectable_instance.reset();
             }
-          }
-        );
+        });
 
     return has_player_collided;
 }

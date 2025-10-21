@@ -33,5 +33,5 @@ void Player::drawPlayerCursor()
 
 void Player::changeCursorState(const CursorType cursor_type_to_change)
 {
-  m_current_cursor_state = cursor_type_to_change;
+    m_current_cursor_state = cursor_type_to_change;
 }
