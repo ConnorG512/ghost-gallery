@@ -16,7 +16,7 @@ class SpawnManagerCollectable : public SpawnManager
 {
   public:
     SpawnManagerCollectable(const int num_spawn_slots);
-    ~SpawnManagerCollectable() = default;
+    ~SpawnManagerCollectable();
 
     void checkForReady();
     void drawCollectables();

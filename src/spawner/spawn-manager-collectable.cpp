@@ -12,16 +12,18 @@
 #include <memory>
 #include <ranges>
 
-SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
-{
-    m_collectables_list.resize(m_num_available_slots);
-}
-
 namespace
 {
 constexpr std::array<int, 2> collectable_spawn_threshold_x{200, 1400};
 constexpr std::array<int, 2> collectable_spawn_threshold_y{100, 700};
 } // namespace
+
+SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
+{
+    m_collectables_list.resize(m_num_available_slots);
+}
+
+SpawnManagerCollectable::~SpawnManagerCollectable() { m_collectables_list.clear(); }
 
 void SpawnManagerCollectable::drawCollectables()
 {
