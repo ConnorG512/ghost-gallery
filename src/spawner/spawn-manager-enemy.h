@@ -13,6 +13,7 @@ class SpawnManagerEnemy : public SpawnManager
 {
   public:
     SpawnManagerEnemy(const int num_spawn_slots);
+    ~SpawnManagerEnemy();
 
     void requestEnemySpawn(const int& current_game_score);
     void drawEnemySprites();
