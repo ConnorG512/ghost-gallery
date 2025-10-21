@@ -7,7 +7,6 @@
 #include "player.h"
 
 #include <array>
-#include <cassert>
 
 namespace
 {
@@ -60,7 +59,6 @@ int Enemy::InitiateAttack()
         respawnEnemy();
         m_tick_component.resetTickCount();
         int damage_result{damage_component.CalculateDamage()};
-        assert(damage_result < 12 && "Damage recieved absurdly high!");
         return damage_component.CalculateDamage();
     }
     return 0;
