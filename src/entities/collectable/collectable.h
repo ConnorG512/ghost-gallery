@@ -14,7 +14,7 @@ class Collectable : public Entity
                 const int y_pos = 0,
                 const bool is_visible = true);
     virtual ~Collectable() = default;
-    virtual void givePoweUp(Player& current_player) = 0;
+    virtual void givePowerUp(Player& current_player) = 0;
 
   private:
     bool m_is_visible{false};
