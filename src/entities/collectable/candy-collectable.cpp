@@ -1,6 +1,6 @@
+#include "candy-collectable.h"
 #include "../../audio-manager.h"
 #include "../player.h"
-#include "candy-collectable.h"
 #include "collectable.h"
 
 CandyCollectable::CandyCollectable(const int x_pos, const int y_pos, const int multiplier_amount)
@@ -8,5 +8,11 @@ CandyCollectable::CandyCollectable(const int x_pos, const int y_pos, const int m
 {
 }
 
-void CandyCollectable::givePowerUp(Player& current_player) {}
-void CandyCollectable::playSound(AudioManager& audio_manager) {}
+void CandyCollectable::givePowerUp(Player& current_player)
+{
+    current_player.score_component.addToScoreMultiplier(m_multiplier_to_give);
+}
+void CandyCollectable::playSound(AudioManager& audio_manager)
+{
+    audio_manager.playAudio(AudioManager::SoundId::candy_pickup);
+}
