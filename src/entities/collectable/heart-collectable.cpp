@@ -3,7 +3,7 @@
 #include "../player.h"
 
 HeartCollectable::HeartCollectable(const int x_pos, const int y_pos, const bool is_visible, const int health_provided)
-    : Collectable{{"assets/image/entity/heart/heart-pickup.png"}, 1, 1, x_pos, y_pos, is_visible},
+    : Collectable{{"assets/image/entity/heart/heart-pickup.png"}, x_pos, y_pos, is_visible},
       m_health_restored{health_provided}
 {
 }

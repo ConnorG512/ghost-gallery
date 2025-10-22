@@ -8,8 +8,6 @@ class Collectable : public Entity
 {
   public:
     Collectable(const std::vector<std::string>& texture_paths,
-                const int max_health,
-                const int current_health,
                 const int x_pos = 0,
                 const int y_pos = 0,
                 const bool is_visible = true);
