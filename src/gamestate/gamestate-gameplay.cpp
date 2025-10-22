@@ -22,6 +22,7 @@ void GameStateGameplay::gameplayLoop()
     if (m_current_player.health_component.GetHealth() == 0)
     {
         gameOver();
+        return;
     }
     playerCollisionActions();
 
