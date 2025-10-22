@@ -7,7 +7,7 @@
 
 namespace
 {
-constexpr float master_volume_increment{0.1};
+constexpr float master_volume_increment{0.1f};
 }
 
 AudioManager::AudioManager()
