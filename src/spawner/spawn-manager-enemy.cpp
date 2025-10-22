@@ -96,4 +96,3 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
         RandomGeneration::GenerateRandomNumber(tick_thresholds.first, tick_thresholds.second));
 }
 
-SpawnManagerEnemy::~SpawnManagerEnemy() { m_enemy_list.clear(); }
