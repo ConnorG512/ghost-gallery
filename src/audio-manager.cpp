@@ -1,17 +1,20 @@
 #include "audio-manager.h"
+
 #include <array>
+#include <iostream>
 #include <raylib.h>
 #include <vector>
 
 namespace
 {
+constexpr float master_volume_increment{0.1};
 }
 
 AudioManager::AudioManager()
 {
     InitAudioDevice();
     loadSounds();
-    SetMasterVolume(0.2);
+    SetMasterVolume(m_master_volume);
 }
 
 AudioManager::~AudioManager()
@@ -59,4 +62,28 @@ void AudioManager::unloadSounds()
     {
         UnloadSound(current_loaded_sound);
     }
+}
+
+void AudioManager::increaseMasterVolumeBy()
+{
+    if (m_master_volume >= 1.0)
+    {
+        m_master_volume = 1.0;
+    }
+    m_master_volume += master_volume_increment;
+
+    SetMasterVolume(m_master_volume);
+    std::cout << "Current volume: " << m_master_volume << std::endl;
+}
+
+void AudioManager::decreaseMasterVolumeBy()
+{
+    if (m_master_volume <= 0.0)
+    {
+        m_master_volume = 0.0;
+    }
+    m_master_volume -= master_volume_increment;
+
+    SetMasterVolume(m_master_volume);
+    std::cout << "Current volume: " << m_master_volume << std::endl;
 }

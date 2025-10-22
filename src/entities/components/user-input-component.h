@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 
+class AudioManager;
+
 class UserInput
 {
   public:
@@ -16,6 +18,8 @@ class UserInput
 
     InputAction UserAction();
     std::array<int, 2> GetMousePos();
+    void increaseVolume(AudioManager& audio_manager);
+    void decreaseVolume(AudioManager& audio_manager);
 
   private:
 };

@@ -23,10 +23,14 @@ class AudioManager
         candy_pickup,
     };
     void playAudio(const SoundId sound_to_play);
+    void increaseMasterVolumeBy();
+    void decreaseMasterVolumeBy();
 
   private:
     std::vector<Sound> m_loaded_sounds;
 
     void loadSounds();
     void unloadSounds();
+
+    float m_master_volume{0.2};
 };

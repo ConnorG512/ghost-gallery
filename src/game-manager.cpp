@@ -21,6 +21,10 @@ void GameManager::startGameLoop()
     while (!shouldGameClose())
     {
         assert(m_current_gamestate);
+
+        m_current_player.user_input.decreaseVolume(m_audio_manager);
+        m_current_player.user_input.increaseVolume(m_audio_manager);
+
         m_current_gamestate->gameplayLoop();
         m_current_gamestate->renderingLoop();
     }
