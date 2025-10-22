@@ -95,4 +95,3 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
         RandomGeneration::GenerateRandomNumber(given_score_thresholds.first, given_score_thresholds.second),
         RandomGeneration::GenerateRandomNumber(tick_thresholds.first, tick_thresholds.second));
 }
-
