@@ -11,6 +11,11 @@ class Window
     void endDraw();
     void drawAndClear();
 
+    Window(const Window& audio_manager) = delete;                // Delete copy constructor.
+    Window& operator=(const Window& audio_manager) = delete;     // Delete copy assignment constructor.
+    Window(Window&& audio_manager) noexcept = delete;            // Delete move constructor.
+    Window& operator=(Window&& audio_manager) noexcept = delete; // Delete move assignment constructor.
+
     enum class CursorStatus
     {
         hide,
