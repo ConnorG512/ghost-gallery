@@ -10,6 +10,11 @@ class AudioManager
     AudioManager();
     ~AudioManager();
 
+    AudioManager(const AudioManager& audio_manager) = delete;                // Delete copy constructor.
+    AudioManager operator=(const AudioManager& audio_manager) = delete;      // Delete copy assignment constructor.
+    AudioManager(AudioManager&& audio_manager) noexcept = delete;            // Delete move constructor.
+    AudioManager& operator=(AudioManager&& audio_manager) noexcept = delete; // Delete move assignment constructor.
+
     enum class SoundId
     {
         ghost_death,
