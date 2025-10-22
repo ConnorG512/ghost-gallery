@@ -10,7 +10,7 @@ class CollisionShape
 
     bool IsCollidingWith(const Rectangle& collider);
     void updateCollisionPosition(const std::array<int, 2>& xy_pos = {0, 0});
-    Rectangle& GetCollisionPosition();
+    const Rectangle& GetCollisionPosition();
 
   private:
     Rectangle m_collision_shape;

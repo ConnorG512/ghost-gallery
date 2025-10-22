@@ -18,4 +18,4 @@ void CollisionShape::updateCollisionPosition(const std::array<int, 2>& xy_pos)
     m_collision_shape.y = xy_pos.at(1);
 }
 
-Rectangle& CollisionShape::GetCollisionPosition() { return m_collision_shape; }
+const Rectangle& CollisionShape::GetCollisionPosition() { return m_collision_shape; }
