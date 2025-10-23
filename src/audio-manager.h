@@ -26,8 +26,8 @@ class AudioManager
     };
     void playAudio(const SoundId sound_to_play);
 
-    void increaseMasterVolumeBy();
-    void decreaseMasterVolumeBy();
+    void increaseMasterVolume();
+    void decreaseMasterVolume();
 
   private:
     std::vector<Sound> m_loaded_sounds;

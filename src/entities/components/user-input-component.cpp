@@ -26,7 +26,7 @@ void UserInput::increaseVolume(AudioManager& audio_manager)
 {
     if (IsKeyPressed(KEY_P))
     {
-        audio_manager.increaseMasterVolumeBy();
+        audio_manager.increaseMasterVolume();
     }
 }
 
@@ -34,6 +34,6 @@ void UserInput::decreaseVolume(AudioManager& audio_manager)
 {
     if (IsKeyPressed(KEY_O))
     {
-        audio_manager.decreaseMasterVolumeBy();
+        audio_manager.decreaseMasterVolume();
     }
 }

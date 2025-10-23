@@ -72,7 +72,7 @@ void AudioManager::unloadSounds()
     }
 }
 
-void AudioManager::increaseMasterVolumeBy()
+void AudioManager::increaseMasterVolume()
 {
     if (m_master_volume >= 1.0)
     {
@@ -83,7 +83,7 @@ void AudioManager::increaseMasterVolumeBy()
     SetMasterVolume(m_master_volume);
 }
 
-void AudioManager::decreaseMasterVolumeBy()
+void AudioManager::decreaseMasterVolume()
 {
     if (m_master_volume <= 0.0)
     {
