@@ -1,9 +1,9 @@
+#include "spawn-manager-enemy.h"
 #include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -36,12 +36,13 @@ void SpawnManagerEnemy::drawEnemySprites()
                           { enemy_instance->sprite.drawSprite(enemy_instance->positional_component.GetXYPos()); });
 }
 
-void SpawnManagerEnemy::attackPlayer(HealthComponent& player_health)
+int SpawnManagerEnemy::attackPlayer()
 {
     std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
                                                             { return Utils::IsValidUniquePtr(enemy_instance); }),
                           [&](const std::unique_ptr<Enemy>& enemy_instance)
-                          { player_health.ReduceHealthBy(enemy_instance->InitiateAttack()); });
+                          { return enemy_instance->InitiateAttack(); });
+    return 0;
 }
 
 void SpawnManagerEnemy::moveEntitiesToNewPos()

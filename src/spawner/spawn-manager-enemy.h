@@ -16,7 +16,7 @@ class SpawnManagerEnemy : public SpawnManager
 
     void requestEnemySpawn(const int& current_game_score);
     void drawEnemySprites();
-    void attackPlayer(HealthComponent& player_health);
+    int attackPlayer();
     void moveEntitiesToNewPos();
     bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
 
