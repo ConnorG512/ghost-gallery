@@ -20,7 +20,7 @@ class Enemy : public Entity
 
     void respawnEnemy();
     void collidedWithPlayer(Player& current_player, AudioManager& audio_manager);
-    int InitiateAttack();
+    [[nodiscard]] int InitiateAttack();
 
     void playSound(AudioManager& audio_manager);
 

@@ -21,7 +21,7 @@ class SpawnManagerCollectable : public SpawnManager
 
     void checkForReady();
     void drawCollectables();
-    bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
+    [[nodiscard]] bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
 
   private:
     std::vector<std::unique_ptr<Collectable>> m_collectables_list;

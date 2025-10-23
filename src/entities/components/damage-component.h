@@ -6,7 +6,7 @@ class DamageComponent
     DamageComponent();
     DamageComponent(const int base_damage, const int critical_chance, const int critical_multiplier = 1);
 
-    int CalculateDamage();
+    [[nodiscard]] int CalculateDamage();
 
   private:
     int m_base_damage{2};

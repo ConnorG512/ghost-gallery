@@ -16,8 +16,8 @@ class UserInput
         start_game,
     };
 
-    InputAction UserAction();
-    std::array<int, 2> GetMousePos();
+    [[nodiscard]] InputAction UserAction();
+    [[nodiscard]] std::array<int, 2> GetMousePos();
     void increaseVolume(AudioManager& audio_manager);
     void decreaseVolume(AudioManager& audio_manager);
 

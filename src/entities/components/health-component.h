@@ -9,7 +9,7 @@ class HealthComponent
     int ReduceHealthBy(const int health_to_reduce);
     int IncreaseHealthBy(const int health_to_add);
     int SetCurrentHealthTo(const int health);
-    int& GetHealth();
+    [[nodiscard]] int& GetHealth();
     void resetHealthToMax();
 
   private:
