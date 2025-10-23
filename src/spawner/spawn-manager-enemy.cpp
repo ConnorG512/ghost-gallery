@@ -110,20 +110,20 @@ void SpawnManagerEnemy::increaseEnemyAmount(const int& current_game_score)
 {
     assert(current_game_score > -1);
 
-    constexpr std::array<int, 3> enemy_spawn_score_thresholds{135000, 200000, 280000};
+    constexpr std::array<int, 3> enemy_spawn_score_thresholds{135000, 320000, 480000};
 
-    if (current_game_score > enemy_spawn_score_thresholds.at(0))
+    if (current_game_score > enemy_spawn_score_thresholds.at(2))
     {
-        m_list_size = 2;
+        m_list_size = 4;
     }
     else if (current_game_score > enemy_spawn_score_thresholds.at(1))
     {
         m_list_size = 3;
     }
-    else if (current_game_score > enemy_spawn_score_thresholds.at(2))
+    else if (current_game_score > enemy_spawn_score_thresholds.at(0))
     {
-        m_list_size = 4;
+        m_list_size = 2;
     }
-    
+
     m_enemy_list.resize(m_list_size);
 }
