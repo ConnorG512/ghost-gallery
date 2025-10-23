@@ -1,7 +1,6 @@
 #include "audio-manager.h"
 
 #include <array>
-#include <iostream>
 #include <raylib.h>
 #include <vector>
 
@@ -38,16 +37,20 @@ void AudioManager::playAudio(const SoundId sound_to_play)
             break;
         case AudioManager::SoundId::candy_pickup:
             PlaySound(m_loaded_sounds.at(3));
+        case AudioManager::SoundId::player_hurt:
+            PlaySound(m_loaded_sounds.at(4));
     }
 }
 
 void AudioManager::loadSounds()
 {
-    constexpr std::array<const char*, 4> sound_files{
+    constexpr std::array<const char*, 6> sound_files{
         "assets/audio/pepSound1.ogg",
         "assets/audio/powerUp2.ogg",
         "assets/audio/powerUp11.ogg",
         "assets/audio/powerUp8.ogg",
+        "assets/audio/twoTone1.ogg",
+        "assets/audio/zapTwoTone2.ogg",
     };
 
     for (const char* file_path : sound_files)
@@ -73,7 +76,6 @@ void AudioManager::increaseMasterVolumeBy()
     m_master_volume += master_volume_increment;
 
     SetMasterVolume(m_master_volume);
-    std::cout << "Current volume: " << m_master_volume << std::endl;
 }
 
 void AudioManager::decreaseMasterVolumeBy()
@@ -85,5 +87,4 @@ void AudioManager::decreaseMasterVolumeBy()
     m_master_volume -= master_volume_increment;
 
     SetMasterVolume(m_master_volume);
-    std::cout << "Current volume: " << m_master_volume << std::endl;
 }

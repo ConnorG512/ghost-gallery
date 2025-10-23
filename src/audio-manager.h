@@ -21,8 +21,10 @@ class AudioManager
         heart_pickup,
         coin_pickup,
         candy_pickup,
+        player_hurt,
     };
     void playAudio(const SoundId sound_to_play);
+
     void increaseMasterVolumeBy();
     void decreaseMasterVolumeBy();
 
