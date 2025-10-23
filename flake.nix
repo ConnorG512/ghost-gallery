@@ -29,19 +29,7 @@
         raylib
       ];
       shellHook = ''
-        echo "Entering Spoopy Jam 7 shell!"
-
-        export CC=clang
-        export CXX=clang++
-        export CXXFLAGS="-stdlib=libc++ -I${pkgs.llvmPackages_21.libcxx}/share/libc++/v1"
-        export LDFLAGS="-L${pkgs.llvmPackages_21.libcxx}/lib -lc++ -lc++abi"
-
-        export PATH="$PATH:${pkgs.llvmPackages_21.clang-tools}/bin"
-
-        echo "Packages:"
-        echo "${pkgs.llvmPackages_21.libcxxClang}"
-        echo "${pkgs.llvmPackages_21.clang-tools}"
-        echo "${pkgs.raylib}"
+        echo "Entering Spoopy Jam 7 shell - Ghost Gallery!"
       '';
     };
     packages.${system} = {
