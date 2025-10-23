@@ -24,7 +24,7 @@ class Enemy : public Entity
 
     void playSound(AudioManager& audio_manager);
 
-    DamageComponent damage_component{2, 10};
+    DamageComponent damage_component{2, 10, 2};
     int score_to_give{30};
 
   private:
