@@ -72,7 +72,6 @@ std::unique_ptr<CoinCollectable> SpawnManagerCollectable::createCoinCollectable(
     auto created_collectable = std::make_unique<CoinCollectable>(
         GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
         GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
-        true,
         GenerateRandomNumber(coin_value_range.at(0), coin_value_range.at(1)));
 
     assert(created_collectable != nullptr);
@@ -87,7 +86,6 @@ std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectabl
     auto created_collectable = std::make_unique<HeartCollectable>(
         GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
         GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
-        true,
         GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
 
     assert(created_collectable != nullptr);
