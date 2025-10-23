@@ -9,19 +9,20 @@
 #include <cassert>
 #include <memory>
 #include <ranges>
+#include <utility>
 
 SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
 {
     m_enemy_list.resize(m_num_available_slots);
 }
 
-void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score)
+void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const std::pair<int,int> screen_xy)
 {
     for (auto& current_enemy_slot : m_enemy_list)
     {
         if (!Utils::IsValidUniquePtr(current_enemy_slot))
         {
-            current_enemy_slot = createEnemy();
+            current_enemy_slot = createEnemy(screen_xy);
             assert(current_enemy_slot != nullptr && "Enemy slot should not be nullptr!");
         }
     }
@@ -83,10 +84,9 @@ bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManage
     return has_player_collided;
 }
 
-std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
+std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy(const std::pair<int, int> screen_xy)
 {
-    constexpr std::pair<int, int> screen_range_x{200, 1400};
-    constexpr std::pair<int, int> screen_range_y{200, 600};
+    constexpr int screen_border_clamp{128};
     constexpr std::pair<int, int> base_damage_thresholds{1, 4};
     constexpr std::pair<int, int> critical_chance_thresholds{1, 10};
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
@@ -98,8 +98,9 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     auto created_enemy = std::make_unique<Enemy>(
         std::vector<std::string>{
             ghost_sprite_paths.at(RandomGeneration::GenerateRandomNumber(0, ghost_sprite_paths.size() - 1))},
-        std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
-                           RandomGeneration::GenerateRandomNumber(screen_range_y.first, screen_range_y.second)},
+        std::array<int, 2>{
+            RandomGeneration::GenerateRandomNumber(0 + screen_border_clamp, screen_xy.first - screen_border_clamp),
+            RandomGeneration::GenerateRandomNumber(0 + screen_border_clamp, screen_xy.second - screen_border_clamp)},
         RandomGeneration::GenerateRandomNumber(base_damage_thresholds.first, base_damage_thresholds.second),
         RandomGeneration::GenerateRandomNumber(critical_chance_thresholds.first, critical_chance_thresholds.second),
         RandomGeneration::GenerateRandomNumber(given_score_thresholds.first, given_score_thresholds.second),
