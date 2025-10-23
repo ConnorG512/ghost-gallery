@@ -95,7 +95,7 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     constexpr std::array<const char*, 2> ghost_sprite_paths{"assets/image/entity/enemy/ghost/ghost-1.png",
                                                             "assets/image/entity/enemy/ghost/ghost-1-inverse.png"};
 
-    return std::make_unique<Enemy>(
+    auto created_enemy = std::make_unique<Enemy>(
         std::vector<std::string>{
             ghost_sprite_paths.at(RandomGeneration::GenerateRandomNumber(0, ghost_sprite_paths.size() - 1))},
         std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
@@ -104,6 +104,9 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
         RandomGeneration::GenerateRandomNumber(critical_chance_thresholds.first, critical_chance_thresholds.second),
         RandomGeneration::GenerateRandomNumber(given_score_thresholds.first, given_score_thresholds.second),
         RandomGeneration::GenerateRandomNumber(tick_thresholds.first, tick_thresholds.second));
+
+    assert(created_enemy != nullptr);
+    return created_enemy;
 }
 
 void SpawnManagerEnemy::increaseEnemyAmount(const int& current_game_score)

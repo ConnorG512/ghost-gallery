@@ -10,6 +10,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cassert>
 #include <memory>
 #include <ranges>
 
@@ -68,11 +69,14 @@ std::unique_ptr<CoinCollectable> SpawnManagerCollectable::createCoinCollectable(
     constexpr std::array<int, 2> coin_value_range{200, 600};
 
     using namespace RandomGeneration;
-    return std::make_unique<CoinCollectable>(
+    auto created_collectable = std::make_unique<CoinCollectable>(
         GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
         GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
         true,
         GenerateRandomNumber(coin_value_range.at(0), coin_value_range.at(1)));
+
+    assert(created_collectable != nullptr);
+    return created_collectable;
 }
 
 std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectable()
@@ -80,11 +84,14 @@ std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectabl
     constexpr std::array<int, 2> health_restoration_range{1, 4};
 
     using namespace RandomGeneration;
-    return std::make_unique<HeartCollectable>(
+    auto created_collectable = std::make_unique<HeartCollectable>(
         GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
         GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
         true,
         GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
+
+    assert(created_collectable != nullptr);
+    return created_collectable;
 }
 
 std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectable()
@@ -92,10 +99,13 @@ std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectabl
     constexpr std::array<int, 2> candy_multiplier_value_range{1, 5};
 
     using namespace RandomGeneration;
-    return std::make_unique<CandyCollectable>(
+    auto created_collectable = std::make_unique<CandyCollectable>(
         GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
         GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
         GenerateRandomNumber(candy_multiplier_value_range.at(0), candy_multiplier_value_range.at(1)));
+
+    assert(created_collectable != nullptr);
+    return created_collectable;
 }
 
 bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
