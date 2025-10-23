@@ -90,7 +90,7 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     constexpr std::pair<int, int> base_damage_thresholds{1, 4};
     constexpr std::pair<int, int> critical_chance_thresholds{1, 10};
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
-    constexpr std::pair<int, int> tick_thresholds{25, 90};
+    constexpr std::pair<int, int> tick_thresholds{45, 100};
 
     constexpr std::array<const char*, 2> ghost_sprite_paths{"assets/image/entity/enemy/ghost/ghost-1.png",
                                                             "assets/image/entity/enemy/ghost/ghost-1-inverse.png"};
