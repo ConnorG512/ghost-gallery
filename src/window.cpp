@@ -24,6 +24,7 @@ void Window::drawAndClear()
     constexpr Color default_window_colour{0, 0, 0, 0};
     clearWindow(default_window_colour);
 }
+std::pair<int, int> Window::GetWindowSize() { return std::pair<int, int>{m_window_width, m_window_height}; }
 
 void Window::changeCursorStatus(const CursorStatus status_to_change_to)
 {

@@ -1,16 +1,20 @@
 #pragma once
 
 #include <raylib.h>
+#include <utility>
 
 class Window
 {
   public:
     Window(int width = 900, int height = 1600, int target_fps = 60);
     ~Window();
+
     bool ShouldWindowClose();
     void beginDraw();
     void endDraw();
     void drawAndClear();
+
+    [[nodiscard]] std::pair<int, int> GetWindowSize();
 
     Window(const Window& audio_manager) = delete;                // Delete copy constructor.
     Window& operator=(const Window& audio_manager) = delete;     // Delete copy assignment constructor.
