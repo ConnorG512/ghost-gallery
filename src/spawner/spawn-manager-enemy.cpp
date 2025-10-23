@@ -115,16 +115,15 @@ void SpawnManagerEnemy::increaseEnemyAmount(const int& current_game_score)
     if (current_game_score > enemy_spawn_score_thresholds.at(0))
     {
         m_list_size = 2;
-        m_enemy_list.resize(m_list_size);
     }
     else if (current_game_score > enemy_spawn_score_thresholds.at(1))
     {
         m_list_size = 3;
-        m_enemy_list.resize(m_list_size);
     }
     else if (current_game_score > enemy_spawn_score_thresholds.at(2))
     {
         m_list_size = 4;
-        m_enemy_list.resize(m_list_size);
     }
+    
+    m_enemy_list.resize(m_list_size);
 }
