@@ -22,6 +22,7 @@ class AudioManager
         coin_pickup,
         candy_pickup,
         player_hurt,
+        start_game,
     };
     void playAudio(const SoundId sound_to_play);
 

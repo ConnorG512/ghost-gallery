@@ -39,6 +39,8 @@ void AudioManager::playAudio(const SoundId sound_to_play)
             PlaySound(m_loaded_sounds.at(3));
         case AudioManager::SoundId::player_hurt:
             PlaySound(m_loaded_sounds.at(4));
+        case AudioManager::SoundId::start_game:
+            PlaySound(m_loaded_sounds.at(5));
     }
 }
 
