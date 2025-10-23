@@ -1,5 +1,4 @@
 #include "spawn-manager-enemy.h"
-#include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
@@ -105,4 +104,27 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
         RandomGeneration::GenerateRandomNumber(critical_chance_thresholds.first, critical_chance_thresholds.second),
         RandomGeneration::GenerateRandomNumber(given_score_thresholds.first, given_score_thresholds.second),
         RandomGeneration::GenerateRandomNumber(tick_thresholds.first, tick_thresholds.second));
+}
+
+void SpawnManagerEnemy::increaseEnemyAmount(const int& current_game_score)
+{
+    assert(current_game_score > -1);
+
+    constexpr std::array<int, 3> enemy_spawn_score_thresholds{135000, 200000, 280000};
+
+    if (current_game_score > enemy_spawn_score_thresholds.at(0))
+    {
+        m_list_size = 2;
+        m_enemy_list.resize(m_list_size);
+    }
+    else if (current_game_score > enemy_spawn_score_thresholds.at(1))
+    {
+        m_list_size = 3;
+        m_enemy_list.resize(m_list_size);
+    }
+    else if (current_game_score > enemy_spawn_score_thresholds.at(2))
+    {
+        m_list_size = 4;
+        m_enemy_list.resize(m_list_size);
+    }
 }

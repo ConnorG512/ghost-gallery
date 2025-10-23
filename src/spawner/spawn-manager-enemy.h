@@ -19,8 +19,10 @@ class SpawnManagerEnemy : public SpawnManager
     int attackPlayer();
     void moveEntitiesToNewPos();
     bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
+    void increaseEnemyAmount(const int& current_game_score);
 
   protected:
+    int m_list_size{1};
     std::vector<std::unique_ptr<Enemy>> m_enemy_list;
     std::unique_ptr<Enemy> createEnemy();
 };

@@ -29,6 +29,7 @@ void GameStateGameplay::gameplayLoop()
 
     m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score);
     m_current_player.takeDamage(m_enemy_spawn_manager.attackPlayer(), m_audio_manager);
+    m_enemy_spawn_manager.increaseEnemyAmount(m_current_player.score_component.current_score);
 }
 
 void GameStateGameplay::renderingLoop()
