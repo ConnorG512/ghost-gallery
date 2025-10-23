@@ -14,7 +14,7 @@ class SpawnManagerEnemy : public SpawnManager
   public:
     SpawnManagerEnemy(const int num_spawn_slots);
 
-    void requestEnemySpawn(const int& current_game_score, const std::pair<int,int> screen_xy);
+    void requestEnemySpawn(const int& current_game_score, const std::pair<int, int> screen_xy);
     void drawEnemySprites();
     [[nodiscard]] int attackPlayer();
     void moveEntitiesToNewPos();

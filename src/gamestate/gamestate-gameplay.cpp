@@ -19,7 +19,7 @@ void GameStateGameplay::initialiseState() {}
 
 void GameStateGameplay::gameplayLoop()
 {
-    m_collectable_spawn_manager.checkForReady();
+    m_collectable_spawn_manager.checkForReady(m_game_window.GetWindowSize());
     if (m_current_player.health_component.GetHealth() == 0)
     {
         gameOver();
@@ -27,7 +27,8 @@ void GameStateGameplay::gameplayLoop()
     }
     playerCollisionActions();
 
-    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score, m_game_window.GetWindowSize());
+    m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score,
+                                            m_game_window.GetWindowSize());
     m_current_player.takeDamage(m_enemy_spawn_manager.attackPlayer(), m_audio_manager);
     m_enemy_spawn_manager.increaseEnemyAmount(m_current_player.score_component.current_score);
 }

@@ -16,8 +16,7 @@
 
 namespace
 {
-constexpr std::array<int, 2> collectable_spawn_threshold_x{200, 1400};
-constexpr std::array<int, 2> collectable_spawn_threshold_y{100, 700};
+constexpr int entity_screen_clamp{128};
 } // namespace
 
 SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
@@ -38,7 +37,8 @@ void SpawnManagerCollectable::drawCollectables()
     }
 }
 
-std::unique_ptr<Collectable> SpawnManagerCollectable::assignCollectableToAvailableSlot()
+std::unique_ptr<Collectable>
+SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, int> screen_xy)
 {
     for (auto& collectable_instance : m_collectables_list)
     {
@@ -47,59 +47,59 @@ std::unique_ptr<Collectable> SpawnManagerCollectable::assignCollectableToAvailab
             int random_result{RandomGeneration::GenerateRandomNumber(0, 2)};
             if (random_result == 0)
             {
-                collectable_instance = createCoinCollectable();
+                collectable_instance = createCoinCollectable(screen_xy);
                 break;
             }
             else if (random_result == 1)
             {
-                collectable_instance = createHeartCollectable();
+                collectable_instance = createHeartCollectable(screen_xy);
                 break;
             }
             else
             {
-                collectable_instance = createCandyCollectable();
+                collectable_instance = createCandyCollectable(screen_xy);
             }
         }
     }
     return nullptr;
 }
 
-std::unique_ptr<CoinCollectable> SpawnManagerCollectable::createCoinCollectable()
+std::unique_ptr<CoinCollectable> SpawnManagerCollectable::createCoinCollectable(const std::pair<int, int> screen_xy)
 {
     constexpr std::array<int, 2> coin_value_range{200, 600};
 
     using namespace RandomGeneration;
     auto created_collectable = std::make_unique<CoinCollectable>(
-        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
-        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.first - entity_screen_clamp),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.second - entity_screen_clamp),
         GenerateRandomNumber(coin_value_range.at(0), coin_value_range.at(1)));
 
     assert(created_collectable != nullptr);
     return created_collectable;
 }
 
-std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectable()
+std::unique_ptr<HeartCollectable> SpawnManagerCollectable::createHeartCollectable(const std::pair<int, int> screen_xy)
 {
     constexpr std::array<int, 2> health_restoration_range{1, 4};
 
     using namespace RandomGeneration;
     auto created_collectable = std::make_unique<HeartCollectable>(
-        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
-        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.first - entity_screen_clamp),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.second - entity_screen_clamp),
         GenerateRandomNumber(health_restoration_range.at(0), health_restoration_range.at(1)));
 
     assert(created_collectable != nullptr);
     return created_collectable;
 }
 
-std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectable()
+std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectable(const std::pair<int, int> screen_xy)
 {
     constexpr std::array<int, 2> candy_multiplier_value_range{1, 5};
 
     using namespace RandomGeneration;
     auto created_collectable = std::make_unique<CandyCollectable>(
-        GenerateRandomNumber(collectable_spawn_threshold_x.at(0), collectable_spawn_threshold_x.at(1)),
-        GenerateRandomNumber(collectable_spawn_threshold_y.at(0), collectable_spawn_threshold_y.at(1)),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.first - entity_screen_clamp),
+        GenerateRandomNumber(0 + entity_screen_clamp, screen_xy.second - entity_screen_clamp),
         GenerateRandomNumber(candy_multiplier_value_range.at(0), candy_multiplier_value_range.at(1)));
 
     assert(created_collectable != nullptr);
@@ -131,11 +131,11 @@ bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
     return has_player_collided;
 }
 
-void SpawnManagerCollectable::checkForReady()
+void SpawnManagerCollectable::checkForReady(const std::pair<int, int> screen_xy)
 {
     if (m_ticker.IncrementAndCheckThreshold())
     {
-        assignCollectableToAvailableSlot();
+        assignCollectableToAvailableSlot(screen_xy);
     }
 }
 

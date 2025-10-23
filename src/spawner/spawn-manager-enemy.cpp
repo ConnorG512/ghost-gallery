@@ -16,7 +16,7 @@ SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots) : SpawnManager{n
     m_enemy_list.resize(m_num_available_slots);
 }
 
-void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const std::pair<int,int> screen_xy)
+void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const std::pair<int, int> screen_xy)
 {
     for (auto& current_enemy_slot : m_enemy_list)
     {
