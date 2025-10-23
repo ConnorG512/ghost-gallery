@@ -1,8 +1,8 @@
+#include "enemy.h"
 #include "../audio-manager.h"
 #include "../util/random-generation.h"
 #include "components/damage-component.h"
 #include "components/user-input-component.h"
-#include "enemy.h"
 #include "entity.h"
 #include "player.h"
 
