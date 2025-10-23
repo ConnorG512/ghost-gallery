@@ -38,11 +38,16 @@ void SpawnManagerEnemy::drawEnemySprites()
 
 int SpawnManagerEnemy::attackPlayer()
 {
+    int damage_amount{0};
+
     std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
                                                             { return Utils::IsValidUniquePtr(enemy_instance); }),
                           [&](const std::unique_ptr<Enemy>& enemy_instance)
-                          { return enemy_instance->InitiateAttack(); });
-    return 0;
+                          {
+                              damage_amount = enemy_instance->InitiateAttack();
+                              return damage_amount;
+                          });
+    return damage_amount;
 }
 
 void SpawnManagerEnemy::moveEntitiesToNewPos()
