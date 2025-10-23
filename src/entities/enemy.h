@@ -11,7 +11,8 @@ class Player;
 class Enemy : public Entity
 {
   public:
-    Enemy(const std::array<int, 2> xy_pos = {0, 0},
+    Enemy(const std::vector<std::string>& texture_paths,
+          const std::array<int, 2> xy_pos = {0, 0},
           const int base_damage = 2,
           const int critical_chance = 0,
           const int given_score = 20,

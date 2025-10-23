@@ -1,25 +1,27 @@
-#include "enemy.h"
 #include "../audio-manager.h"
 #include "../util/random-generation.h"
 #include "components/damage-component.h"
 #include "components/user-input-component.h"
+#include "enemy.h"
 #include "entity.h"
 #include "player.h"
 
 #include <array>
+#include <vector>
 
 namespace
 {
 constexpr std::array<int, 2> score_range{25, 75};
 }
 
-Enemy::Enemy(const std::array<int, 2> xy_pos,
+Enemy::Enemy(const std::vector<std::string>& texture_paths,
+             const std::array<int, 2> xy_pos,
              const int base_damage,
              const int critical_chance,
              const int given_score,
              const int tick_threshold)
-    : Entity{{"assets/image/entity/enemy/ghost/ghost-1.png"}, 2, 2, xy_pos.at(0), xy_pos.at(1)},
-      damage_component{base_damage, critical_chance}, score_to_give{given_score}, m_tick_component{tick_threshold}
+    : Entity{texture_paths, 2, 2, xy_pos.at(0), xy_pos.at(1)}, damage_component{base_damage, critical_chance},
+      score_to_give{given_score}, m_tick_component{tick_threshold}
 {
 }
 
