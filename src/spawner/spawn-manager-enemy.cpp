@@ -91,7 +91,8 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
                                                             "assets/image/entity/enemy/ghost/ghost-1-inverse.png"};
 
     return std::make_unique<Enemy>(
-        {"assets/image/entity/enemy/ghost/ghost-1-inverse.png"},
+        std::vector<std::string>{
+            ghost_sprite_paths.at(RandomGeneration::GenerateRandomNumber(0, ghost_sprite_paths.size() - 1))},
         std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
                            RandomGeneration::GenerateRandomNumber(screen_range_y.first, screen_range_y.second)},
         RandomGeneration::GenerateRandomNumber(base_damage_thresholds.first, base_damage_thresholds.second),
