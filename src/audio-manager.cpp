@@ -37,10 +37,13 @@ void AudioManager::playAudio(const SoundId sound_to_play)
             break;
         case AudioManager::SoundId::candy_pickup:
             PlaySound(m_loaded_sounds.at(3));
+            break;
         case AudioManager::SoundId::player_hurt:
             PlaySound(m_loaded_sounds.at(4));
+            break;
         case AudioManager::SoundId::start_game:
             PlaySound(m_loaded_sounds.at(5));
+            break;
     }
 }
 
