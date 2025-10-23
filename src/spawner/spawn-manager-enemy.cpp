@@ -1,9 +1,9 @@
-#include "spawn-manager-enemy.h"
 #include "../entities/components/health-component.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -86,6 +86,9 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy()
     constexpr std::pair<int, int> critical_chance_thresholds{1, 10};
     constexpr std::pair<int, int> given_score_thresholds{200, 650};
     constexpr std::pair<int, int> tick_thresholds{25, 90};
+
+    constexpr std::array<const char*, 2> ghost_sprite_paths{"assets/image/entity/enemy/ghost/ghost-1.png",
+                                                            "assets/image/entity/enemy/ghost/ghost-1-inverse.png"};
 
     return std::make_unique<Enemy>(
         std::array<int, 2>{RandomGeneration::GenerateRandomNumber(screen_range_x.first, screen_range_x.second),
