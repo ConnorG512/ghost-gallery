@@ -1,5 +1,7 @@
 #include "player.h"
+#include "../audio-manager.h"
 #include "entity.h"
+
 #include <utility>
 
 namespace
@@ -34,4 +36,14 @@ void Player::drawPlayerCursor()
 void Player::changeCursorState(const CursorType cursor_type_to_change)
 {
     m_current_cursor_state = cursor_type_to_change;
+}
+
+void Player::takeDamage(const int damage_amount, AudioManager& audio_manager)
+{
+    if (damage_amount <= 0)
+    {
+        return;
+    };
+    health_component.ReduceHealthBy(damage_amount);
+    audio_manager.playAudio(AudioManager::SoundId::player_hurt);
 }

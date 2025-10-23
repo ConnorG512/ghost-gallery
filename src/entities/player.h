@@ -18,6 +18,7 @@ class Player : public Entity
 
     void ResetPlayerStats();
     void drawPlayerCursor();
+    void takeDamage(const int damage_amount, AudioManager& audio_manager);
 
     enum class CursorType
     {
