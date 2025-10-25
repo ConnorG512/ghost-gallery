@@ -13,10 +13,12 @@
 #include <cassert>
 #include <memory>
 #include <ranges>
+#include <utility>
 
 namespace
 {
 constexpr int entity_screen_clamp{128};
+
 } // namespace
 
 SpawnManagerCollectable::SpawnManagerCollectable(const int num_spawn_slots) : SpawnManager{num_spawn_slots}
@@ -40,25 +42,31 @@ void SpawnManagerCollectable::drawCollectables()
 std::unique_ptr<Collectable>
 SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, int> screen_xy)
 {
-    for (auto& collectable_instance : m_collectables_list)
+    for (auto& collectable_instance :
+         m_collectables_list | std::views::filter([this](const std::unique_ptr<Collectable>& collectable_instance)
+                                                  { return !Utils::IsValidUniquePtr(collectable_instance); }))
     {
-        if (collectable_instance == nullptr)
+        enum class CollectableId
         {
-            int random_result{RandomGeneration::GenerateRandomNumber(0, 2)};
-            if (random_result == 0)
-            {
+            coin,
+            heart,
+            candy,
+        };
+
+        const CollectableId chosen_item = []()
+        { return static_cast<CollectableId>(RandomGeneration::GenerateRandomNumber(0, 2)); }();
+
+        switch (chosen_item)
+        {
+            case CollectableId::coin:
                 collectable_instance = createCoinCollectable(screen_xy);
                 break;
-            }
-            else if (random_result == 1)
-            {
+            case CollectableId::heart:
                 collectable_instance = createHeartCollectable(screen_xy);
                 break;
-            }
-            else
-            {
+            case CollectableId::candy:
                 collectable_instance = createCandyCollectable(screen_xy);
-            }
+                break;
         }
     }
     return nullptr;

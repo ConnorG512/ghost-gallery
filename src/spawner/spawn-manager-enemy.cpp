@@ -1,8 +1,8 @@
+#include "spawn-manager-enemy.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
