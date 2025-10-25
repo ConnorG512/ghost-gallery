@@ -1,4 +1,3 @@
-#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/candy-collectable.h"
 #include "../entities/collectable/coin-collectable.h"
@@ -6,6 +5,7 @@
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
 
 #include <algorithm>
@@ -30,12 +30,11 @@ SpawnManagerCollectable::~SpawnManagerCollectable() { m_collectables_list.clear(
 
 void SpawnManagerCollectable::drawCollectables()
 {
-    for (const auto& collectable_instance : m_collectables_list)
+    for (const auto& collectable_instance :
+         m_collectables_list | std::views::filter([](const auto& collectable_instance)
+                                                  { return Utils::IsValidUniquePtr(collectable_instance); }))
     {
-        if (collectable_instance != nullptr)
-        {
-            collectable_instance->sprite.drawSprite({collectable_instance->positional_component.GetXYPos()});
-        }
+        collectable_instance->sprite.drawSprite({collectable_instance->positional_component.GetXYPos()});
     }
 }
 
@@ -43,7 +42,7 @@ std::unique_ptr<Collectable>
 SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, int> screen_xy)
 {
     for (auto& collectable_instance :
-         m_collectables_list | std::views::filter([this](const std::unique_ptr<Collectable>& collectable_instance)
+         m_collectables_list | std::views::filter([](const std::unique_ptr<Collectable>& collectable_instance)
                                                   { return !Utils::IsValidUniquePtr(collectable_instance); }))
     {
         enum class CollectableId
