@@ -7,6 +7,7 @@
 #include <array>
 
 class Player;
+class HealthComponent;
 
 class Enemy : public Entity
 {
@@ -20,7 +21,7 @@ class Enemy : public Entity
 
     void respawnEnemy();
     void collidedWithPlayer(Player& current_player, AudioManager& audio_manager);
-    [[nodiscard]] int InitiateAttack();
+    void initiateAttack(HealthComponent& health_component);
 
     void playSound(AudioManager& audio_manager);
 
@@ -28,7 +29,5 @@ class Enemy : public Entity
     int score_to_give{30};
 
   private:
-    void changeEnemyGivenScore();
-
     TickComponent m_tick_component{140};
 };

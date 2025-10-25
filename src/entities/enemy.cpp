@@ -29,7 +29,6 @@ void Enemy::respawnEnemy()
 {
     setNewEntityPosition(
         {RandomGeneration::GenerateRandomNumber(100, 1400), RandomGeneration::GenerateRandomNumber(200, 750)});
-    changeEnemyGivenScore();
     m_tick_component.resetTickCount();
 }
 
@@ -47,21 +46,14 @@ void Enemy::collidedWithPlayer(Player& current_player, AudioManager& audio_manag
     }
 }
 
-void Enemy::changeEnemyGivenScore()
-{
-    score_to_give = RandomGeneration::GenerateRandomNumber(score_range.at(0), score_range.at(1));
-}
-
 void Enemy::playSound(AudioManager& audio_manager) { audio_manager.playAudio(AudioManager::SoundId::ghost_death); }
 
-int Enemy::InitiateAttack()
+void Enemy::initiateAttack(HealthComponent& health_component)
 {
     if (m_tick_component.IncrementAndCheckThreshold())
     {
+        health_component.ReduceHealthBy(damage_component.CalculateDamage());
         respawnEnemy();
         m_tick_component.resetTickCount();
-        int damage_result{damage_component.CalculateDamage()};
-        return damage_component.CalculateDamage();
     }
-    return 0;
 }
