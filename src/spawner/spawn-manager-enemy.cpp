@@ -1,8 +1,8 @@
-#include "spawn-manager-enemy.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -18,13 +18,12 @@ SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots) : SpawnManager{n
 
 void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const std::pair<int, int> screen_xy)
 {
-    for (auto& current_enemy_slot : m_enemy_list)
+    for (auto& current_enemy_slot :
+         m_enemy_list | std::views::filter([this](const std::unique_ptr<Enemy>& enemy_instance)
+                                           { return !Utils::IsValidUniquePtr(enemy_instance); }))
     {
-        if (!Utils::IsValidUniquePtr(current_enemy_slot))
-        {
-            current_enemy_slot = createEnemy(screen_xy);
-            assert(current_enemy_slot != nullptr && "Enemy slot should not be nullptr!");
-        }
+        current_enemy_slot = createEnemy(screen_xy);
+        assert(current_enemy_slot != nullptr && "Enemy slot should not be nullptr!");
     }
 }
 
