@@ -29,7 +29,7 @@ void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const s
 
 void SpawnManagerEnemy::drawEnemySprites()
 {
-    std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
+    std::ranges::for_each(m_enemy_list | std::views::filter([](const std::unique_ptr<Enemy>& enemy_instance)
                                                             { return Utils::IsValidUniquePtr(enemy_instance); }),
                           [&](std::unique_ptr<Enemy>& enemy_instance)
                           { enemy_instance->sprite.drawSprite(enemy_instance->positional_component.GetXYPos()); });
@@ -39,7 +39,7 @@ int SpawnManagerEnemy::attackPlayer()
 {
     int damage_amount{0};
 
-    std::ranges::for_each(m_enemy_list | std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
+    std::ranges::for_each(m_enemy_list | std::views::filter([](const std::unique_ptr<Enemy>& enemy_instance)
                                                             { return Utils::IsValidUniquePtr(enemy_instance); }),
                           [&](const std::unique_ptr<Enemy>& enemy_instance)
                           {
