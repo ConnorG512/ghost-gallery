@@ -31,7 +31,5 @@ class SpawnManagerCollectable : public SpawnManager
     [[nodiscard]] std::unique_ptr<CoinCollectable> createCoinCollectable(const std::pair<int, int> screen_xy);
     [[nodiscard]] std::unique_ptr<HeartCollectable> createHeartCollectable(const std::pair<int, int> screen_xy);
     [[nodiscard]] std::unique_ptr<CandyCollectable> createCandyCollectable(const std::pair<int, int> screen_xy);
-
     bool isManagerFull();
-    bool hasCollectableBeenInteractedWith(std::unique_ptr<Collectable>& current_collectable, Player& current_player);
 };

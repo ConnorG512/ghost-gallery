@@ -148,9 +148,3 @@ void SpawnManagerCollectable::checkForReady(const std::pair<int, int> screen_xy)
         assignCollectableToAvailableSlot(screen_xy);
     }
 }
-
-bool SpawnManagerCollectable::hasCollectableBeenInteractedWith(std::unique_ptr<Collectable>& current_collectable,
-                                                               Player& current_player)
-{
-    return current_collectable->collision.IsCollidingWith(current_player.collision.GetCollisionPosition());
-}
