@@ -24,12 +24,13 @@ class SpawnManagerCollectable : public SpawnManager
     [[nodiscard]] bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
 
   private:
-    std::vector<std::unique_ptr<Collectable>> m_collectables_list;
-    std::unique_ptr<Collectable> assignCollectableToAvailableSlot(const std::pair<int, int> screen_xy);
-    std::unique_ptr<CoinCollectable> createCoinCollectable(const std::pair<int, int> screen_xy);
-    std::unique_ptr<HeartCollectable> createHeartCollectable(const std::pair<int, int> screen_xy);
-    std::unique_ptr<CandyCollectable> createCandyCollectable(const std::pair<int, int> screen_xy);
     TickComponent m_ticker{300};
+    std::vector<std::unique_ptr<Collectable>> m_collectables_list;
+
+    std::unique_ptr<Collectable> assignCollectableToAvailableSlot(const std::pair<int, int> screen_xy);
+    [[nodiscard]] std::unique_ptr<CoinCollectable> createCoinCollectable(const std::pair<int, int> screen_xy);
+    [[nodiscard]] std::unique_ptr<HeartCollectable> createHeartCollectable(const std::pair<int, int> screen_xy);
+    [[nodiscard]] std::unique_ptr<CandyCollectable> createCandyCollectable(const std::pair<int, int> screen_xy);
 
     bool isManagerFull();
     bool hasCollectableBeenInteractedWith(std::unique_ptr<Collectable>& current_collectable, Player& current_player);
