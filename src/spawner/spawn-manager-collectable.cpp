@@ -73,7 +73,6 @@ SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, i
                 collectable_instance = createCandyCollectable(screen_xy);
                 break;
             default:
-                collectable_instance = createCoinCollectable(screen_xy);
                 break;
         }
     }
