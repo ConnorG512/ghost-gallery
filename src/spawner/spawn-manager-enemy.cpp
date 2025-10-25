@@ -29,33 +29,32 @@ void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const s
 
 void SpawnManagerEnemy::drawEnemySprites()
 {
-    std::ranges::for_each(m_enemy_list | std::views::filter([](const std::unique_ptr<Enemy>& enemy_instance)
-                                                            { return Utils::IsValidUniquePtr(enemy_instance); }),
-                          [&](std::unique_ptr<Enemy>& enemy_instance)
-                          { enemy_instance->sprite.drawSprite(enemy_instance->positional_component.GetXYPos()); });
+    for (const auto& enemy_instance :
+         m_enemy_list |
+             std::views::filter([](const auto& enemy_instance) { return Utils::IsValidUniquePtr(enemy_instance); }))
+    {
+        enemy_instance->sprite.drawSprite(enemy_instance->positional_component.GetXYPos());
+    }
 }
 
-int SpawnManagerEnemy::attackPlayer()
+void SpawnManagerEnemy::attackPlayer(HealthComponent& player_health)
 {
-    int damage_amount{0};
-
-    std::ranges::for_each(m_enemy_list | std::views::filter([](const std::unique_ptr<Enemy>& enemy_instance)
-                                                            { return Utils::IsValidUniquePtr(enemy_instance); }),
-                          [&](const std::unique_ptr<Enemy>& enemy_instance)
-                          {
-                              damage_amount = enemy_instance->InitiateAttack();
-                              return damage_amount;
-                          });
-    return damage_amount;
+    for (const auto& enemy_instance :
+         m_enemy_list |
+             std::views::filter([](const auto& enemy_instance) { return Utils::IsValidUniquePtr(enemy_instance); }))
+    {
+        enemy_instance->initiateAttack(player_health);
+    }
 }
 
 void SpawnManagerEnemy::moveEntitiesToNewPos()
 {
-    for (auto& current_enemy_slot : m_enemy_list)
-        if (current_enemy_slot != nullptr)
-        {
-            current_enemy_slot->setNewEntityPosition();
-        }
+    for (const auto& enemy_instance :
+         m_enemy_list |
+             std::views::filter([](const auto& enemy_instance) { return Utils::IsValidUniquePtr(enemy_instance); }))
+    {
+        enemy_instance->respawnEnemy();
+    }
 }
 
 bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
