@@ -1,4 +1,3 @@
-#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/candy-collectable.h"
 #include "../entities/collectable/coin-collectable.h"
@@ -6,6 +5,7 @@
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
 
 #include <algorithm>
@@ -123,27 +123,23 @@ std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectabl
 
 bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
-    bool has_player_collided{false};
-
-    std::ranges::for_each(
-        m_collectables_list |
-            std::views::filter([](std::unique_ptr<Collectable>& collectable_instance)
-                               { return Utils::IsValidUniquePtr(collectable_instance); }) |
-            std::views::filter(
-                [&current_player](std::unique_ptr<Collectable>& collectable_instance)
-                { return collectable_instance->checkCollision(current_player.collision.GetCollisionPosition()); }),
-        [&](std::unique_ptr<Collectable>& collectable_instance)
+    auto const valid_collectable = std::ranges::find_if(
+        m_collectables_list,
+        [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
         {
-            has_player_collided = true;
-            if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
-            {
-                collectable_instance->givePowerUp(current_player);
-                collectable_instance->playSound(audio_manager);
-                collectable_instance.reset();
-            }
+            return Utils::IsValidUniquePtr(collectable_instance) &&
+                   collectable_instance->checkCollision(current_player.collision.GetCollisionPosition());
         });
 
-    return has_player_collided;
+    if (valid_collectable != m_collectables_list.end() &&
+        current_player.user_input.UserAction() == UserInput::InputAction::fire)
+    {
+        valid_collectable->get()->givePowerUp(current_player);
+        valid_collectable->get()->playSound(audio_manager);
+        valid_collectable->reset();
+        return true;
+    }
+    return false;
 }
 
 void SpawnManagerCollectable::checkForReady(const std::pair<int, int> screen_xy)
