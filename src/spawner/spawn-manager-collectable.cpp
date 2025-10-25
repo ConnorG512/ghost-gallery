@@ -51,10 +51,15 @@ SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, i
             coin,
             heart,
             candy,
+            end,
         };
 
         const CollectableId chosen_item = []()
-        { return static_cast<CollectableId>(RandomGeneration::GenerateRandomNumber(0, 2)); }();
+        {
+            const int result{RandomGeneration::GenerateRandomNumber(0, std::to_underlying(CollectableId::end) - 1)};
+            assert(result < std::to_underlying(CollectableId::end));
+            return static_cast<CollectableId>(result);
+        }();
 
         switch (chosen_item)
         {
@@ -66,6 +71,9 @@ SpawnManagerCollectable::assignCollectableToAvailableSlot(const std::pair<int, i
                 break;
             case CollectableId::candy:
                 collectable_instance = createCandyCollectable(screen_xy);
+                break;
+            default:
+                collectable_instance = createCoinCollectable(screen_xy);
                 break;
         }
     }
