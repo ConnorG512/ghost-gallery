@@ -56,7 +56,14 @@
 
         cmakeFlags = [
           "-DCMAKE_BUILD_TYPE=Debug"
+          "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
         ];
+        
+        installPhase = ''
+          mkdir -p $out/bin
+          cp compile_commands.json $out/bin
+          cp app $out/bin
+        '';
       });
 
       # nix build .#packages.x86_64-linux.release
@@ -79,7 +86,14 @@
 
         cmakeFlags = [
           "-DCMAKE_BUILD_TYPE=Release"
+          "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
         ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+          cp compile_commands.json $out/bin
+          cp app $out/bin
+        '';
       });
 
       # nix build .#packages.x86_64-linux.mingwW64
@@ -99,6 +113,7 @@
 
         cmakeFlags = [
           "-DCMAKE_BUILD_TYPE=Release"
+          "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
           "-DCMAKE_C_COMPILER=${crossPkgs.stdenv.cc.targetPrefix}gcc"
           "-DCMAKE_CXX_COMPILER=${crossPkgs.stdenv.cc.targetPrefix}g++"
         ];
@@ -106,6 +121,7 @@
 
         installPhase = ''
           mkdir -p $out/bin
+          cp compile_commands.json $out/bin
           cp app.exe $out/bin/
 
           # Move DLL's with the exe
