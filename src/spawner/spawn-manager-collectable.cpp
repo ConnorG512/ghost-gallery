@@ -1,3 +1,4 @@
+#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/candy-collectable.h"
 #include "../entities/collectable/coin-collectable.h"
@@ -5,7 +6,6 @@
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
 
 #include <algorithm>
@@ -132,7 +132,8 @@ void SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
             });
 
     // Cursor needs to glow green regardless of the collectable that is hovered over.
-    if (std::ranges::any_of(hovered_over_collectable, [](const std::unique_ptr<Collectable>& collectable_instance){ return true;}))
+    if (std::ranges::any_of(hovered_over_collectable,
+                            [](const std::unique_ptr<Collectable>& collectable_instance) { return true; }))
     {
         current_player.changeCursorState(Player::CursorType::friendly);
     }
@@ -140,7 +141,18 @@ void SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
     {
         current_player.changeCursorState(Player::CursorType::neutral);
     }
-    // Collectable should one be collected once per click.
+
+    // Only one collectable should be used per click.
+    if (auto first_collectable =
+            std::ranges::find_if(hovered_over_collectable,
+                                 [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
+                                 { return current_player.user_input.UserAction() == UserInput::InputAction::fire; });
+        first_collectable != hovered_over_collectable.end())
+    {
+        first_collectable->get()->givePowerUp(current_player);
+        first_collectable->get()->playSound(audio_manager);
+        first_collectable->reset();
+    }
 }
 
 void SpawnManagerCollectable::checkForReady(const std::pair<int, int> screen_xy)
