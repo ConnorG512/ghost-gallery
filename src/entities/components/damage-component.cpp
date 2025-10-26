@@ -1,5 +1,5 @@
-#include "damage-component.h"
-#include "../../util/random-generation.h"
+#include "include/component/damage-component.h"
+#include "incluide/util/random-generation.h"
 
 DamageComponent::DamageComponent() {}
 

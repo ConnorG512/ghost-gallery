@@ -1,4 +1,4 @@
-#include "positional-component.h"
+#include "include/component/positional-component.h"
 
 PositionalComponent::PositionalComponent(int x_pos, int y_pos) : m_current_position{x_pos, y_pos} {}
 

@@ -1,7 +1,7 @@
-#include "candy-collectable.h"
-#include "../../audio-manager.h"
-#include "../player.h"
-#include "collectable.h"
+#include "include/entity/candy-collectable.h"
+#include "include/manager/audio-manager.h"
+#include "include/entity/player.h"
+#include "include/entity/collectable.h"
 
 CandyCollectable::CandyCollectable(const int x_pos, const int y_pos, const int multiplier_amount)
     : Collectable({"assets/image/entity/candy/candy.png"}, x_pos, y_pos), m_multiplier_to_give{multiplier_amount}

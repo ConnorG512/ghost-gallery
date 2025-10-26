@@ -1,8 +1,8 @@
-#include "gamestate-gameplay.h"
-#include "../entities/player.h"
-#include "../game-manager.h"
-#include "../window.h"
-#include "gamestate-base.h"
+#include "include/game-state/gamestate-gameplay.h"
+#include "include/entity/player.h"
+#include "include/manager/game-manager.h"
+#include "include/window.h"
+#include "include/game-state/gamestate-base.h"
 
 GameStateGameplay::GameStateGameplay(GameManager* game_manager,
                                      Window& game_window,
