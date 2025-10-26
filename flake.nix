@@ -22,7 +22,6 @@
         clang-tools
         valgrind
         gef
-        bear
 
         llvmPackages_21.libcxxClang
         llvmPackages_21.libcxx
