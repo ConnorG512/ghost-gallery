@@ -1,7 +1,5 @@
 #pragma once
 
-#include "component/damage-component.h"
-#include "component/health-component.h"
 #include "component/score-component.h"
 #include "component/user-input-component.h"
 #include "entity/entity.h"
