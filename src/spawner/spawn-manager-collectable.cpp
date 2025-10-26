@@ -120,25 +120,27 @@ std::unique_ptr<CandyCollectable> SpawnManagerCollectable::createCandyCollectabl
     return created_collectable;
 }
 
-bool SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
+void SpawnManagerCollectable::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
-    auto const valid_collectable = std::ranges::find_if(
-        m_collectables_list,
-        [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
-        {
-            return Utils::IsValidUniquePtr(collectable_instance) &&
-                   collectable_instance->checkCollision(current_player.collision.GetCollisionPosition());
-        });
+    auto hovered_over_collectable =
+        m_collectables_list |
+        std::views::filter(
+            [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
+            {
+                return Utils::IsValidUniquePtr(collectable_instance) &&
+                       collectable_instance->checkCollision(current_player.collision.GetCollisionPosition());
+            });
 
-    if (valid_collectable != m_collectables_list.end() &&
-        current_player.user_input.UserAction() == UserInput::InputAction::fire)
+    // Cursor needs to glow green regardless of the collectable that is hovered over.
+    if (std::ranges::any_of(hovered_over_collectable, [](const std::unique_ptr<Collectable>& collectable_instance){ return true;}))
     {
-        valid_collectable->get()->givePowerUp(current_player);
-        valid_collectable->get()->playSound(audio_manager);
-        valid_collectable->reset();
-        return true;
+        current_player.changeCursorState(Player::CursorType::friendly);
     }
-    return false;
+    else
+    {
+        current_player.changeCursorState(Player::CursorType::neutral);
+    }
+    // Collectable should one be collected once per click.
 }
 
 void SpawnManagerCollectable::checkForReady(const std::pair<int, int> screen_xy)

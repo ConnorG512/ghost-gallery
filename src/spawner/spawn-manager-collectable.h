@@ -21,7 +21,7 @@ class SpawnManagerCollectable : public SpawnManager
 
     void checkForReady(const std::pair<int, int> screen_xy);
     void drawCollectables();
-    [[nodiscard]] bool checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
+    void checkPlayerCollision(Player& current_player, AudioManager& audio_manager);
 
   private:
     TickComponent m_ticker{300};
