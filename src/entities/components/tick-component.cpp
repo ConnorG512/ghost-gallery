@@ -1,4 +1,4 @@
-#include "include/component/tick-component.h"
+#include "component/tick-component.h"
 
 TickComponent::TickComponent(const int maximum_tick, const int tick_rate)
     : m_maximum_tick{maximum_tick}, m_tick_rate{tick_rate}

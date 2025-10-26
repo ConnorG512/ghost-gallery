@@ -1,8 +1,8 @@
 #pragma once
 
-#include "audio-manager.h"
-#include "entities/player.h"
-#include "gamestate/gamestate-base.h"
+#include "manager/audio-manager.h"
+#include "entity/player.h"
+#include "game-state/gamestate-base.h"
 #include "window.h"
 
 #include <memory>

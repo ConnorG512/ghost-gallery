@@ -1,11 +1,11 @@
 #pragma once
 
+#include "entity/coin-collectable.h"
+#include "entity/component/tick-component.h"
+#include "manager/spawn-manager.h"
+
 #include <memory>
 #include <vector>
-
-#include "../entities/collectable/coin-collectable.h"
-#include "../entities/components/tick-component.h"
-#include "spawn-manager.h"
 
 class CoinCollectable;
 class HeartCollectable;

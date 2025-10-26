@@ -1,5 +1,5 @@
-#include "include/component/user-input-component.h"
-#include "include/manager/audio-manager.h"
+#include "component/user-input-component.h"
+#include "manager/audio-manager.h"
 
 #include <raylib.h>
 

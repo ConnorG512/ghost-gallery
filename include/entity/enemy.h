@@ -1,8 +1,8 @@
 #pragma once
 
-#include "include/components/damage-component.h"
-#include "include/components/tick-component.h"
-#include "entity.h"
+#include "component/damage-component.h"
+#include "component/tick-component.h"
+#include "entity/entity.h"
 
 #include <array>
 

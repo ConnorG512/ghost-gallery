@@ -1,13 +1,13 @@
 #pragma once
 
-#include "include/entity/enemy.h"
-#include "include/entity/player.h"
-#include "include/component/image-sprite.h"
-#include "include/manager/spawn-manager-collectable.h"
-#include "include/manager/spawn-manager-enemy.h"
-#include "include/ui/ui-gameplay.h"
-#include "include/util/random-generation.h"
-#include "include/game-state/gamestate-base.h"
+#include "entity/enemy.h"
+#include "entity/player.h"
+#include "component/image-sprite.h"
+#include "manager/spawn-manager-collectable.h"
+#include "manager/spawn-manager-enemy.h"
+#include "ui/ui-gameplay.h"
+#include "util/random-generation.h"
+#include "game-state/gamestate-base.h"
 
 class Collectable;
 

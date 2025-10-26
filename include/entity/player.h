@@ -1,10 +1,10 @@
 #pragma once
 
-#include "include/components/damage-component.h"
-#include "include/components/health-component.h"
-#include "include/components/score-component.h"
-#include "include/components/user-input-component.h"
-#include "include/entity/entity.h"
+#include "component/damage-component.h"
+#include "component/health-component.h"
+#include "component/score-component.h"
+#include "component/user-input-component.h"
+#include "entity/entity.h"
 
 class Window;
 class ScoreComponent;

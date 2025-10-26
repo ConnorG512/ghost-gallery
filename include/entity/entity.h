@@ -1,9 +1,9 @@
 #pragma once
 
-#include "include/component/collision-shape.h"
-#include "include/component/image-sprite.h"
-#include "include/component/health-component.h"
-#include "include/component/positional-component.h"
+#include "component/collision-shape.h"
+#include "component/image-sprite.h"
+#include "component/health-component.h"
+#include "component/positional-component.h"
 
 #include <array>
 #include <raylib.h>

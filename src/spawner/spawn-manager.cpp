@@ -1,4 +1,4 @@
-#include "include/manager/spawn-manager.h"
+#include "manager/spawn-manager.h"
 
 SpawnManager::SpawnManager(const int num_spawn_slots) : m_num_available_slots{num_spawn_slots} {}
 

@@ -1,4 +1,4 @@
-#include "include/component/health-component.h"
+#include "component/health-component.h"
 
 HealthComponent::HealthComponent(int max_health, int current_health)
     : m_max_health{max_health}, m_current_health{current_health}

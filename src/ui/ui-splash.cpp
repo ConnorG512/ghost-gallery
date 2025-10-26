@@ -1,4 +1,4 @@
-#include "include/ui/ui-splash.h"
+#include "ui/ui-splash.h"
 
 #include <format>
 #include <ranges>

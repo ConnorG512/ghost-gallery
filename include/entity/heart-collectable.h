@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/entity/collectable.h"
+#include "entity/collectable.h"
 
 class HeartCollectable : public Collectable
 {

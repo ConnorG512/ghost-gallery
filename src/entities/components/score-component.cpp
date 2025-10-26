@@ -1,4 +1,4 @@
-#include "include/component/score-component.h"
+#include "component/score-component.h"
 #include <limits>
 
 void ScoreComponent::increaseScore(int num_to_increase_by)

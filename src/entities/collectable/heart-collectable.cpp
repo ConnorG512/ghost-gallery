@@ -1,6 +1,6 @@
-#include "include/entity/heart-collectable.h"
-#include "include/manager/audio-manager.h"
-#include "include/entity/player.h"
+#include "entity/heart-collectable.h"
+#include "manager/audio-manager.h"
+#include "entity/player.h"
 
 HeartCollectable::HeartCollectable(const int x_pos, const int y_pos, const int health_provided)
     : Collectable{{"assets/image/entity/heart/heart-pickup.png"}, x_pos, y_pos}, m_health_restored{health_provided}

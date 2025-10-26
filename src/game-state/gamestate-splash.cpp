@@ -1,7 +1,7 @@
-#include "include/game-state/gamestate-splash.h"
-#include "include/component/user-input-component.h"
-#include "include/manager/game-manager.h"
-#include "include/window.h"
+#include "game-state/gamestate-splash.h"
+#include "component/user-input-component.h"
+#include "manager/game-manager.h"
+#include "window.h"
 
 GameStateSplash::GameStateSplash(GameManager* game_manager,
                                  Window& game_window,

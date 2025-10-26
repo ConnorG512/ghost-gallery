@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/component/score-component.h"
+#include "component/score-component.h"
 #include <array>
 
 struct ScoreComponent

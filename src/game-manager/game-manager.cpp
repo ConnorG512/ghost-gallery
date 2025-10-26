@@ -1,8 +1,8 @@
-#include "include/manager/game-manager.h"
-#include "incluce/game-state/gamestate/gamestate-base.h"
-#include "incluce/game-state/gamestate/gamestate-gameplay.h"
-#include "incluce/game-state/gamestate/gamestate-splash.h"
-#include "include/window.h"
+#include "manager/game-manager.h"
+#include "game-state/gamestate/gamestate-base.h"
+#include "game-state/gamestate/gamestate-gameplay.h"
+#include "game-state/gamestate/gamestate-splash.h"
+#include "window.h"
 
 #include <cassert>
 #include <memory>
