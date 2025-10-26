@@ -6,72 +6,78 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCE_FILES
-  src/main.cpp
-  src/window.h
-  src/window.cpp
-  src/entities/player.h
-  src/entities/player.cpp
-  src/image-sprite.h
-  src/image-sprite.cpp
-  src/collision-shape.h
-  src/collision-shape.cpp
-  src/util/utils.h
-  src/util/random-generation.h
-  src/util/random-generation.cpp
-  src/audio-manager.h
-  src/audio-manager.cpp
-  src/game-manager.h
-  src/game-manager.cpp
-  src/gamestate/gamestate-base.h
-  src/gamestate/gamestate-base.cpp
-  src/gamestate/gamestate-gameplay.h
-  src/gamestate/gamestate-gameplay.cpp
-  src/gamestate/gamestate-splash.h
-  src/gamestate/gamestate-splash.cpp
-  src/entities/entity.h
-  src/entities/entity.cpp
-  src/entities/enemy.h
-  src/entities/enemy.cpp
-  src/entities/components/damage-component.h
-  src/entities/components/damage-component.cpp
-  src/entities/components/health-component.h
-  src/entities/components/health-component.cpp
-  src/entities/components/positional-component.h
-  src/entities/components/positional-component.cpp
-  src/entities/components/score-component.h
-  src/entities/components/score-component.cpp
-  src/entities/components/tick-component.h
-  src/entities/components/tick-component.cpp
-  src/entities/components/user-input-component.h
-  src/entities/components/user-input-component.cpp
-  src/entities/collectable/collectable.h
-  src/entities/collectable/collectable.cpp
-  src/entities/collectable/coin-collectable.h
-  src/entities/collectable/coin-collectable.cpp
-  src/entities/collectable/heart-collectable.h
-  src/entities/collectable/heart-collectable.cpp
-  src/entities/collectable/candy-collectable.h
   src/entities/collectable/candy-collectable.cpp
-  src/spawner/spawn-manager.h
-  src/spawner/spawn-manager.cpp
-  src/spawner/spawn-manager-collectable.h
-  src/spawner/spawn-manager-collectable.cpp
-  src/spawner/spawn-manager-enemy.h
-  src/spawner/spawn-manager-enemy.cpp
-  src/ui/ui.h
+  src/entities/collectable/coin-collectable.cpp
+  src/entities/collectable/collectable.cpp
+  src/entities/collectable/heart-collectable.cpp
+  src/entities/components/score-component.cpp
+  src/entities/components/health-component.cpp
+  src/entities/components/positional-component.cpp
+  src/entities/components/damage-component.cpp
+  src/entities/components/tick-component.cpp
+  src/entities/components/user-input-component.cpp
+  src/entities/entity.cpp
+  src/entities/player.cpp
+  src/entities/enemy.cpp
   src/ui/ui.cpp
-  src/ui/ui-splash.h
-  src/ui/ui-splash.cpp
-  src/ui/ui-gameplay.h
   src/ui/ui-gameplay.cpp
+  src/ui/ui-splash.cpp
+  src/spawner/spawn-manager.cpp
+  src/spawner/spawn-manager-collectable.cpp
+  src/spawner/spawn-manager-enemy.cpp
+  src/util/random-generation.cpp
+  src/main.cpp
+  src/collision-shape.cpp
+  src/image-sprite.cpp
+  src/window.cpp
+  src/game-manager/game-manager.cpp
+  src/game-manager/audio-manager.cpp
+  src/game-state/gamestate-base.cpp
+  src/game-state/gamestate-splash.cpp
+  src/game-state/gamestate-gameplay.cpp
+)
+
+set(INCLUDE_FILES
+  include/component/score-component.h
+  include/component/positional-component.h
+  include/component/damage-component.h
+  include/component/health-component.h
+  include/component/tick-component.h
+  include/component/user-input-component.h
+  include/component/image-sprite.h
+  include/component/collision-shape.h
+  include/entity/candy-collectable.h
+  include/entity/coin-collectable.h
+  include/entity/collectable.h
+  include/entity/heart-collectable.h
+  include/entity/player.h
+  include/entity/enemy.h
+  include/entity/entity.h
+  include/game-state/gamestate-splash.h
+  include/game-state/gamestate-base.h
+  include/game-state/gamestate-gameplay.h
+  include/ui/ui.h
+  include/ui/ui-gameplay.h
+  include/ui/ui-splash.h
+  include/util/random-generation.h
+  include/util/utils.h
+  include/window.h
+  include/manager/game-manager.h
+  include/manager/spawn-manager-collectable.h
+  include/manager/spawn-manager-enemy.h
+  include/manager/spawn-manager.h
+  include/manager/audio-manager.h
 )
 
 #Creating executable:
 if(WIN32)
-  add_executable(app WIN32 ${SOURCE_FILES})
+  add_executable(app WIN32 ${SOURCE_FILES} ${INCLUDE_FILES})
 else()
-  add_executable(app ${SOURCE_FILES})
+  add_executable(app ${SOURCE_FILES} ${INCLUDE_FILES})
 endif()
+
+# Setting a custom include directory
+target_include_directories(app PRIVATE "${CMAKE_SOURCE_DIR}/include")
 
 # Compile options:
 if(MINGW)
@@ -79,7 +85,7 @@ if(MINGW)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -static-libgcc")
 elseif (UNIX AND NOT APPLE)
-  target_compile_options(app PRIVATE -fsanitize=address,undefined -ggdb) # Better GDB symbols
+  target_compile_options(app PRIVATE -fsanitize=address,undefined -ggdb) # Better GDB symbols, fsanitize 
   target_link_options(app PRIVATE -fsanitize=address,undefined)
 endif()
 
