@@ -1,7 +1,7 @@
 #pragma once
 
-#include "components/damage-component.h"
-#include "components/tick-component.h"
+#include "include/components/damage-component.h"
+#include "include/components/tick-component.h"
 #include "entity.h"
 
 #include <array>

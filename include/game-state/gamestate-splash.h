@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../image-sprite.h"
-#include "../ui/ui-splash.h"
-#include "gamestate-base.h"
+#include "include/component/image-sprite.h"
+#include "include/ui/ui-splash.h"
+#include "include/game-state/gamestate-base.h"
 
 class GameStateSplash : public GameState
 {

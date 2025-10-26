@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ui.h"
+#include "include/ui/ui.h"
 #include <array>
 
 class UiGameplay : public Ui

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../entities/enemy.h"
-#include "spawn-manager.h"
+#include "include/entity/enemy.h"
+#include "include/manager/spawn-manager.h"
 
 #include <memory>
 #include <vector>

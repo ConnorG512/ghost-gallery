@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../entities/components/tick-component.h"
+#include "include/component/tick-component.h"
 #include <vector>
 
 class SpawnManager

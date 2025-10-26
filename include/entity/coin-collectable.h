@@ -1,6 +1,6 @@
 #pragma once
 
-#include "collectable.h"
+#include "include/entity/collectable.h"
 #include <raylib.h>
 
 class CoinCollectable : public Collectable
