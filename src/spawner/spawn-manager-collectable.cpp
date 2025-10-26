@@ -1,3 +1,4 @@
+#include "spawn-manager-collectable.h"
 #include "../audio-manager.h"
 #include "../entities/collectable/candy-collectable.h"
 #include "../entities/collectable/coin-collectable.h"
@@ -5,7 +6,6 @@
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-collectable.h"
 #include "spawn-manager.h"
 
 #include <algorithm>

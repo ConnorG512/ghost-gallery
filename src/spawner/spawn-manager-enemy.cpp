@@ -1,8 +1,8 @@
+#include "spawn-manager-enemy.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
-#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -77,9 +77,9 @@ void SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManage
                 { return current_player.user_input.UserAction() == UserInput::InputAction::fire; });
             hit_enemy != hovered_over_enemy.end())
         {
-          current_player.score_component.increaseScore(hit_enemy->get()->score_to_give);
-          hit_enemy->get()->playSound(audio_manager);
-          hit_enemy->reset();
+            current_player.score_component.increaseScore(hit_enemy->get()->score_to_give);
+            hit_enemy->get()->playSound(audio_manager);
+            hit_enemy->reset();
         }
     }
 }
