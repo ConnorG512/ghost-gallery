@@ -1,8 +1,8 @@
-#include "spawn-manager-enemy.h"
 #include "../entities/enemy.h"
 #include "../entities/player.h"
 #include "../util/random-generation.h"
 #include "../util/utils.h"
+#include "spawn-manager-enemy.h"
 
 #include <algorithm>
 #include <array>
@@ -57,29 +57,25 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
     }
 }
 
-bool SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
+void SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
-    bool has_player_collided{false};
+    auto valid_enemy =
+        m_enemy_list | std::views::filter(
+                           [&current_player](const std::unique_ptr<Enemy>& enemy_instance)
+                           {
+                               return Utils::IsValidUniquePtr(enemy_instance) &&
+                                      enemy_instance->checkCollision(current_player.collision.GetCollisionPosition());
+                           });
 
-    std::ranges::for_each(
-        m_enemy_list |
-            std::views::filter([](std::unique_ptr<Enemy>& enemy_instance)
-                               { return Utils::IsValidUniquePtr(enemy_instance); }) |
-            std::views::filter(
-                [&current_player](std::unique_ptr<Enemy>& enemy_instance)
-                { return enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition()); }),
-        [&](std::unique_ptr<Enemy>& enemy_instance)
-        {
-            has_player_collided = true;
-            if (current_player.user_input.UserAction() == UserInput::InputAction::fire)
-            {
-                current_player.score_component.increaseScore(enemy_instance->score_to_give);
-                enemy_instance->playSound(audio_manager);
-                enemy_instance.reset();
-            }
-        });
-
-    return has_player_collided;
+    if(std::ranges::any_of(valid_enemy, [](const std::unique_ptr<Enemy>& enemy_instance){ return true;}))
+    {
+      current_player.changeCursorState(Player::CursorType::enemy);
+    }
+    else 
+    {
+      current_player.changeCursorState(Player::CursorType::neutral);
+      return;
+    }
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy(const std::pair<int, int> screen_xy)
