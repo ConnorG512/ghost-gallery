@@ -1,4 +1,4 @@
-#include "image-sprite.h"
+#include "include/entity/component/image-sprite.h"
 
 #include <raylib.h>
 #include <string>

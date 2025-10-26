@@ -1,4 +1,4 @@
-#include "game-manager.h"
+#include "include/manager/game-manager.h"
 
 int main(int argc, char* argv[])
 {

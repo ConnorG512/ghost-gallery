@@ -1,6 +1,6 @@
-#include "player.h"
-#include "../audio-manager.h"
-#include "entity.h"
+#include "include/entity/player.h"
+#include "include/manager/audio-manager.h"
+#include "include/entity/entity.h"
 
 #include <utility>
 

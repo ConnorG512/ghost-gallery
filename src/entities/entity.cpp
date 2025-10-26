@@ -1,6 +1,6 @@
-#include "entity.h"
-#include "../audio-manager.h"
-#include "components/positional-component.h"
+#include "include/entity/entity.h"
+#include "include/manager/audio-manager.h"
+#include "include/components/positional-component.h"
 
 Entity::Entity(const std::vector<std::string>& texture_paths,
                const int max_health,

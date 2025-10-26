@@ -1,4 +1,4 @@
-#include "collision-shape.h"
+#include "include/component/collision-shape.h"
 
 #include <raylib.h>
 

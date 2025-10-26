@@ -1,4 +1,5 @@
-#include "ui.h"
+#include "include/ui/ui.h"
+
 #include <raylib.h>
 
 Ui::Ui(const int start_pos_x, const int start_pos_y, const int spacing, const int font_size)

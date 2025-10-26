@@ -1,4 +1,5 @@
-#include "ui-splash.h"
+#include "include/ui/ui-splash.h"
+
 #include <format>
 #include <ranges>
 #include <raylib.h>
