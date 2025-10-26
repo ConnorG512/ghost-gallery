@@ -1,4 +1,5 @@
-#include "window.h"
+#include "manager/window-manager.h"
+
 #include <raylib.h>
 
 Window::Window(int width, int height, int target_fps)

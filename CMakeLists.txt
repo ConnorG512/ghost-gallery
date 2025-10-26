@@ -28,9 +28,9 @@ set(SOURCE_FILES
   src/main.cpp
   src/collision-shape.cpp
   src/image-sprite.cpp
-  src/window.cpp
-  src/game-manager/game-manager.cpp
-  src/game-manager/audio-manager.cpp
+  src/manager/window-manager.cpp
+  src/manager/game-manager.cpp
+  src/manager/audio-manager.cpp
   src/game-state/gamestate-base.cpp
   src/game-state/gamestate-splash.cpp
   src/game-state/gamestate-gameplay.cpp
