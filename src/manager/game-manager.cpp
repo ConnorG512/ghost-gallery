@@ -2,7 +2,7 @@
 #include "game-state/gamestate-base.h"
 #include "game-state/gamestate-gameplay.h"
 #include "game-state/gamestate-splash.h"
-#include "window.h"
+#include "manager/window-manager.h"
 
 #include <cassert>
 #include <memory>

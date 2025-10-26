@@ -2,15 +2,15 @@
 #include "entity/player.h"
 #include "game-state/gamestate-base.h"
 #include "manager/game-manager.h"
-#include "window.h"
+#include "manager/window-manager.h"
 
 GameStateGameplay::GameStateGameplay(GameManager* game_manager,
-                                     Window& game_window,
+                                     WindowManager& game_window,
                                      Player& current_player,
                                      AudioManager& audio_manager)
     : GameState{game_manager, game_window, current_player, audio_manager}
 {
-    m_game_window.changeCursorStatus(Window::CursorStatus::hide);
+    m_game_window.changeCursorStatus(WindowManager::CursorStatus::hide);
     m_current_player.ResetPlayerStats();
     audio_manager.playAudio(AudioManager::SoundId::start_game);
 };

@@ -15,7 +15,7 @@ class GameStateGameplay : public GameState
 {
   public:
     GameStateGameplay(GameManager* game_manager,
-                      Window& game_window,
+                      WindowManager& game_window,
                       Player& current_player,
                       AudioManager& audio_manager);
     ~GameStateGameplay() = default;

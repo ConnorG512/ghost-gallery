@@ -2,32 +2,32 @@
 
 #include <raylib.h>
 
-Window::Window(int width, int height, int target_fps)
+WindowManager::WindowManager(int width, int height, int target_fps)
     : m_window_width{width}, m_window_height{height}, m_target_fps{target_fps}
 {
     InitWindow(m_window_width, m_window_height, "Ghost Gallery");
     SetTargetFPS(m_target_fps);
 }
 
-Window::~Window() { CloseWindow(); }
+WindowManager::~WindowManager() { CloseWindow(); }
 
-bool Window::ShouldWindowClose() { return WindowShouldClose(); }
+bool WindowManager::ShouldWindowClose() { return WindowShouldClose(); }
 
-void Window::beginDraw() { BeginDrawing(); }
+void WindowManager::beginDraw() { BeginDrawing(); }
 
-void Window::endDraw() { EndDrawing(); }
+void WindowManager::endDraw() { EndDrawing(); }
 
-void Window::clearWindow(const Color& colour) { ClearBackground(colour); }
+void WindowManager::clearWindow(const Color& colour) { ClearBackground(colour); }
 
-void Window::drawAndClear()
+void WindowManager::drawAndClear()
 {
     beginDraw();
     constexpr Color default_window_colour{0, 0, 0, 0};
     clearWindow(default_window_colour);
 }
-std::pair<int, int> Window::GetWindowSize() { return std::pair<int, int>{m_window_width, m_window_height}; }
+std::pair<int, int> WindowManager::GetWindowSize() { return std::pair<int, int>{m_window_width, m_window_height}; }
 
-void Window::changeCursorStatus(const CursorStatus status_to_change_to)
+void WindowManager::changeCursorStatus(const CursorStatus status_to_change_to)
 {
     switch (status_to_change_to)
     {

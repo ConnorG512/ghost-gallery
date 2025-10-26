@@ -3,7 +3,7 @@
 #include "manager/audio-manager.h"
 #include "entity/player.h"
 #include "game-state/gamestate-base.h"
-#include "window.h"
+#include "manager/window-manager.h"
 
 #include <memory>
 
@@ -23,7 +23,7 @@ struct GameManager
     void changeCurrentGameState(GameType gamestate);
 
   private:
-    Window m_game_window{1600, 896, 60};
+    WindowManager m_game_window{1600, 896, 60};
     std::unique_ptr<GameState> m_current_gamestate{nullptr};
     AudioManager m_audio_manager{};
 

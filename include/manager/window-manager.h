@@ -3,11 +3,11 @@
 #include <raylib.h>
 #include <utility>
 
-class Window
+class WindowManager
 {
   public:
-    Window(int width = 900, int height = 1600, int target_fps = 60);
-    ~Window();
+    WindowManager(int width = 900, int height = 1600, int target_fps = 60);
+    ~WindowManager();
 
     bool ShouldWindowClose();
     void beginDraw();
@@ -16,10 +16,10 @@ class Window
 
     [[nodiscard]] std::pair<int, int> GetWindowSize();
 
-    Window(const Window& audio_manager) = delete;                // Delete copy constructor.
-    Window& operator=(const Window& audio_manager) = delete;     // Delete copy assignment constructor.
-    Window(Window&& audio_manager) noexcept = delete;            // Delete move constructor.
-    Window& operator=(Window&& audio_manager) noexcept = delete; // Delete move assignment constructor.
+    WindowManager(const WindowManager& audio_manager) = delete;                // Delete copy constructor.
+    WindowManager& operator=(const WindowManager& audio_manager) = delete;     // Delete copy assignment constructor.
+    WindowManager(WindowManager&& audio_manager) noexcept = delete;            // Delete move constructor.
+    WindowManager& operator=(WindowManager&& audio_manager) noexcept = delete; // Delete move assignment constructor.
 
     enum class CursorStatus
     {

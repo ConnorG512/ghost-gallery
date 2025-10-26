@@ -4,7 +4,6 @@
 #include "component/user-input-component.h"
 #include "entity/entity.h"
 
-class Window;
 class ScoreComponent;
 
 class Player : public Entity

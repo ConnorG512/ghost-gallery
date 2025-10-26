@@ -1,16 +1,14 @@
 #pragma once
 
-#include <memory>
-
 class GameManager;
-class Window;
+class WindowManager;
 class Player;
 class AudioManager;
 
 class GameState
 {
   public:
-    GameState(GameManager* game_manager, Window& game_window, Player& current_player, AudioManager& audio_manager);
+    GameState(GameManager* game_manager, WindowManager& game_window, Player& current_player, AudioManager& audio_manager);
     virtual ~GameState() = default;
 
     virtual void initialiseState() = 0;
@@ -19,7 +17,7 @@ class GameState
 
   protected:
     GameManager* m_game_manager;
-    Window& m_game_window;
+    WindowManager& m_game_window;
     Player& m_current_player;
     AudioManager& m_audio_manager;
 };
