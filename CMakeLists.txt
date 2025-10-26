@@ -39,43 +39,11 @@ set(SOURCE_FILES
   src/game-state/gamestate-gameplay.cpp
 )
 
-set(INCLUDE_FILES
-  include/component/score-component.h
-  include/component/positional-component.h
-  include/component/damage-component.h
-  include/component/health-component.h
-  include/component/tick-component.h
-  include/component/user-input-component.h
-  include/component/image-sprite.h
-  include/component/collision-shape.h
-  include/entity/candy-collectable.h
-  include/entity/coin-collectable.h
-  include/entity/collectable.h
-  include/entity/heart-collectable.h
-  include/entity/player.h
-  include/entity/enemy.h
-  include/entity/entity.h
-  include/game-state/gamestate-splash.h
-  include/game-state/gamestate-base.h
-  include/game-state/gamestate-gameplay.h
-  include/ui/ui.h
-  include/ui/ui-gameplay.h
-  include/ui/ui-splash.h
-  include/util/random-generation.h
-  include/util/utils.h
-  include/window.h
-  include/manager/game-manager.h
-  include/manager/spawn-manager-collectable.h
-  include/manager/spawn-manager-enemy.h
-  include/manager/spawn-manager.h
-  include/manager/audio-manager.h
-)
-
 #Creating executable:
 if(WIN32)
-  add_executable(app WIN32 ${SOURCE_FILES} ${INCLUDE_FILES})
+  add_executable(app WIN32 ${SOURCE_FILES})
 else()
-  add_executable(app ${SOURCE_FILES} ${INCLUDE_FILES})
+  add_executable(app ${SOURCE_FILES})
 endif()
 
 # Setting a custom include directory
