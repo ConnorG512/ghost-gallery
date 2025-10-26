@@ -132,23 +132,21 @@ void SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
             });
 
     // Cursor needs to glow green regardless of the collectable that is hovered over.
-    if (std::ranges::empty(hovered_over_collectable))
+    if (!std::ranges::empty(hovered_over_collectable))
     {
-        current_player.changeCursorState(Player::CursorType::neutral);
-        return;
-    }
-    current_player.changeCursorState(Player::CursorType::friendly);
+        current_player.changeCursorState(Player::CursorType::friendly);
 
-    // Only one collectable should be used per click.
-    if (auto first_collectable =
-            std::ranges::find_if(hovered_over_collectable,
-                                 [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
-                                 { return current_player.user_input.UserAction() == UserInput::InputAction::fire; });
-        first_collectable != hovered_over_collectable.end())
-    {
-        first_collectable->get()->givePowerUp(current_player);
-        first_collectable->get()->playSound(audio_manager);
-        first_collectable->reset();
+        // Only one collectable should be used per click.
+        if (auto first_collectable = std::ranges::find_if(
+                hovered_over_collectable,
+                [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
+                { return current_player.user_input.UserAction() == UserInput::InputAction::fire; });
+            first_collectable != hovered_over_collectable.end())
+        {
+            first_collectable->get()->givePowerUp(current_player);
+            first_collectable->get()->playSound(audio_manager);
+            first_collectable->reset();
+        }
     }
 }
 
