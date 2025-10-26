@@ -67,12 +67,21 @@ void SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManage
                                       enemy_instance->checkCollision(current_player.collision.GetCollisionPosition());
                            });
 
-    if (std::ranges::empty(hovered_over_enemy))
+    if (!std::ranges::empty(hovered_over_enemy))
     {
-        current_player.changeCursorState(Player::CursorType::neutral);
-        return;
+        current_player.changeCursorState(Player::CursorType::enemy);
+
+        if (auto hit_enemy = std::ranges::find_if(
+                hovered_over_enemy,
+                [&current_player](const std::unique_ptr<Enemy>& enemy_instance)
+                { return current_player.user_input.UserAction() == UserInput::InputAction::fire; });
+            hit_enemy != hovered_over_enemy.end())
+        {
+          current_player.score_component.increaseScore(hit_enemy->get()->score_to_give);
+          hit_enemy->get()->playSound(audio_manager);
+          hit_enemy->reset();
+        }
     }
-    current_player.changeCursorState(Player::CursorType::enemy);
 }
 
 std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy(const std::pair<int, int> screen_xy)
