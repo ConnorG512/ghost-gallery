@@ -1,12 +1,12 @@
 #include "manager/spawn-manager-collectable.h"
-#include "manager/audio-manager.h"
-#include "entity//candy-collectable.h"
-#include "entity/collectable/coin-collectable.h"
-#include "entity/collectable/heart-collectable.h"
+#include "entity/candy-collectable.h"
+#include "entity/coin-collectable.h"
+#include "entity/heart-collectable.h"
 #include "entity/player.h"
+#include "manager/audio-manager.h"
+#include "manager/spawn-manager.h"
 #include "util/random-generation.h"
 #include "util/utils.h"
-#include "manager/spawn-manager.h"
 
 #include <algorithm>
 #include <array>

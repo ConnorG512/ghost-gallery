@@ -1,10 +1,10 @@
 #include "entity/enemy.h"
-#include "manager/audio-manager.h"
-#include "util/random-generation.h"
-#include "components/damage-component.h"
-#include "components/user-input-component.h"
+#include "component/damage-component.h"
+#include "component/user-input-component.h"
 #include "entity/entity.h"
 #include "entity/player.h"
+#include "manager/audio-manager.h"
+#include "util/random-generation.h"
 
 #include <array>
 #include <vector>

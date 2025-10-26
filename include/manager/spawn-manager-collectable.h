@@ -1,7 +1,7 @@
 #pragma once
 
 #include "entity/coin-collectable.h"
-#include "entity/component/tick-component.h"
+#include "component/tick-component.h"
 #include "manager/spawn-manager.h"
 
 #include <memory>

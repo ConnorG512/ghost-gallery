@@ -1,7 +1,7 @@
 #include "entity/coin-collectable.h"
+#include "entity/player.h"
 #include "manager/audio-manager.h"
 #include "util/random-generation.h"
-#include "entity/player.h"
 
 CoinCollectable::CoinCollectable(const int x_pos, const int y_pos, const int coins_given)
     : Collectable{{"assets/image/entity/coin/coin.png"}, x_pos, y_pos}, m_score_given{coins_given}
