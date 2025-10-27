@@ -22,7 +22,6 @@ class SpawnManagerEnemy : public SpawnManager
     void increaseEnemyAmount(const int& current_game_score);
 
   protected:
-    int m_list_size{1};
     std::vector<std::unique_ptr<Enemy>> m_enemy_list;
     std::unique_ptr<Enemy> createEnemy(const std::pair<int, int> screen_xy);
 };
