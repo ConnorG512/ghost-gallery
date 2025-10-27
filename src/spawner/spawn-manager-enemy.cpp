@@ -112,15 +112,15 @@ std::unique_ptr<Enemy> SpawnManagerEnemy::createEnemy(const std::pair<int, int> 
 
 void SpawnManagerEnemy::increaseEnemyAmount(const int& current_game_score)
 {
-    if (current_game_score > 850000)
+    if (current_game_score > 1350000)
     {
         m_enemy_list.resize(5);
     }
-    else if (current_game_score > 600000)
+    else if (current_game_score > 850000)
     {
         m_enemy_list.resize(4);
     }
-    else if (current_game_score > 350000)
+    else if (current_game_score > 650000)
     {
         m_enemy_list.resize(3);
     }
