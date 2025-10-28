@@ -57,13 +57,13 @@ void SpawnManagerEnemy::moveEntitiesToNewPos()
 
 void SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManager& audio_manager)
 {
-    auto hovered_over_enemy =
-        m_enemy_list | std::views::filter(
-                           [&current_player](const std::unique_ptr<Enemy>& enemy_instance)
-                           {
-                               return Utils::IsValidUniquePtr(enemy_instance) &&
-                                      enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition());
-                           });
+    auto hovered_over_enemy = m_enemy_list | std::views::filter(
+                                                 [&current_player](const std::unique_ptr<Enemy>& enemy_instance)
+                                                 {
+                                                     return Utils::IsValidUniquePtr(enemy_instance) &&
+                                                            enemy_instance->collision.IsCollidingWith(
+                                                                current_player.collision.GetCollisionPosition());
+                                                 });
 
     if (!std::ranges::empty(hovered_over_enemy))
     {
