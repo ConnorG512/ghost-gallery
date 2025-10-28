@@ -18,13 +18,11 @@ SpawnManagerEnemy::SpawnManagerEnemy(const int num_spawn_slots) : SpawnManager{n
 
 void SpawnManagerEnemy::requestEnemySpawn(const int& current_game_score, const std::pair<int, int> screen_xy)
 {
-    for (auto& current_enemy_slot :
-         m_enemy_list | std::views::filter([this](const std::unique_ptr<Enemy>& enemy_instance)
-                                           { return !Utils::IsValidUniquePtr(enemy_instance); }))
-    {
-        current_enemy_slot = createEnemy(screen_xy);
-        assert(current_enemy_slot != nullptr && "Enemy slot should not be nullptr!");
-    }
+    auto empty_slots = m_enemy_list | std::views::filter([](const auto& slot) { return slot == nullptr; });
+    std::ranges::transform(empty_slots,
+                           std::ranges::begin(empty_slots),
+                           [this, &screen_xy](const std::unique_ptr<Enemy>& enemy_instance)
+                           { return createEnemy(screen_xy); });
 }
 
 void SpawnManagerEnemy::drawEnemySprites()
