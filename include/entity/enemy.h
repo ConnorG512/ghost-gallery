@@ -21,7 +21,7 @@ class Enemy : public Entity
 
     void respawnEnemy();
     void collidedWithPlayer(Player& current_player, AudioManager& audio_manager);
-    void initiateAttack(HealthComponent& health_component);
+    void initiateAttack(Player& health_component, AudioManager& audio_manager);
 
     void playSound(AudioManager& audio_manager);
 

@@ -35,13 +35,13 @@ void SpawnManagerEnemy::drawEnemySprites()
     }
 }
 
-void SpawnManagerEnemy::attackPlayer(HealthComponent& player_health)
+void SpawnManagerEnemy::attackPlayer(Player& current_player, AudioManager& audio_manager)
 {
     for (const auto& enemy_instance :
          m_enemy_list |
              std::views::filter([](const auto& enemy_instance) { return Utils::IsValidUniquePtr(enemy_instance); }))
     {
-        enemy_instance->initiateAttack(player_health);
+        enemy_instance->initiateAttack(current_player, audio_manager);
     }
 }
 

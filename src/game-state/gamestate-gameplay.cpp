@@ -30,7 +30,7 @@ void GameStateGameplay::gameplayLoop()
     m_enemy_spawn_manager.requestEnemySpawn(m_current_player.score_component.current_score,
                                             m_game_window.GetWindowSize());
     m_enemy_spawn_manager.checkPlayerCollision(m_current_player, m_audio_manager);
-    m_enemy_spawn_manager.attackPlayer(m_current_player.health_component);
+    m_enemy_spawn_manager.attackPlayer(m_current_player, m_audio_manager);
     m_enemy_spawn_manager.increaseEnemyAmount(m_current_player.score_component.current_score);
 }
 

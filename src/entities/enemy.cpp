@@ -48,11 +48,11 @@ void Enemy::collidedWithPlayer(Player& current_player, AudioManager& audio_manag
 
 void Enemy::playSound(AudioManager& audio_manager) { audio_manager.playAudio(AudioManager::SoundId::ghost_death); }
 
-void Enemy::initiateAttack(HealthComponent& health_component)
+void Enemy::initiateAttack(Player& current_player, AudioManager& audio_manager)
 {
     if (m_tick_component.IncrementAndCheckThreshold())
     {
-        health_component.ReduceHealthBy(damage_component.CalculateDamage());
+        current_player.takeDamage(damage_component.CalculateDamage(), audio_manager);
         respawnEnemy();
         m_tick_component.resetTickCount();
     }
