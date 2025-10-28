@@ -15,6 +15,8 @@ set(SOURCE_FILES
   src/entities/components/damage-component.cpp
   src/entities/components/tick-component.cpp
   src/entities/components/user-input-component.cpp
+  src/entities/components/collision-shape.cpp
+  src/entities/components/image-sprite.cpp
   src/entities/entity.cpp
   src/entities/player.cpp
   src/entities/enemy.cpp
@@ -26,8 +28,6 @@ set(SOURCE_FILES
   src/spawner/spawn-manager-enemy.cpp
   src/util/random-generation.cpp
   src/main.cpp
-  src/collision-shape.cpp
-  src/image-sprite.cpp
   src/manager/window-manager.cpp
   src/manager/game-manager.cpp
   src/manager/audio-manager.cpp
