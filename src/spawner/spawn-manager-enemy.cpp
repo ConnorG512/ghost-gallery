@@ -62,7 +62,7 @@ void SpawnManagerEnemy::checkPlayerCollision(Player& current_player, AudioManage
                            [&current_player](const std::unique_ptr<Enemy>& enemy_instance)
                            {
                                return Utils::IsValidUniquePtr(enemy_instance) &&
-                                      enemy_instance->checkCollision(current_player.collision.GetCollisionPosition());
+                                      enemy_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition());
                            });
 
     if (!std::ranges::empty(hovered_over_enemy))

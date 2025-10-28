@@ -12,8 +12,6 @@ Entity::Entity(const std::vector<std::string>& texture_paths,
 {
 }
 
-bool Entity::checkCollision(const Rectangle& collider) { return collision.IsCollidingWith(collider); }
-
 void Entity::setNewEntityPosition(std::array<int, 2> xy_pos)
 {
     positional_component.setScreenPosition(xy_pos);

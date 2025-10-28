@@ -128,7 +128,7 @@ void SpawnManagerCollectable::checkPlayerCollision(Player& current_player, Audio
             [&current_player](const std::unique_ptr<Collectable>& collectable_instance)
             {
                 return Utils::IsValidUniquePtr(collectable_instance) &&
-                       collectable_instance->checkCollision(current_player.collision.GetCollisionPosition());
+                       collectable_instance->collision.IsCollidingWith(current_player.collision.GetCollisionPosition());
             });
 
     // Cursor needs to glow green regardless of the collectable that is hovered over.

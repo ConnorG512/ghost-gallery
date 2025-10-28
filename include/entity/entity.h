@@ -15,7 +15,6 @@ class AudioManager;
 class Entity
 {
   public:
-    bool checkCollision(const Rectangle& collider);
     void setNewEntityPosition(std::array<int, 2> xy_pos = {0, 0});
 
     virtual void playSound(AudioManager& audio_manager);
