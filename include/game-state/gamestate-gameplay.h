@@ -18,7 +18,6 @@ class GameStateGameplay : public GameState
                       WindowManager& game_window,
                       Player& current_player,
                       AudioManager& audio_manager);
-    ~GameStateGameplay() = default;
 
     void initialiseState() override;
     void gameplayLoop() override;
