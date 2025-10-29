@@ -8,7 +8,7 @@ You can find the game download on [itch.io](https://gronallacon.itch.io/ghost-ga
 
 **Fire:** Left mouse Button
 
-**Start** Game: Space
+**Start Game:** Space
 
 **Exit:** ESC
 
